@@ -1,0 +1,107 @@
+html{
+    scroll-behavior: smooth;
+    scroll-padding-top: 210px;
+}
+
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+#about{
+    background-color: #003580;
+    color: white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+
+}
+
+.homeEntranceRateTitle{
+    color: rgb(40, 194, 194);
+    margin: 10px 0px -10px 0px;
+    font-size: 35px;
+    font-weight: bold;
+    padding: 0px 50px 0 50px;
+    border-bottom: 3px solid black;
+}
+/* #pleaseRead{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1024px;
+} */
+
+ /* header start  */
+
+.homeList{
+    width: 100%;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    background-color: rgb(0, 53, 128, 0.7);
+    border-bottom: 20px solid rgb(0, 53, 128, 0);
+    border-top: 15px solid rgb(0, 53, 128, 0);
+    position: fixed;
+    margin-top: 60px;
+    z-index: 999;
+}
+
+.homeListItem{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: wheat;
+}
+
+.homeListItem:focus{
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+/* header end */
+
+.googleMap{
+    width: 100%;
+    max-width: 1024px;
+}
+
+.warningAmberIcon{
+    color: #0071c2;
+    font-size: 150px !important;
+    margin-bottom: -50px;
+}
+
+.importantDetails{
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    margin-top: 30px;
+}
+
+.importantDetailsList{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1024px;
+    cursor: pointer;
+}
+
+.importantDetailTiles{
+    text-align: center;
+}
+
+.importantDetailsIcon{
+    background-color: #0071c2;
+    color: white;
+    font-size: 100px !important;
+    display: flex;
+}
+
+
