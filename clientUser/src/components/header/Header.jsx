@@ -92,30 +92,6 @@ const Header = ({ type }) => {
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-        {location.pathname !== "/" && (
-          <div className="headerList">
-            <div className="headerListItem active">
-              <Bed />
-              <span>Stays</span>
-            </div>
-            <div className="headerListItem">
-              <Flight />
-              <span>Flights</span>
-            </div>
-            <div className="headerListItem">
-              <DirectionsCarFilled />
-              <span>Car Rentals</span>
-            </div>
-            <div className="headerListItem">
-              <Attractions />
-              <span>Attractions</span>
-            </div>
-            <div className="headerListItem">
-              <AirportShuttle />
-              <span>Airport Taxis</span>
-            </div>
-          </div>
-        )}
         {type !== "list" && (
           <>
             <h1 className="headerTitle">What is Lorem Ipsum?</h1>
