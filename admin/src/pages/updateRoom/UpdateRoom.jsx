@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 const UpdateRoom = () => {
   const location = useLocation();

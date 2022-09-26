@@ -19,7 +19,6 @@ const Home = () => {
           <Widget type="balance" /> */}
         </div>
         <div className="charts">
-          <Featured />
           <Chart />
         </div>
         <div className="listContainer">

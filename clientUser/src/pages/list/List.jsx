@@ -55,10 +55,6 @@ const List = () => {
     reFetch();
   };
 
-  const handleChange = (e) => {
-    const checkedValue = e.target.value;
-  };
-
   return (
     <div>
       <Header type="list" />
