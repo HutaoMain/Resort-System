@@ -7,8 +7,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 const Reserve = ({ setOpen, serviceid, totalprice }) => {
-  // const [data, setData] = useState([]);
-  // location
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 

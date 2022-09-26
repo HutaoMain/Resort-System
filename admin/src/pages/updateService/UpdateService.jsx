@@ -5,7 +5,7 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateService = () => {
   const location = useLocation();
@@ -15,10 +15,11 @@ const UpdateService = () => {
   const [serviceData, setServiceData] = useState("");
   const [rooms, setRooms] = useState([]);
 
-  const { data, loading, error } = useFetch("http://localhost:5000/rooms");
+  const navigate = useNavigate();
+
+  const { data, loading } = useFetch("http://localhost:5000/rooms");
 
   //get axios
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(`http://localhost:5000/services/find/${id}`);
@@ -28,16 +29,13 @@ const UpdateService = () => {
   }, []);
 
   //update axios
-
   const handleClick = async () => {
     try {
       const res = await axios.put(`http://localhost:5000/services/${id}`, {
         ...serviceData,
       });
       return res.data;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleSelect = (e) => {

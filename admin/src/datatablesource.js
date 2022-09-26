@@ -1,7 +1,5 @@
 import moment from "moment";
 
-
-
 export const userColumns = [
     { field: "_id", headerName: "ID", width: 250 },
     {
@@ -118,7 +116,7 @@ export const userColumns = [
       align: "center",
       type: "number",
       width: 100,
-      valueGetter: ({value}) => currencyFormatter.format(value  )
+      valueGetter: ({value}) => currencyFormatter.format(value)
     },
     {
       field: "dateRange.startDate",  
@@ -127,7 +125,7 @@ export const userColumns = [
       align: "center",
       width: 200,
       valueGetter: (params) =>  
-        moment(params?.row.dateRange[0].startDate).utc().format("YYYY-MMM-D")
+        moment(params?.row.dateRange[0][0]).utc().format("YYYY-MMM-D")
     },
     {
       field: "dateRange.endDate",  
@@ -136,7 +134,7 @@ export const userColumns = [
       align: "center",
       width: 200,
       valueGetter: (params) =>  
-        moment(params?.row.dateRange[0].endDate).utc().format("YYYY-MMM-DD")
+        moment(params?.row.dateRange[0][1]).utc().format("YYYY-MMM-DD")
     },  
     {
       field: "createdAt",

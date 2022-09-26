@@ -6,24 +6,17 @@ import { useState } from "react";
 import { serviceInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NewService = () => {
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
 
-  const { data, loading, error } = useFetch("/rooms");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
-  const handleSelect = (e) => {
-    const value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setRooms(value);
   };
 
   const handleClick = async (e) => {
@@ -49,6 +42,7 @@ const NewService = () => {
       };
 
       await axios.post("/services", newservice);
+      navigate("/services");
     } catch (err) {}
   };
 
@@ -117,7 +111,7 @@ const NewService = () => {
                       ))}
                 </select>
               </div> */}
-              <button onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Add</button>
             </form>
           </div>
         </div>

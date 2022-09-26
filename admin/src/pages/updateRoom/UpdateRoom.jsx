@@ -1,9 +1,7 @@
 import "./UpdateRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
-import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -12,23 +10,10 @@ const UpdateRoom = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
-  const [serviceId, setServiceId] = useState("");
   const [rooms, setRooms] = useState([]);
   const [roomDetails, setRoomDetails] = useState("");
 
-  // const { data, loading, error } = useFetch("/services");
-  const { data, loading, error } = useFetch(
-    `http://localhost:5000/rooms/${id}`
-  );
-
-  // //get axios from serviceId
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await axios.get(`http://localhost:5000/services/rooms/${id}`);
-  //     setServiceId(res.data);
-  //   };
-  //   fetchData();
-  // }, []);
+  const { data } = useFetch(`http://localhost:5000/rooms/${id}`);
 
   // get axios
   useEffect(() => {
@@ -40,14 +25,14 @@ const UpdateRoom = () => {
   }, []);
 
   //update axios
-  const handleClick = async (e) => {
-    e.preventDefault();
-    const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
+  const handleClick = async () => {
+    // e.preventDefault();
+    // const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      await axios.put(`http://localhost:5000/rooms/${id}`, {
+      const res = await axios.put(`http://localhost:5000/rooms/${id}`, {
         ...roomDetails,
-        roomNumbers,
       });
+      return res.data;
     } catch (err) {}
   };
 
@@ -66,11 +51,11 @@ const UpdateRoom = () => {
                 <label>Title</label>
                 <input
                   type="text"
-                  value={roomDetails.getRoombyId?.title}
+                  value={roomDetails.title}
                   onChange={(e) => {
                     setRoomDetails((data) => ({
                       ...data,
-                      name: e.target.value,
+                      title: e.target.value,
                     }));
                   }}
                 />
@@ -79,24 +64,11 @@ const UpdateRoom = () => {
                 <label>Price</label>
                 <input
                   type="text"
-                  value={roomDetails.getRoombyId?.price}
+                  value={roomDetails.price}
                   onChange={(e) => {
                     setRoomDetails((data) => ({
                       ...data,
-                      name: e.target.value,
-                    }));
-                  }}
-                />
-              </div>
-              <div className="formInput">
-                <label>Price</label>
-                <input
-                  type="text"
-                  value={roomDetails.getRoombyId?.price}
-                  onChange={(e) => {
-                    setRoomDetails((data) => ({
-                      ...data,
-                      name: e.target.value,
+                      price: e.target.value,
                     }));
                   }}
                 />
@@ -105,11 +77,11 @@ const UpdateRoom = () => {
                 <label>Max People</label>
                 <input
                   type="text"
-                  value={roomDetails.getRoombyId?.maxPeople}
+                  value={roomDetails.maxPeople}
                   onChange={(e) => {
                     setRoomDetails((data) => ({
                       ...data,
-                      name: e.target.value,
+                      maxPeople: e.target.value,
                     }));
                   }}
                 />
@@ -118,37 +90,26 @@ const UpdateRoom = () => {
                 <label>Description</label>
                 <input
                   type="text"
-                  value={roomDetails.getRoombyId?.desc}
+                  value={roomDetails.desc}
                   onChange={(e) => {
                     setRoomDetails((data) => ({
                       ...data,
-                      name: e.target.value,
+                      desc: e.target.value,
                     }));
                   }}
                 />
               </div>
               <div className="formInput">
                 <label>Rooms</label>
-                {data.getRoombyId?.roomNumbers?.map((roomnumber, key) => (
+                {data.roomNumbers?.map((roomnumber, key) => (
                   <textarea key={key}>{roomnumber.number}</textarea>
                 ))}
               </div>
               <div className="formInput">
                 <label>Choose a Service</label>
-                {/* <select id="serviceId">
-                  onChange={(e) => setServiceId(e.target.value)}
-                  {loading
-                    ? "loading"
-                    : data &&
-                      data.map((service) => (
-                        <option key={service._id} value={service._id}>
-                          {service.name}
-                        </option>
-                      ))}
-                </select> */}
-                <input type="text" value={roomDetails.getServiceByRoom?.name} />
+                {/* <input type="text" value={roomDetails.getServiceByRoom?.name} /> */}
               </div>
-              <button onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Update</button>
             </form>
           </div>
         </div>

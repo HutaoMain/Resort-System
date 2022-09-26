@@ -1,17 +1,22 @@
 .widget {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
     flex: 1;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 10px;
-    height: 100px;
+    height: 150px;
 
   //paghiwalayin
     .widgetItem{
       display: flex;
       margin-left: 20px;
-      padding: 20px;
+      padding: 50px 70px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      border-radius: 10px;
+      margin-bottom: 60px;
+      margin-top: 50px;
     }
   
     .left,
@@ -22,12 +27,12 @@
   
       .title {
         font-weight: bold;
-        font-size: 14px;
+        font-size: 25px;
         color: rgb(160, 160, 160);
       }
   
       .counter {
-        font-size: 28px;
+        font-size: 25px;
         font-weight: 300;
       }
   

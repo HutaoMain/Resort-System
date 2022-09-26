@@ -11,7 +11,7 @@ router.put("/:id", roomCRUD.updateRoom)
 router.put("/availability/:id", roomCRUD.updateRoomAvailability)
 
 // DELETE
-router.delete("/:id/:serviceid", roomCRUD.deleteRoom)
+router.delete("/:id", roomCRUD.deleteRoom)
 
 // GET
 router.get("/:id", roomCRUD.getRoom)
