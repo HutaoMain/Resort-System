@@ -36,6 +36,7 @@ const UpdateService = () => {
       });
       return res.data;
     } catch (error) {}
+    navigate("/services", { replace: true });
   };
 
   const handleSelect = (e) => {

@@ -28,7 +28,7 @@ const Login = () => {
       );
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-        navigate("/");
+        navigate("/", { replace: true });
       } else {
         dispatch({
           type: "LOGIN_FAILURE",
