@@ -28,23 +28,24 @@ const UpdateService = () => {
     fetchData();
   }, []);
 
-  //update axios
-  const handleClick = async () => {
-    try {
-      const res = await axios.put(`http://localhost:5000/services/${id}`, {
-        ...serviceData,
-      });
-      return res.data;
-    } catch (error) {}
-    navigate("/services", { replace: true });
-  };
-
   const handleSelect = (e) => {
     const value = Array.from(
       e.target.selectedOptions,
       (option) => option.value
     );
     setRooms(value);
+  };
+
+  //update axios
+  const handleClick = async () => {
+    try {
+      const res = await axios.put(`http://localhost:5000/services/${id}`, {
+        ...serviceData,
+        rooms,
+      });
+      return res.data;
+    } catch (error) {}
+    navigate("/services", { replace: true });
   };
 
   return (

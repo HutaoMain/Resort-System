@@ -6,11 +6,14 @@ import { useState } from "react";
 import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NewRoom = () => {
   const [info, setInfo] = useState({});
-  const [serviceId, setServiceId] = useState(undefined);
+  const [serviceId, setServiceId] = useState();
   const [rooms, setRooms] = useState([]);
+
+  const navigate = useNavigate();
 
   const { data, loading, error } = useFetch("/services");
 
@@ -22,8 +25,9 @@ const NewRoom = () => {
     e.preventDefault();
     const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      await axios.post(`/rooms/${serviceId}`, { ...info, roomNumbers });
+      await axios.post("/rooms", { ...info, roomNumbers });
     } catch (err) {}
+    navigate("/rooms", { replace: true });
   };
 
   return (
@@ -71,7 +75,7 @@ const NewRoom = () => {
                       ))}
                 </select>
               </div>
-              <button onClick={handleClick}>Send</button>
+              <button onClick={handleClick}>Add Room</button>
             </form>
           </div>
         </div>

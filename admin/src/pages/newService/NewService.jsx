@@ -15,9 +15,13 @@ const NewService = () => {
 
   const navigate = useNavigate();
 
+  const { data, loading } = useFetch("http://localhost:5000/rooms");
+
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
+
+  const handleSelect = () => {};
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -98,19 +102,18 @@ const NewService = () => {
                   <option value={true}>Yes</option>
                 </select>
               </div>
-              {/* <div className="selectRooms">
+              <div className="selectRooms">
                 <label>Rooms</label>
                 <select id="rooms" multiple onChange={handleSelect}>
                   {loading
                     ? "loading"
-                    : data &&
-                      data.map((room) => (
+                    : data.map((room) => (
                         <option key={room._id} value={room._id}>
                           {room.title}
                         </option>
                       ))}
                 </select>
-              </div> */}
+              </div>
               <button onClick={handleClick}>Add</button>
             </form>
           </div>
