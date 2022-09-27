@@ -2,13 +2,15 @@
 
 Issues:
 
+Admin
+
 1. User table should only show isAdmin:false
-2. Reservation table an error occured (FIXED)
-3. searchbar
-4. logout button
-5. Reservation table color Status
-6. dont allow the user to go back to login page or home page when logged out
+2. searchbar
+3. Reservation table color Status
+4. dont allow the user to go back to login page or home page when logged out
+5. View Page should have list of transaction that associated with their ID
+6. User Status
 
-thinking
+thinking to become permanent
 
-1. remove profile
+1. remove profile in sidebar

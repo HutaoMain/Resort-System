@@ -41,7 +41,10 @@ const Datatable = ({ columns }) => {
         return (
           <div className="cellAction">
             {location.pathname !== "/reservations" && (
-              <Link to="/users/test" style={{ textDecoration: "none" }}>
+              <Link
+                to={`/${path}/view/${params.row._id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <div className="viewButton">View</div>
               </Link>
             )}

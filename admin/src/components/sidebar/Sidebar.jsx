@@ -14,8 +14,8 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
+    // localStorage.clear();
+    // sessionStorage.clear();
     navigate("/login", { replace: true });
   };
 
@@ -62,9 +62,9 @@ const Sidebar = () => {
             </li>
           </Link>
           <p className="title">USER</p>
-          <li>
+          <li onClick={logout}>
             <ExitToAppIcon className="icon" />
-            <span onClick={logout}>Logout</span>
+            <span>Logout</span>
           </li>
         </ul>
       </div>

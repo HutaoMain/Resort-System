@@ -1,7 +1,7 @@
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
-import Single from "./pages/single/Single";
+import ViewUser from "./pages/viewUser/ViewUser";
 import NewService from "./pages/newService/NewService";
 import NewRoom from "./pages/newRoom/NewRoom";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
@@ -55,10 +55,10 @@ function App() {
               }
             />
             <Route
-              path=":userId"
+              path="view/:userId"
               element={
                 <ProtectedRoute>
-                  <Single />
+                  <ViewUser />
                 </ProtectedRoute>
               }
             />
@@ -72,14 +72,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
+            {/* <Route
               path=":serviceId"
               element={
                 <ProtectedRoute>
-                  <Single />
+                  <ViewUser />
                 </ProtectedRoute>
               }
-            />
+            /> */}
             <Route
               path="new"
               element={
@@ -106,14 +106,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
+            {/* <Route
               path=":productId"
               element={
                 <ProtectedRoute>
-                  <Single />
+                  <ViewUser />
                 </ProtectedRoute>
               }
-            />
+            /> */}
             <Route
               path="new"
               element={
@@ -140,14 +140,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
+            {/* <Route
               path=":productId"
               element={
                 <ProtectedRoute>
-                  <Single />
+                  <ViewUser />
                 </ProtectedRoute>
               }
-            />
+            /> */}
             <Route
               path="new"
               element={

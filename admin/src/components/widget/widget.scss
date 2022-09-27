@@ -45,14 +45,15 @@
       .percentage {
         display: flex;
         align-items: center;
-        font-size: 14px;
+        font-size: 25px;
+        margin-left: 3px;
   
-        &.positive {
-          color: green;
-        }
-        &.negative {
-          color: red;
-        }
+        // &.positive {
+        //   color: green;
+        // }
+        // &.negative {
+        //   color: red;
+        // }
       }
   
       .icon {

@@ -1,11 +1,11 @@
 import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import useFetch from "../../hooks/useFetch.js";
-import { Link } from "react-router-dom";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+// import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+// import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+// import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+// import useFetch from "../../hooks/useFetch.js";
+// import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -123,8 +123,8 @@ const Widget = ({ type }) => {
           <span className="link"></span>
         </div>
         <div className="right">
-          <div className="percentage positive">
-            <KeyboardArrowUpIcon />
+          <div>
+            <PersonOutlineIcon className="percentage" />
           </div>
         </div>
       </div>
@@ -137,9 +137,7 @@ const Widget = ({ type }) => {
           <span className="link"></span>
         </div>
         <div className="right">
-          <div className="percentage positive">
-            <KeyboardArrowUpIcon />
-          </div>
+          <div className="percentage">{/* <KeyboardArrowUpIcon /> */}</div>
         </div>
       </div>
 
@@ -151,9 +149,7 @@ const Widget = ({ type }) => {
           <span className="link"></span>
         </div>
         <div className="right">
-          <div className="percentage positive">
-            <KeyboardArrowUpIcon />
-          </div>
+          <div className="percentage">{/* <KeyboardArrowUpIcon /> */}</div>
         </div>
       </div>
     </div>
