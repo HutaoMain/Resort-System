@@ -16,35 +16,40 @@ const cookieParser = require("cookie-parser");
 const app = express();
 dotenv.config();
 
-const connect = async () =>{
-    try {
-        await mongoose.connect(process.env.MONGO);
-        console.log("connected to mongoDb")
-      } catch (error) {
-        throw error
-      }
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO);
+    console.log("connected to mongoDb");
+  } catch (error) {
+    throw error;
+  }
 };
 
-mongoose.connection.on("disconnected", ()=>{
-    console.log("mongoDB disconnected!");
-})
+mongoose.connection.on("disconnected", () => {
+  console.log("mongoDB disconnected!");
+});
 
-mongoose.connection.on("connected", ()=>{
-    console.log("mongoDB connected!");
-})
+mongoose.connection.on("connected", () => {
+  console.log("mongoDB connected!");
+});
 
-app.use(cookieSession(
-    {
-        name:"session",
-        keys:["lama"],
-        maxAge: 24 * 60 * 60 * 100
-    }
-));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["lama"],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors({credentials: true, origin: ['http://localhost:3000',  'http://localhost:3001']}));
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+  })
+);
 
 //middleware
 app.use(cookieParser());
@@ -57,13 +62,13 @@ app.use("/services", servicesRoute);
 app.use("/rooms", roomsRoute);
 app.use("/reservations", reservationRoute);
 
-app.use((err, req, res, next) =>{
-    const errorStatus = err.status || 500;
-    const errorMessage = err.message || "Something went wrong";
-    return res.status(errorStatus).json(errorMessage);
-})
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong";
+  return res.status(errorStatus).json(errorMessage);
+});
 
-app.listen("5000", () =>{
-    connect()
-    console.log("Server is running!");
+app.listen("5000", () => {
+  connect();
+  console.log("Server is running!");
 });

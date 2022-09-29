@@ -133,7 +133,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
       );
       sample();
       setOpen(false);
-      navigate("/");
+      navigate(-1);
     } catch (err) {}
   };
 

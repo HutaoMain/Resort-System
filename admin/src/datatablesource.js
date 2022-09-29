@@ -1,11 +1,19 @@
 import moment from "moment";
 
 export const userColumns = [
-  { field: "_id", headerName: "ID", width: 250 },
+  {
+    field: "_id",
+    headerName: "ID",
+    width: 250,
+    headerAlign: "center",
+    align: "center",
+  },
   {
     field: "user",
     headerName: "User",
     width: 230,
+    align: "center",
+    headerAlign: "center",
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -19,15 +27,24 @@ export const userColumns = [
       );
     },
   },
+  // {
+  //   field: "isAdmin",
+  //   operatorValue: "contains",
+  //   value: "false",
+  // },
   {
     field: "email",
     headerName: "Email",
     width: 230,
+    headerAlign: "center",
+    align: "center",
   },
   {
     field: "status",
     headerName: "Status",
     width: 160,
+    headerAlign: "center",
+    align: "center",
     renderCell: (params) => {
       return (
         <div className={`cellWithStatus ${params.row.status}`}>
@@ -39,50 +56,78 @@ export const userColumns = [
 ];
 
 export const serviceColumns = [
-  { field: "_id", headerName: "ID", width: 250 },
+  {
+    field: "_id",
+    headerName: "ID",
+    width: 250,
+    headerAlign: "center",
+    align: "center",
+  },
   {
     field: "name",
     headerName: "Name",
     width: 175,
+    headerAlign: "center",
+    align: "center",
   },
   {
     field: "type",
     headerName: "Type",
     width: 100,
+    headerAlign: "center",
+    align: "center",
   },
   {
     field: "desc",
     headerName: "Description",
     width: 230,
+    headerAlign: "center",
+    align: "center",
   },
   {
     field: "cheapestPrice",
     headerName: "Cheapest Price",
     width: 230,
+    headerAlign: "center",
+    align: "center",
   },
 ];
 
 export const roomColumns = [
-  { field: "_id", headerName: "ID", width: 250 },
+  {
+    field: "_id",
+    headerName: "ID",
+    width: 250,
+    headerAlign: "center",
+    align: "center",
+  },
   {
     field: "title",
     headerName: "Name",
     width: 150,
+    headerAlign: "center",
+    align: "center",
   },
   {
     field: "price",
     headerName: "Price",
     width: 100,
+    headerAlign: "center",
+    align: "center",
   },
   {
     field: "maxPeople",
     headerName: "Max People",
     width: 110,
+    headerAlign: "center",
+    align: "center",
   },
   {
     field: "desc",
     headerName: "Description",
     width: 230,
+    headerAlign: "center",
+    align: "center",
   },
 ];
 

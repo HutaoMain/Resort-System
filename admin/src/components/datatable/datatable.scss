@@ -11,10 +11,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
 
       .pathTitle{
         text-transform: capitalize;
         font-size: 27px;
+        margin-bottom: 10px;
+      }
+
+      .datatableHover{
+        font-size: 11px;
+        position: absolute;
+        left: 0;
+        top: 35px;
       }
   
       .link{

@@ -36,6 +36,7 @@ const Datatable = ({ columns }) => {
     {
       field: "action",
       headerName: "Action",
+      headerAlign: "center",
       width: 200,
       renderCell: (params) => {
         return (
@@ -80,6 +81,9 @@ const Datatable = ({ columns }) => {
     <div className="datatable">
       <div className="datatableTitle">
         <h1 className="pathTitle">{path}</h1>
+        <h4 className="datatableHover">
+          Please hover to header below to filter and sort data
+        </h4>
         {location.pathname !== "/users" &&
           location.pathname !== "/reservations" && (
             <Link to={`/${path}/new`} className="link">
@@ -96,7 +100,6 @@ const Datatable = ({ columns }) => {
           columns={columns.concat(actionColumn)}
           pageSize={9}
           rowsPerPageOptions={[9]}
-          checkboxSelection
           getRowId={(row) => row._id}
         />
       )}
