@@ -1,11 +1,13 @@
 import "./Navbar.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginModal from "../../pages/loginModal/LoginModal.jsx";
 import { useState } from "react";
 
 const Navbar = ({ user }) => {
   const location = useLocation();
   const path = location.pathname.split("/");
+
+  const navigate = useNavigate();
 
   const [isToggled, setToggle] = useState(false);
   const logout = () => {
@@ -36,7 +38,10 @@ const Navbar = ({ user }) => {
               </button>
               <LoginModal
                 isToggled={isToggled}
-                onClose={() => setToggle(false)}
+                onClose={() => {
+                  setToggle(false);
+                  navigate(0);
+                }}
               ></LoginModal>
             </>
           )}

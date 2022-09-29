@@ -4,14 +4,12 @@ import { useState, useContext, useEffect } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { format } from "date-fns";
 
 const Reserve = ({ setOpen, serviceid, totalprice }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const [reservation, setReservation] = useState("");
   const [serviceData, setServiceData] = useState("");
 
   //services
@@ -25,7 +23,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
 
   const [user, setUser] = useState(null);
 
-  const { dates, options } = useContext(SearchContext);
+  const { dates } = useContext(SearchContext);
 
   useEffect(() => {
     const getUser = () => {
@@ -51,7 +49,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     getUser();
   }, []);
 
-  const { data, loading, error } = useFetch(
+  const { data } = useFetch(
     `http://localhost:5000/services/rooms/${serviceid}`
   );
 
@@ -79,19 +77,6 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     return !isFound;
   };
 
-  // const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-  // function dayDifference(date1, date2) {
-  //   const timeDiff = Math.abs(date2?.getTime() - date1?.getTime());
-  //   const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-  //   return diffDays;
-  // }
-
-  // const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
-
-  // const found = data.find((obj) => {
-  //   return obj?.price;
-  // });
-
   const sample = async () => {
     const postReserve = {
       customerName: user.displayName,
@@ -101,7 +86,6 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     };
 
     await axios.post("/reservations", postReserve);
-    console.log(postReserve);
   };
 
   const handleSelect = (e) => {
@@ -113,8 +97,6 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
         : selectedRooms.filter((item) => item !== value)
     );
   };
-
-  console.log(selectedRooms);
 
   const navigate = useNavigate();
 

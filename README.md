@@ -18,7 +18,15 @@ Client
 
 1. navigation after login
 2. Entrance rate price
+3. subscribe to the email and definition
+4. react scroll
+5. integrate time
+6. wrap other endpoints with loading (fixed)
 
 thinking to become permanent
 
 1. remove profile in sidebar
+
+Few things to note:
+
+1. it is impossible to save from state when you forcibly reload the page otherwise you have to save it in backend(database).

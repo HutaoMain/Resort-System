@@ -3,14 +3,14 @@ import { createContext, useReducer } from "react";
 const INITIAL_STATE = {
   city: undefined,
   dates: [],
-  options: {  
+  options: {
     adult: undefined,
     children: undefined,
     room: undefined,
   },
   checkedBox1: undefined,
   checkedBox2: undefined,
-  checkedBox3: undefined
+  checkedBox3: undefined,
 };
 
 export const SearchContext = createContext(INITIAL_STATE);
@@ -45,4 +45,3 @@ export const SearchContextProvider = ({ children }) => {
     </SearchContext.Provider>
   );
 };
-
