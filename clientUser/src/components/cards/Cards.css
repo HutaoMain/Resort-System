@@ -1,0 +1,47 @@
+.cardComponentContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1024px;
+}
+
+.cardComponent{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 22rem;
+    width: 15rem;
+    border: 1px solid black;
+}
+
+.cardComponentImg{
+    height: 12rem;
+    width: 15rem;
+    object-fit: cover;
+}
+
+.cardComponentTitle{
+    margin-top: 10px;
+    margin-left: 12px;
+}
+
+.cardComponentText{
+    font-size: 13px;
+    margin-top: 3px;
+    margin-left: 12px;
+}
+
+.cardComponentPrice{
+    padding: 2px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 12px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0071c2;
+    color: white;
+}

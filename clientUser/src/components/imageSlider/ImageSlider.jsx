@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./ImageSlider.css";
 import { SliderData } from "./SliderData";
+import logo from "../../images/logo.png";
 
 const ImageSlider = ({ slides }) => {
   const delay = 2500;
@@ -31,7 +32,9 @@ const ImageSlider = ({ slides }) => {
 
   return (
     <div className="slideshow">
-      <h1 className="sliderTextCentered">JOHN MIKO'S PLACE RESORT</h1>
+      <h1 className="sliderTextCentered">
+        <img src={logo} alt="John Miko Resort Logo" />
+      </h1>
       <div
         className="slideshowSlider"
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}

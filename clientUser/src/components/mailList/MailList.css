@@ -28,3 +28,22 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.mailListSanitize{
+    /* text-green-200 font-bold pt-2 */
+    font-size: 10px;
+    color: green;
+    font-weight: bold;
+}
+
+.mailListMessage{
+    /* min-h-42px */
+    min-height: 42px;
+}
+
+.mailListerrorMessage{
+    /* text-red-700 pt-2 */
+    font-size: 10px;
+    color: red;
+    font-weight: 700;
+}

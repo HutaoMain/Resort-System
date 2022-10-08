@@ -1,27 +1,39 @@
 import "./Header.css";
-import {
-  Bed,
-  Flight,
-  DirectionsCarFilled,
-  Attractions,
-  AirportShuttle,
-  CalendarMonth,
-  Person,
-  AccessTime,
-  FamilyRestroomOutlined,
-} from "@mui/icons-material";
+import { CalendarMonth, Person, AccessTime } from "@mui/icons-material";
 import { DateRange } from "react-date-range";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format, setDate } from "date-fns";
-import { useLocation, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
-import List from "../../pages/list/List";
 
 const Header = ({ type }) => {
-  const location = useLocation();
-  const path = location.pathname.split("/");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const getUser = () => {
+      fetch("http://localhost:5000/auth/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) return response.json();
+          throw new Error("Authentication has been failed!");
+        })
+        .then((resObject) => {
+          setUser(resObject.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUser();
+  }, []);
 
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -42,27 +54,12 @@ const Header = ({ type }) => {
   let days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
   days = days + 1;
 
-  const [checkedBox1, setCheckedBox1] = useState(true);
-  const [checkedBox2, setCheckedBox2] = useState(false);
-  const [checkedBox3, setCheckedBox3] = useState(false);
-  const handleClick1 = () => {
-    setCheckedBox1((prev) => !prev);
-  };
-  const handleClick2 = () => {
-    setCheckedBox2((prev) => !prev);
-  };
-  const handleClick3 = () => {
-    setCheckedBox3((prev) => !prev);
-  };
-
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
     room: 1,
   });
-
-  const [openTime, setOpenTime] = useState(false);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -78,10 +75,10 @@ const Header = ({ type }) => {
   const handleSearch = () => {
     dispatch({
       type: "NEW_SEARCH",
-      payload: { dates, options, checkedBox1, checkedBox2, checkedBox3 },
+      payload: { dates, options },
     });
     navigate("/services", {
-      state: { dates, options, checkedBox1, checkedBox2, checkedBox3 },
+      state: { dates, options },
     });
   };
 
@@ -107,10 +104,18 @@ const Header = ({ type }) => {
               publishing software like Aldus PageMaker including versions of
               Lorem Ipsum.
             </p>
-
             <button className="headerBtn">Discover More</button>
 
-            <div className="headerSearch">
+            <p className="headerNotice">Please reserve here below.</p>
+            <p
+              className={
+                user ? "headerNoticeloginHide" : "headerNoticeloginShow"
+              }
+            >
+              Login at the top right to reserve now
+            </p>
+
+            <div className={user ? "headerSearch" : "headerSearchDisabled"}>
               <div className="headerSearchItem">
                 <CalendarMonth className="headerIcon" />
                 <span
@@ -210,55 +215,7 @@ const Header = ({ type }) => {
                   </div>
                 )}
               </div>
-              <div className="headerSearchItem">
-                <AccessTime className="headerIcon" />
-                <span
-                  onClick={() => setOpenTime(!openTime)}
-                  className="headerSearchText"
-                >
-                  What time you want to avail ?
-                </span>
 
-                {openTime && (
-                  <div className="times">
-                    <div className="timesItem">
-                      <span className="timesText">8:00AM to 5:00PM</span>
-                      <div className="timesCounter">
-                        <input
-                          type="checkbox"
-                          className="timesCheckbox"
-                          checked={checkedBox1}
-                          onChange={handleClick1}
-                        />
-                      </div>
-                    </div>
-                    {/*  */}
-                    <div className="timesItem">
-                      <span className="timesText">6:00PM to 12:00AM</span>
-                      <div className="timesCounter">
-                        <input
-                          type="checkbox"
-                          className="timesCheckbox"
-                          checked={checkedBox2}
-                          onChange={handleClick2}
-                        />
-                      </div>
-                    </div>
-                    {/*  */}
-                    <div className="timesItem">
-                      <span className="timesText">6:00PM to 6:00AM</span>
-                      <div className="timesCounter">
-                        <input
-                          type="checkbox"
-                          className="timesCheckbox"
-                          checked={checkedBox3}
-                          onChange={handleClick3}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
               <div className="headerSearchItem">
                 <button className="headerBtn" onClick={handleSearch}>
                   Search

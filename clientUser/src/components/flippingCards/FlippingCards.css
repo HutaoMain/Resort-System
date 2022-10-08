@@ -1,4 +1,4 @@
-.cardContainer{
+.flippingCardContainer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     max-width: 1024px;
 }
 
-.card{
+.flippingCard{
     background-color: #0071c2;
     color: white;
     padding: 3rem 4rem;

@@ -133,7 +133,7 @@ const SingleHotel = ({ user }) => {
                     English versions from the 1914 translation by H. Rackham.
                   </span>
                   <h2>
-                    <b>PHP {totalPrice}</b> ({days} nights)
+                    <b>PHP {totalPrice}</b> - {days} night(s)
                   </h2>
                   <button onClick={handleClick}>Reserve or Book Now!</button>
                 </div>

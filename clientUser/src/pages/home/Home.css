@@ -25,18 +25,9 @@ html{
     margin: 10px 0px -10px 0px;
     font-size: 35px;
     font-weight: bold;
-    padding: 0px 50px 0 50px;
-    border-bottom: 3px solid black;
+    padding: 0px 40px 0 40px;
+    border-bottom: 2px solid black;
 }
-/* #pleaseRead{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 1024px;
-} */
-
- /* header start  */
 
 .homeList{
     width: 100%;
@@ -56,12 +47,8 @@ html{
     align-items: center;
     gap: 10px;
     color: wheat;
-}
-
-.homeListItem:focus{
-    border: 1px solid white;
-    padding: 10px;
-    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 2px;
 }
 
 /* header end */
@@ -76,32 +63,3 @@ html{
     font-size: 150px !important;
     margin-bottom: -50px;
 }
-
-.importantDetails{
-    width: 100%;
-    max-width: 1024px;
-    display: flex;
-    margin-top: 30px;
-}
-
-.importantDetailsList{
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 1024px;
-    cursor: pointer;
-}
-
-.importantDetailTiles{
-    text-align: center;
-}
-
-.importantDetailsIcon{
-    background-color: #0071c2;
-    color: white;
-    font-size: 100px !important;
-    display: flex;
-}
-
-

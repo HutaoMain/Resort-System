@@ -11,9 +11,6 @@ const List = () => {
   const location = useLocation();
 
   const [dates, setDates] = useState(location.state.dates);
-  const [checkedBox1, setCheckedBox1] = useState(location.state.checkedBox1);
-  const [checkedBox2, setCheckedBox2] = useState(location.state.checkedBox2);
-  const [checkedBox3, setCheckedBox3] = useState(location.state.checkedBox3);
 
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
@@ -29,7 +26,7 @@ const List = () => {
   };
 
   return (
-    <div>
+    <>
       {loading ? (
         "loading"
       ) : (
@@ -55,30 +52,7 @@ const List = () => {
                     />
                   )}
                 </div>
-                <div className="listItem">
-                  <label>What time you want to avail?</label>
-                  <label>8:00AM to 5:00PM</label>
-                  <input
-                    type="checkbox"
-                    name="checkbox1"
-                    defaultChecked={checkedBox1}
-                    value={1}
-                  />
-                  <label>6:00PM to 12:00AM</label>
-                  <input
-                    type="checkbox"
-                    name="checkbox2"
-                    defaultChecked={checkedBox2}
-                    value={1}
-                  />
-                  <label>6:00PM to 6:00AM</label>
-                  <input
-                    type="checkbox"
-                    name="checkbox3"
-                    defaultChecked={checkedBox3}
-                    value={1}
-                  />
-                </div>
+
                 <div className="listItem">
                   <label>Options</label>
                   <div className="listOptions">
@@ -142,7 +116,7 @@ const List = () => {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 };
 

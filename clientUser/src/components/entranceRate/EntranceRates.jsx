@@ -1,10 +1,11 @@
 import "./EntranceRates.css";
 import Table from "react-bootstrap/Table";
+import Cards from "../cards/Cards";
 
 const EntranceRate = () => {
   return (
     <div className="entranceRate">
-      <div className="entranceRateTable">
+      {/* <div className="entranceRateTable">
         <span className="adultH1">Adult</span>
         <Table striped bordered hover>
           <thead>
@@ -32,9 +33,12 @@ const EntranceRate = () => {
             </tr>
           </tbody>
         </Table>
-      </div>
+      </div> */}
+      <Cards />
+      <Cards />
+      <Cards />
 
-      <div className="entranceRateTable">
+      {/* <div className="entranceRateTable">
         <span className="childH1">Child</span>
         <table>
           <thead>
@@ -92,7 +96,7 @@ const EntranceRate = () => {
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 };

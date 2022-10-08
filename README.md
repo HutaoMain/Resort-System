@@ -16,12 +16,13 @@ Admin
 
 Client
 
-1. navigation after login
-2. Entrance rate price
-3. subscribe to the email and definition
-4. react scroll
-5. integrate time
+1. navigation after login(block the please reserve here if not logged in)
+2. change entrance rate to services rate then put their prices (fixed for now)
+3. subscribe to the email and definition (this is fixed for now)
+4. react scroll (fixed)
+5. integrate time (not necessary) remove codes regarding time (fixed)
 6. wrap other endpoints with loading (fixed)
+7. Logout button when on different page (fixed)
 
 thinking to become permanent
 

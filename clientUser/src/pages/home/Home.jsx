@@ -1,6 +1,5 @@
 import Header from "../../components/header/Header.jsx";
 import "./Home.css";
-import EntranceRates from "../../components/entranceRate/EntranceRates.jsx";
 import MailList from "../../components/mailList/MailList.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import ImageSlider from "../../components/imageSlider/ImageSlider.jsx";
@@ -16,71 +15,86 @@ import {
   AddIcCall,
   RequestQuote,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
+import Cards from "../../components/cards/Cards.jsx";
 
 const Home = () => {
   return (
     <div>
       <div className="homeList">
-        <a
+        <Link
           className="homeListItem"
-          href="#homeHref"
-          style={{ textDecoration: "none" }}
+          to="hometo"
+          smooth={true}
+          duration={70}
+          offset={-10}
         >
           <MapsHomeWork />
           <span>Home</span>
-        </a>
-        <a
+        </Link>
+        <Link
           className="homeListItem"
-          href="#about"
-          style={{ textDecoration: "none" }}
+          to="about"
+          smooth={true}
+          duration={70}
+          offset={-175}
         >
           <Info />
           <span>About</span>
-        </a>
-        <a
+        </Link>
+        <Link
           className="homeListItem"
-          href="#reservation"
-          style={{ textDecoration: "none" }}
+          to="reservation"
+          smooth={true}
+          duration={70}
+          offset={-220}
         >
           <EventAvailable />
           <span>Reservation</span>
-        </a>
-        <a
+        </Link>
+        <Link
           className="homeListItem"
-          href="#entranceRate"
-          style={{ textDecoration: "none" }}
+          to="entranceRate"
+          smooth={true}
+          duration={70}
+          offset={-200}
         >
           <RequestQuote />
-          <span>Entrance Rate</span>
-        </a>
-        <a
+          <span>Rates</span>
+        </Link>
+        <Link
           className="homeListItem"
-          href="#pleaseRead"
-          style={{ textDecoration: "none" }}
+          to="pleaseRead"
+          smooth={true}
+          duration={70}
+          offset={-250}
         >
           <MarkChatRead />
           <span>Please Read</span>
-        </a>
-        <a
+        </Link>
+        <Link
           className="homeListItem"
-          href="#map"
-          style={{ textDecoration: "none" }}
+          to="map"
+          smooth={true}
+          duration={70}
+          offset={-100}
         >
           <AddLocationAlt />
           <span>Map</span>
-        </a>
-        <a
+        </Link>
+        <Link
           className="homeListItem"
-          href="#contacts"
-          style={{ textDecoration: "none" }}
+          to="contacts"
+          smooth={true}
+          duration={70}
+          offset={-10}
         >
           <AddIcCall />
           <span>Contacts</span>
-        </a>
+        </Link>
       </div>
 
-      <div id="homeHref">
+      <div id="hometo">
         <ImageSlider className="imageSlider" slides={SliderData} />
       </div>
       <div className="homeContainer">
@@ -88,9 +102,9 @@ const Home = () => {
           <Header />
         </div>
         <div id="reservation"></div>
-        <span className="homeEntranceRateTitle">Entrance Rate</span>
+        <span className="homeEntranceRateTitle">Packages / Rates</span>
         <div id="entranceRate"></div>
-        <EntranceRates />
+        <Cards />
         <br />
         <WarningAmber className="warningAmberIcon" />
         <div id="pleaseRead"></div>

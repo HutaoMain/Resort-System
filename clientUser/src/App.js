@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
@@ -9,6 +9,8 @@ import SinglePage from "./pages/singlePage/SinglePage.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
+
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const getUser = () => {
@@ -35,15 +37,14 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       <Navbar user={user} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<List />} />
         <Route path="/services/:id" element={<SinglePage user={user} />} />
-        {/* <Route path="/login" element={<LoginModal />} /> */}
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

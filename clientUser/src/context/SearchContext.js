@@ -8,9 +8,6 @@ const INITIAL_STATE = {
     children: undefined,
     room: undefined,
   },
-  checkedBox1: undefined,
-  checkedBox2: undefined,
-  checkedBox3: undefined,
 };
 
 export const SearchContext = createContext(INITIAL_STATE);
@@ -35,9 +32,6 @@ export const SearchContextProvider = ({ children }) => {
         city: state.city,
         dates: state.dates,
         options: state.options,
-        checkedBox1: state.checkedBox1,
-        checkedBox2: state.checkedBox2,
-        checkedBox3: state.checkedBox3,
         dispatch,
       }}
     >

@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const Navbar = ({ user }) => {
   const location = useLocation();
-  const path = location.pathname.split("/");
 
   const navigate = useNavigate();
 
@@ -15,8 +14,12 @@ const Navbar = ({ user }) => {
   };
 
   return (
-    <div className={location.pathname !== "/" ? "navbar" : "navbarHome"}>
-      <div className="navContainer">
+    <div className={location.pathname !== "/" ? "navbars" : "navbarHome"}>
+      <div
+        className={
+          location.pathname !== "/" ? "navbarContainer" : "navbarHomeContainer"
+        }
+      >
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
           <span className="logo">JOHN MIKO’S PLACE RESORT</span>
         </Link>
