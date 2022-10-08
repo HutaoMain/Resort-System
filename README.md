@@ -4,7 +4,7 @@ Issues:
 
 Admin
 
-1. User table should only show isAdmin:false
+1. User table should only show isAdmin:false (in table buttons are hidden when you are the admin instead theres a string showing that youre the admin (fixed))
 2. Reservation table color Status
 3. dont allow the user to go back to login page or home page when logged out
 4. View Page should have list of transaction that associated with their ID
@@ -16,7 +16,7 @@ Admin
 
 Client
 
-1. navigation after login(block the please reserve here if not logged in)
+1. navigation after login (block the please reserve here if not logged in (fixed))
 2. change entrance rate to services rate then put their prices (fixed for now)
 3. subscribe to the email and definition (this is fixed for now)
 4. react scroll (fixed)
@@ -31,3 +31,10 @@ thinking to become permanent
 Few things to note:
 
 1. it is impossible to save from state when you forcibly reload the page otherwise you have to save it in backend(database).
+
+Changes when in local and development (deployed)
+
+1. cors url
+2. package.json in clientUser (from "private": true to "homepage":".") remove "proxy": "http://localhost:5000/"
+3. add .env PORT = 3000, REACT_APP_API_URL = "http://185.201.8.202/"
+4. setup const axiosInstance = axios.create({ baseURL: process.env.REAC_APP_URL, });

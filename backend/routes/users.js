@@ -12,15 +12,15 @@ const router = require("express").Router();
 // })
 
 // UPDATE
-router.put("/:id", userRUD.updateUser)
+router.put("/:id", userRUD.updateUser);
 
 // DELETE
-router.delete("/:id", userRUD.deleteUser)
+router.delete("/:id", userRUD.deleteUser);
 
 // GET
-router.get("/:id", userRUD.getUser)
+router.get("/:id", userRUD.getUser);
 
 // GET ALL
-router.get("/", userRUD.getUsers)
+router.get("/", userRUD.getUsers);
 
-module.exports = router;    
+module.exports = router;

@@ -4,21 +4,25 @@ import Navbar from "../../components/navbar/Navbar";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
-import { Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const UpdateRoom = () => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REAC_APP_URL,
+  });
+
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
   const [rooms, setRooms] = useState([]);
   const [roomDetails, setRoomDetails] = useState("");
 
-  const { data } = useFetch(`http://localhost:5000/rooms/${id}`);
+  const { data } = useFetch(`/rooms/${id}`);
 
   // get axios
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`http://localhost:5000/rooms/${id}`);
+      const res = await axiosInstance.get(`/rooms/${id}`);
       setRoomDetails(res.data);
     };
     fetchData();
@@ -29,7 +33,7 @@ const UpdateRoom = () => {
     // e.preventDefault();
     // const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      const res = await axios.put(`http://localhost:5000/rooms/${id}`, {
+      const res = await axiosInstance.put(`/rooms/${id}`, {
         ...roomDetails,
       });
       return res.data;
@@ -106,10 +110,12 @@ const UpdateRoom = () => {
                 ))}
               </div>
               <div className="formInput">
-                <label>Choose a Service</label>
+                {/* <label>Choose a Service</label> */}
                 {/* <input type="text" value={roomDetails.getServiceByRoom?.name} /> */}
               </div>
-              <button onClick={handleClick}>Update</button>
+              <Link className="roomButton" to="/rooms" onClick={handleClick}>
+                Update
+              </Link>
             </form>
           </div>
         </div>

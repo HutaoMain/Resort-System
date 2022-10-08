@@ -2,6 +2,7 @@ import "./Cards.css";
 import nipaHut from "../../images/nipaHut.jpg";
 import picnicTable from "../../images/picnicTable.jpg";
 import functionHall from "../../images/functionHall.jpg";
+import room from "../../images/room.jpg";
 
 const Cards = () => {
   return (
@@ -21,7 +22,7 @@ const Cards = () => {
       </div>
 
       <div className="cardComponent">
-        <img src={nipaHut} alt="holder" className="cardComponentImg" />
+        <img src={room} alt="holder" className="cardComponentImg" />
         <div className="cardComponentContainer">
           <div>
             <h3 className="cardComponentTitle">Room</h3>

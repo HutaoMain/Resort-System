@@ -9,6 +9,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const NewRoom = () => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REAC_APP_URL,
+  });
+
   const [info, setInfo] = useState({});
   const [serviceId, setServiceId] = useState();
   const [rooms, setRooms] = useState([]);
@@ -25,7 +29,7 @@ const NewRoom = () => {
     e.preventDefault();
     const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      await axios.post("/rooms", { ...info, roomNumbers });
+      await axiosInstance.post("/rooms", { ...info, roomNumbers });
     } catch (err) {}
     navigate("/rooms", { replace: true });
   };

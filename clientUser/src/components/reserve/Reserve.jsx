@@ -6,6 +6,8 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, serviceid, totalprice }) => {
+  const axiosInstance = axios.create({ baseURL: process.env.REAC_APP_URL });
+
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
@@ -15,7 +17,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
   //services
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`http://localhost:5000/services/find/${id}`);
+      const res = await axiosInstance.get(`/services/find/${id}`);
       setServiceData(res.data);
     };
     fetchData();
@@ -27,7 +29,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("http://localhost:5000/auth/login/success", {
+      fetch("/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -49,9 +51,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     getUser();
   }, []);
 
-  const { data } = useFetch(
-    `http://localhost:5000/services/rooms/${serviceid}`
-  );
+  const { data } = useFetch(`/services/rooms/${serviceid}`);
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -85,7 +85,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
       dateRange: dates,
     };
 
-    await axios.post("/reservations", postReserve);
+    await axiosInstance.post("/reservations", postReserve);
   };
 
   const handleSelect = (e) => {
@@ -104,12 +104,9 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     try {
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(
-            `http://localhost:5000/rooms/availability/${roomId}`,
-            {
-              dates: alldates,
-            }
-          );
+          const res = axiosInstance.put(`/rooms/availability/${roomId}`, {
+            dates: alldates,
+          });
           return res.data;
         })
       );

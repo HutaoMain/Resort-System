@@ -10,9 +10,7 @@ import useFetch from "../../hooks/useFetch";
 import moment from "moment";
 
 const List = () => {
-  const { data, loading, error } = useFetch(
-    "http://localhost:5000/reservations"
-  );
+  const { data, loading, error } = useFetch("/reservations");
 
   return (
     <TableContainer component={Paper} className="table">

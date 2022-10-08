@@ -5,6 +5,10 @@ import { AuthContext } from "../../context/AuthContext";
 import "./login.scss";
 
 const Login = () => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REAC_APP_URL,
+  });
+
   const [credentials, setCredentials] = useState({
     username: undefined,
     password: undefined,
@@ -22,10 +26,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post(
-        "http://localhost:5000/auth/login",
-        credentials
-      );
+      const res = await axiosInstance.post("/auth/login", credentials);
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
         navigate("/", { replace: true });

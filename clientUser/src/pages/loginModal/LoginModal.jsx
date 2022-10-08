@@ -7,13 +7,13 @@ const LoginModal = ({ isToggled, children, onClose }) => {
   // const navigate = useNavigate();
 
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open("/auth/google", "_self");
   };
 
   // "width=500,height=500, top=75, left=400"
 
   const facebook = () => {
-    window.open("http://localhost:5000/auth/facebook", "_self");
+    window.open("/auth/facebook", "_self");
   };
 
   return (

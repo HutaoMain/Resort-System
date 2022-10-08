@@ -8,6 +8,10 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateService = () => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REAC_APP_URL,
+  });
+
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
@@ -17,12 +21,12 @@ const UpdateService = () => {
 
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("http://localhost:5000/rooms");
+  const { data, loading } = useFetch("/rooms");
 
   //get axios
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`http://localhost:5000/services/find/${id}`);
+      const res = await axiosInstance.get(`/services/find/${id}`);
       setServiceData(res.data);
     };
     fetchData();
@@ -39,7 +43,7 @@ const UpdateService = () => {
   //update axios
   const handleClick = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/services/${id}`, {
+      const res = await axiosInstance.put(`/services/${id}`, {
         ...serviceData,
         rooms,
       });

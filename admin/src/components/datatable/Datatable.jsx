@@ -7,6 +7,10 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const Datatable = ({ columns }) => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REAC_APP_URL,
+  });
+
   const location = useLocation();
   const path = location.pathname.split("/")[1];
 
@@ -20,7 +24,7 @@ const Datatable = ({ columns }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/${path}/${id}`);
+      await axiosInstance.delete(`/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
@@ -28,7 +32,7 @@ const Datatable = ({ columns }) => {
   //axios update reservation
   const handleUpdateReservation = async (id) => {
     try {
-      await axios.put(`/reservations/${id}`, reservation.status);
+      await axiosInstance.put(`/reservations/${id}`, reservation.status);
     } catch (err) {}
   };
 
@@ -40,39 +44,45 @@ const Datatable = ({ columns }) => {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="cellAction">
-            {location.pathname !== "/reservations" && (
-              <Link
-                to={`/${path}/view/${params.row._id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div className="viewButton">View</div>
-              </Link>
-            )}
-            {location.pathname !== "/users" && (
-              <Link
-                to={`/${path}/update/${params.row._id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div className="viewButton">Edit</div>
-              </Link>
-            )}
-            {location.pathname !== "/reservations" ? (
-              <div
-                className="deleteButton"
-                onClick={() => handleDelete(params.row._id)}
-              >
-                Delete
+          <>
+            {params.row.username !== "markanthony123" ? (
+              <div className="cellAction">
+                {location.pathname === "/services" && (
+                  <Link
+                    to={`/${path}/view/${params.row._id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="viewButton">View</div>
+                  </Link>
+                )}
+                {location.pathname !== "/users" && (
+                  <Link
+                    to={`/${path}/update/${params.row._id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div className="viewButton">Edit</div>
+                  </Link>
+                )}
+                {location.pathname !== "/reservations" ? (
+                  <div
+                    className="deleteButton"
+                    onClick={() => handleDelete(params.row._id)}
+                  >
+                    Delete
+                  </div>
+                ) : (
+                  <div
+                    className="viewButton"
+                    onClick={() => handleUpdateReservation(params.row._id)}
+                  >
+                    Update
+                  </div>
+                )}
               </div>
             ) : (
-              <div
-                className="viewButton"
-                onClick={() => handleUpdateReservation(params.row._id)}
-              >
-                Update
-              </div>
+              "Admin"
             )}
-          </div>
+          </>
         );
       },
     },

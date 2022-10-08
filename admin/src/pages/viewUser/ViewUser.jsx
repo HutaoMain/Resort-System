@@ -1,7 +1,6 @@
 import "./ViewUser.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";

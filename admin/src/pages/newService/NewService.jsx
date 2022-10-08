@@ -9,13 +9,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const NewService = () => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REAC_APP_URL,
+  });
+
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
 
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("http://localhost:5000/rooms");
+  const { data, loading } = useFetch("/rooms");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -45,7 +49,7 @@ const NewService = () => {
         photo: list,
       };
 
-      await axios.post("/services", newservice);
+      await axiosInstance.post("/services", newservice);
       navigate("/services");
     } catch (err) {}
   };

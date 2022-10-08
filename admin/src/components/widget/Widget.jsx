@@ -6,13 +6,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Widget = ({ type }) => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REAC_APP_URL,
+  });
+
   const [userData, setUserData] = useState("");
   const [serviceData, setServiceData] = useState("");
   const [roomData, setRoomData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://localhost:5000/users");
+      const res = await axiosInstance.get("/users");
       setUserData(res.data);
     };
     fetchData();
@@ -20,7 +24,7 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://localhost:5000/services");
+      const res = await axiosInstance.get("/services");
       setServiceData(res.data);
     };
     fetchData();
@@ -28,7 +32,7 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://localhost:5000/rooms");
+      const res = await axiosInstance.get("/rooms");
       setRoomData(res.data);
     };
     fetchData();
