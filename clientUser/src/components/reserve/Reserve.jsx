@@ -29,7 +29,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("/auth/login/success", {
+      fetch("http://api.johnmikoresort.store/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {

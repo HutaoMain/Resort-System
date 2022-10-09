@@ -10,7 +10,7 @@ const Navbar = ({ user }) => {
 
   const [isToggled, setToggle] = useState(false);
   const logout = () => {
-    window.open("http:185.201.8.202:5000/auth/logout", "_self");
+    window.open("http://api.johnmikoresort.store/auth/logout", "_self");
   };
 
   return (
