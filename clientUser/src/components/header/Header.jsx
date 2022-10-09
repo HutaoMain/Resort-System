@@ -112,7 +112,7 @@ const Header = ({ type }) => {
                 user ? "headerNoticeloginHide" : "headerNoticeloginShow"
               }
             >
-              Login at the top right to reserve now
+              Please Login at the top to use reservation.
             </p>
 
             <div className={user ? "headerSearch" : "headerSearchDisabled"}>
