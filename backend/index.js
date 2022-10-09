@@ -44,12 +44,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors());
-
-// {
-//   credentials: true,
-//   origin: ["http://localhost:3000", "http://localhost:3001"],
-// }
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://185.201.8.202/",
+  })
+);
 
 //middleware
 app.use(cookieParser());
@@ -68,7 +68,7 @@ app.use((err, req, res, next) => {
   return res.status(errorStatus).json(errorMessage);
 });
 
-app.listen("5000", () => {
+app.listen(5000, () => {
   connect();
   console.log("Server is running!");
 });
