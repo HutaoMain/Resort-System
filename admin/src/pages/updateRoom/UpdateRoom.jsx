@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const UpdateRoom = () => {
   const axiosInstance = axios.create({
-    baseURL: process.env.REAC_APP_URL,
+    baseURL: process.env.REACT_APP_URL,
   });
 
   const location = useLocation();

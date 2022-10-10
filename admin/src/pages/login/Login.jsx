@@ -6,7 +6,7 @@ import "./login.scss";
 
 const Login = () => {
   const axiosInstance = axios.create({
-    baseURL: process.env.REAC_APP_URL,
+    baseURL: process.env.REACT_APP_URL,
   });
 
   const [credentials, setCredentials] = useState({

@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateService = () => {
   const axiosInstance = axios.create({
-    baseURL: process.env.REAC_APP_URL,
+    baseURL: process.env.REACT_APP_URL,
   });
 
   const location = useLocation();

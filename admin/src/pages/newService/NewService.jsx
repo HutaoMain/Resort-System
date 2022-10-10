@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const NewService = () => {
   const axiosInstance = axios.create({
-    baseURL: process.env.REAC_APP_URL,
+    baseURL: process.env.REACT_APP_URL,
   });
 
   const [files, setFiles] = useState("");
