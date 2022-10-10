@@ -44,16 +44,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    credentials: true,
-    origin: [
-      "http://johnmikoresort.store",
-      "http://admin.johnmikoresort.store",
-      "http://localhost:3000",
-    ],
-  })
-);
+app.use(cors());
 
 //middleware
 app.use(cookieParser());
