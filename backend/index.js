@@ -47,7 +47,10 @@ app.use(passport.session());
 app.use(
   cors({
     credentials: true,
-    origin: "http://185.201.8.202/",
+    origin: [
+      "http://johnmikoresort.store",
+      "http://admin.johnmikoresort.store",
+    ],
   })
 );
 
