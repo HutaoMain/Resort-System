@@ -17,7 +17,7 @@ const UpdateRoom = () => {
   const [rooms, setRooms] = useState([]);
   const [roomDetails, setRoomDetails] = useState("");
 
-  const { data } = useFetch(`/rooms/${id}`);
+  const { data } = useFetch(`http://api.johnmikoresort.store/rooms/${id}`);
 
   // get axios
   useEffect(() => {

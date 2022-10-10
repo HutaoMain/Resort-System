@@ -21,7 +21,7 @@ const UpdateService = () => {
 
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("/rooms");
+  const { data, loading } = useFetch("http://api.johnmikoresort.store/rooms");
 
   //get axios
   useEffect(() => {

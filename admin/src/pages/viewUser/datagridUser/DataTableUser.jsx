@@ -10,7 +10,9 @@ const DataTableUser = () => {
   //   const location = useLocation();
   //   const id = location.pathname.split("/")[3];
 
-  const { data, loading } = useFetch(`/reservations`);
+  const { data, loading } = useFetch(
+    `http://api.johnmikoresort.store/reservations`
+  );
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",

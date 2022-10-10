@@ -19,7 +19,7 @@ const NewService = () => {
 
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("/rooms");
+  const { data, loading } = useFetch("http://api.johnmikoresort.store/rooms");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));

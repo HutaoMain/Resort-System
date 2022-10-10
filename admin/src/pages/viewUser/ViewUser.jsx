@@ -9,7 +9,9 @@ const Single = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
-  const { data, loading } = useFetch(`/users/${id}`);
+  const { data, loading } = useFetch(
+    `http://api.johnmikoresort.store/users/${id}`
+  );
 
   return (
     <div className="single">

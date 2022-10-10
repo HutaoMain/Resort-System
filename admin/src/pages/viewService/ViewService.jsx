@@ -10,7 +10,9 @@ const ViewService = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
-  const { data, loading } = useFetch(`/services/find/${id}`);
+  const { data, loading } = useFetch(
+    `http://api.johnmikoresort.store/services/find/${id}`
+  );
 
   return (
     <div className="viewService">

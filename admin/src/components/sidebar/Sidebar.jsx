@@ -16,7 +16,7 @@ const Sidebar = () => {
   const logout = () => {
     // localStorage.clear();
     // sessionStorage.clear();
-    navigate("/login", { replace: true });
+    navigate("http://api.johnmikoresort.store/login", { replace: true });
   };
 
   return (
