@@ -104,7 +104,7 @@ const Datatable = ({ columns }) => {
         "loading"
       ) : (
         <DataGrid
-          getRowId={(row) => row?._id}
+          getRowId={(row) => row._id}
           className="datagrid"
           rows={list}
           columns={columns.concat(actionColumn)}
