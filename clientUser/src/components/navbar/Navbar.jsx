@@ -10,7 +10,7 @@ const Navbar = ({ user }) => {
 
   const [isToggled, setToggle] = useState(false);
   const logout = () => {
-    window.open("http://api.johnmikoresort.store/auth/logout", "_self");
+    window.open("https://api.johnmikoresort.store/auth/logout", "_self");
   };
 
   return (

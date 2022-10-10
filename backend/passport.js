@@ -6,8 +6,8 @@ const GOOGLE_CLIENT_ID =
   "442836680666-5ojvaini79uu44rdneffm1l8crl4nse5.apps.googleusercontent.com";
 const GOOGLE_CLIENT_SECRET = "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";
 
-const FACEBOOK_CLIENT_ID = "771571454036559";
-const FACEBOOK_CLIENT_SECRET = "6f2d8f24452577e520a0e048355e46aa";
+const FACEBOOK_CLIENT_ID = "477706624375622";
+const FACEBOOK_CLIENT_SECRET = "c0194060e0f43cf3daa62668069b93e9";
 
 const User = require("./models/User");
 

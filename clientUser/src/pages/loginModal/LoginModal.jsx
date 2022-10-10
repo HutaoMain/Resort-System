@@ -7,13 +7,13 @@ const LoginModal = ({ isToggled, children, onClose }) => {
   // const navigate = useNavigate();
 
   const google = () => {
-    window.open("http://api.johnmikoresort.store/auth/google", "_self");
+    window.open("https://api.johnmikoresort.store/auth/google", "_self");
   };
 
   // "width=500,height=500, top=75, left=400"
 
   const facebook = () => {
-    window.open("http://api.johnmikoresort.store/auth/facebook", "_self");
+    window.open("https://api.johnmikoresort.store/auth/facebook", "_self");
   };
 
   return (

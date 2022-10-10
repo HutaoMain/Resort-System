@@ -48,8 +48,8 @@ app.use(
   cors({
     credentials: true,
     origin: [
-      "http://johnmikoresort.store",
-      "http://admin.johnmikoresort.store",
+      "https://johnmikoresort.store",
+      "https://admin.johnmikoresort.store",
     ],
   })
 );

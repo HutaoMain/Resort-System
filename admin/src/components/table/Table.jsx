@@ -11,7 +11,7 @@ import moment from "moment";
 
 const List = () => {
   const { data, loading, error } = useFetch(
-    "http://api.johnmikoresort.store/reservations"
+    "https://api.johnmikoresort.store/reservations"
   );
 
   return (

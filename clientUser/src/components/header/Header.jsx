@@ -13,7 +13,7 @@ const Header = ({ type }) => {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("http://api.johnmikoresort.store/auth/login/success", {
+      fetch("https://api.johnmikoresort.store/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {

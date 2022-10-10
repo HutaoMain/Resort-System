@@ -11,13 +11,13 @@ const UpdateRoom = () => {
   const id = location.pathname.split("/")[3];
   const [roomDetails, setRoomDetails] = useState("");
 
-  const { data } = useFetch(`http://api.johnmikoresort.store/rooms/${id}`);
+  const { data } = useFetch(`https://api.johnmikoresort.store/rooms/${id}`);
 
   // get axios
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `http://api.johnmikoresort.store/rooms/${id}`
+        `https://api.johnmikoresort.store/rooms/${id}`
       );
       setRoomDetails(res.data);
     };
@@ -30,7 +30,7 @@ const UpdateRoom = () => {
     // const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
       const res = await axios.put(
-        `http://api.johnmikoresort.store/rooms/${id}`,
+        `https://api.johnmikoresort.store/rooms/${id}`,
         {
           ...roomDetails,
         }

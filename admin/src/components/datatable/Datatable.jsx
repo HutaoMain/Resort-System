@@ -13,7 +13,7 @@ const Datatable = ({ columns }) => {
   const [list, setList] = useState([]);
   const [reservation, setReservation] = useState("");
   const { data, loading, error } = useFetch(
-    `http://api.johnmikoresort.store/${path}`
+    `https://api.johnmikoresort.store/${path}`
   );
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Datatable = ({ columns }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://api.johnmikoresort.store/${path}/${id}`);
+      await axios.delete(`https://api.johnmikoresort.store/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
@@ -31,7 +31,7 @@ const Datatable = ({ columns }) => {
   const handleUpdateReservation = async (id) => {
     try {
       await axios.put(
-        `http://api.johnmikoresort.store/reservations/${id}`,
+        `https://api.johnmikoresort.store/reservations/${id}`,
         reservation.status
       );
     } catch (err) {}

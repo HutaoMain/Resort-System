@@ -12,7 +12,7 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://api.johnmikoresort.store/users");
+      const res = await axios.get("https://api.johnmikoresort.store/users");
       setUserData(res.data);
     };
     fetchData();
@@ -20,7 +20,7 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://api.johnmikoresort.store/services");
+      const res = await axios.get("https://api.johnmikoresort.store/services");
       setServiceData(res.data);
     };
     fetchData();
@@ -28,7 +28,7 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://api.johnmikoresort.store/rooms");
+      const res = await axios.get("https://api.johnmikoresort.store/rooms");
       setRoomData(res.data);
     };
     fetchData();

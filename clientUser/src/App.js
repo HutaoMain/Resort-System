@@ -3,9 +3,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
-// import LoginModal from "./pages/loginModal/LoginModal";
 import SinglePage from "./pages/singlePage/SinglePage.jsx";
-// import MessengerCustomerChat from 'react-messenger-customer-chat';
+import Messenger from "./components/messenger/Messenger";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -14,7 +13,7 @@ function App() {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("http://api.johnmikoresort.store/auth/login/success", {
+      fetch("https://api.johnmikoresort.store/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -38,6 +37,7 @@ function App() {
 
   return (
     <>
+      <Messenger />
       <Navbar user={user} />
       <Routes>
         <Route path="/" element={<Home />} />

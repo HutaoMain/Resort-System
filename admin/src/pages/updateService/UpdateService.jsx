@@ -17,13 +17,13 @@ const UpdateService = () => {
 
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("http://api.johnmikoresort.store/rooms");
+  const { data, loading } = useFetch("https://api.johnmikoresort.store/rooms");
 
   //get axios
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `http://api.johnmikoresort.store/services/find/${id}`
+        `https://api.johnmikoresort.store/services/find/${id}`
       );
       setServiceData(res.data);
     };
@@ -42,7 +42,7 @@ const UpdateService = () => {
   const handleClick = async () => {
     try {
       const res = await axios.put(
-        `http://api.johnmikoresort.store/services/${id}`,
+        `https://api.johnmikoresort.store/services/${id}`,
         {
           ...serviceData,
           rooms,

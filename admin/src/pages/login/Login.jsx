@@ -23,7 +23,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(
-        "http://api.johnmikoresort.store/auth/login",
+        "https://api.johnmikoresort.store/auth/login",
         credentials
       );
       if (res.data.isAdmin) {

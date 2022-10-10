@@ -10,7 +10,7 @@ const Single = () => {
   const id = location.pathname.split("/")[3];
 
   const { data, loading } = useFetch(
-    `http://api.johnmikoresort.store/users/${id}`
+    `https://api.johnmikoresort.store/users/${id}`
   );
 
   return (

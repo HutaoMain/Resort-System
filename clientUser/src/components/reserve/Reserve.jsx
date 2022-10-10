@@ -16,7 +16,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `http://api.johnmikoresort.store/services/find/${id}`
+        `https://api.johnmikoresort.store/services/find/${id}`
       );
       setServiceData(res.data);
     };
@@ -29,7 +29,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("http://api.johnmikoresort.store/auth/login/success", {
+      fetch("https://api.johnmikoresort.store/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -52,7 +52,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
   }, []);
 
   const { data } = useFetch(
-    `http://api.johnmikoresort.store/services/rooms/${serviceid}`
+    `https://api.johnmikoresort.store/services/rooms/${serviceid}`
   );
 
   const getDatesInRange = (startDate, endDate) => {
@@ -88,7 +88,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     };
 
     await axios.post(
-      "http://api.johnmikoresort.store/reservations",
+      "https://api.johnmikoresort.store/reservations",
       postReserve
     );
   };
@@ -110,7 +110,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
       await Promise.all(
         selectedRooms.map((roomId) => {
           const res = axios.put(
-            `http://api.johnmikoresort.store/rooms/availability/${roomId}`,
+            `https://api.johnmikoresort.store/rooms/availability/${roomId}`,
             {
               dates: alldates,
             }
@@ -120,7 +120,7 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
       );
       sample();
       setOpen(false);
-      navigate(-1);
+      navigate("/");
     } catch (err) {}
   };
 

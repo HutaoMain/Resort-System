@@ -15,7 +15,7 @@ const NewService = () => {
 
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("http://api.johnmikoresort.store/rooms");
+  const { data, loading } = useFetch("https://api.johnmikoresort.store/rooms");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -45,7 +45,7 @@ const NewService = () => {
         photo: list,
       };
 
-      await axios.post("http://api.johnmikoresort.store/services", newservice);
+      await axios.post("https://api.johnmikoresort.store/services", newservice);
       navigate("/services");
     } catch (err) {}
   };

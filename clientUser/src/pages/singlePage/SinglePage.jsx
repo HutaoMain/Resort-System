@@ -23,7 +23,7 @@ const SingleHotel = ({ user }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const { data, loading } = useFetch(
-    `http://api.johnmikoresort.store/services/find/${id}`
+    `https://api.johnmikoresort.store/services/find/${id}`
   );
 
   const { dates, options } = useContext(SearchContext);

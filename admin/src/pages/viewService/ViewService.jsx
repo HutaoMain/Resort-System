@@ -11,7 +11,7 @@ const ViewService = () => {
   const id = location.pathname.split("/")[3];
 
   const { data, loading } = useFetch(
-    `http://api.johnmikoresort.store/services/find/${id}`
+    `https://api.johnmikoresort.store/services/find/${id}`
   );
 
   return (
