@@ -5,10 +5,6 @@ import { AuthContext } from "../../context/AuthContext";
 import "./login.scss";
 
 const Login = () => {
-  const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_URL,
-  });
-
   const [credentials, setCredentials] = useState({
     username: undefined,
     password: undefined,
