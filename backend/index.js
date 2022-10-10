@@ -50,6 +50,7 @@ app.use(
     origin: [
       "http://johnmikoresort.store",
       "http://admin.johnmikoresort.store",
+      "http://localhost:3000",
     ],
   })
 );
@@ -71,7 +72,7 @@ app.use((err, req, res, next) => {
   return res.status(errorStatus).json(errorMessage);
 });
 
-app.listen(5000, () => {
+app.listen("5000", () => {
   connect();
   console.log("Server is running!");
 });

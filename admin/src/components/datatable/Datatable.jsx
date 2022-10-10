@@ -12,7 +12,9 @@ const Datatable = ({ columns }) => {
 
   const [list, setList] = useState([]);
   const [reservation, setReservation] = useState("");
-  const { data, loading, error } = useFetch(`/${path}`);
+  const { data, loading, error } = useFetch(
+    `http://api.johnmikoresort.store/${path}`
+  );
 
   useEffect(() => {
     setList(data);
