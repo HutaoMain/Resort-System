@@ -26,26 +26,30 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.map((item) => (
-            <TableRow key={item._id}>
-              <TableCell className="tableCell">{item._id}</TableCell>
-              <TableCell className="tableCell">{item.service}</TableCell>
-              <TableCell className="tableCell">{item.customerName}</TableCell>
-              <TableCell className="tableCell">
-                {[
-                  moment(item?.dateRange[0].startDate).format("YYYY-MM-DD"),
-                  <br />,
-                  "to",
-                  <br />,
-                  moment(item?.dateRange[0].endDate).format("YYYY-MM-DD"),
-                ]}
-              </TableCell>
-              <TableCell className="tableCell">₱{item.amount}</TableCell>
-              <TableCell className={`status ${item.status}`}>
-                {item.status}
-              </TableCell>
-            </TableRow>
-          ))}
+          {loading
+            ? "Loading"
+            : data.map((item) => (
+                <TableRow key={item._id}>
+                  <TableCell className="tableCell">{item._id}</TableCell>
+                  <TableCell className="tableCell">{item.service}</TableCell>
+                  <TableCell className="tableCell">
+                    {item.customerName}
+                  </TableCell>
+                  <TableCell className="tableCell">
+                    {[
+                      moment(item?.dateRange[0].startDate).format("YYYY-MM-DD"),
+                      <br />,
+                      "to",
+                      <br />,
+                      moment(item?.dateRange[0].endDate).format("YYYY-MM-DD"),
+                    ]}
+                  </TableCell>
+                  <TableCell className="tableCell">₱{item.amount}</TableCell>
+                  <TableCell className={`status ${item.status}`}>
+                    {item.status}
+                  </TableCell>
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
     </TableContainer>
