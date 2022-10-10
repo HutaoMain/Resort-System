@@ -2,7 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 const authController = require("../controllers/authController.js");
 
-const CLIENT_URL = "http://185.201.8.202/";
+const CLIENT_URL = "http://johnmikoresort.store/";
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
