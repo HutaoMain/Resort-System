@@ -18,7 +18,7 @@ const List = () => {
   const [max, setMax] = useState(undefined);
 
   const { data, loading, reFetch } = useFetch(
-    `/services?min=${min || 0}&max=${max || 999}`
+    `http://api.johnmikoresort.store/services?min=${min || 0}&max=${max || 999}`
   );
 
   const handleClick = () => {

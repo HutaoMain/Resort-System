@@ -6,8 +6,6 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, serviceid, totalprice }) => {
-  const axiosInstance = axios.create({ baseURL: process.env.REAC_APP_URL });
-
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
@@ -17,7 +15,9 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
   //services
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axiosInstance.get(`/services/find/${id}`);
+      const res = await axios.get(
+        `http://api.johnmikoresort.store/services/find/${id}`
+      );
       setServiceData(res.data);
     };
     fetchData();
@@ -51,7 +51,9 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     getUser();
   }, []);
 
-  const { data } = useFetch(`/services/rooms/${serviceid}`);
+  const { data } = useFetch(
+    `http://api.johnmikoresort.store/services/rooms/${serviceid}`
+  );
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -85,7 +87,10 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
       dateRange: dates,
     };
 
-    await axiosInstance.post("/reservations", postReserve);
+    await axios.post(
+      "http://api.johnmikoresort.store/reservations",
+      postReserve
+    );
   };
 
   const handleSelect = (e) => {
@@ -104,9 +109,12 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     try {
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axiosInstance.put(`/rooms/availability/${roomId}`, {
-            dates: alldates,
-          });
+          const res = axios.put(
+            `http://api.johnmikoresort.store/rooms/availability/${roomId}`,
+            {
+              dates: alldates,
+            }
+          );
           return res.data;
         })
       );

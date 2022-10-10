@@ -7,14 +7,8 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 
 const UpdateRoom = () => {
-  const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_URL,
-  });
-
   const location = useLocation();
   const id = location.pathname.split("/")[3];
-
-  const [rooms, setRooms] = useState([]);
   const [roomDetails, setRoomDetails] = useState("");
 
   const { data } = useFetch(`http://api.johnmikoresort.store/rooms/${id}`);
@@ -22,7 +16,9 @@ const UpdateRoom = () => {
   // get axios
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axiosInstance.get(`/rooms/${id}`);
+      const res = await axios.get(
+        `http://api.johnmikoresort.store/rooms/${id}`
+      );
       setRoomDetails(res.data);
     };
     fetchData();
@@ -33,9 +29,12 @@ const UpdateRoom = () => {
     // e.preventDefault();
     // const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      const res = await axiosInstance.put(`/rooms/${id}`, {
-        ...roomDetails,
-      });
+      const res = await axios.put(
+        `http://api.johnmikoresort.store/rooms/${id}`,
+        {
+          ...roomDetails,
+        }
+      );
       return res.data;
     } catch (err) {}
   };

@@ -6,17 +6,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Widget = ({ type }) => {
-  const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_URL,
-  });
-
   const [userData, setUserData] = useState("");
   const [serviceData, setServiceData] = useState("");
   const [roomData, setRoomData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axiosInstance.get("/users");
+      const res = await axios.get("http://api.johnmikoresort.store/users");
       setUserData(res.data);
     };
     fetchData();
@@ -24,7 +20,7 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axiosInstance.get("/services");
+      const res = await axios.get("http://api.johnmikoresort.store/services");
       setServiceData(res.data);
     };
     fetchData();
@@ -32,7 +28,7 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axiosInstance.get("/rooms");
+      const res = await axios.get("http://api.johnmikoresort.store/rooms");
       setRoomData(res.data);
     };
     fetchData();

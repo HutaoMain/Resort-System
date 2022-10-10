@@ -8,10 +8,6 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateService = () => {
-  const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_URL,
-  });
-
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
@@ -26,7 +22,9 @@ const UpdateService = () => {
   //get axios
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axiosInstance.get(`/services/find/${id}`);
+      const res = await axios.get(
+        `http://api.johnmikoresort.store/services/find/${id}`
+      );
       setServiceData(res.data);
     };
     fetchData();
@@ -43,10 +41,13 @@ const UpdateService = () => {
   //update axios
   const handleClick = async () => {
     try {
-      const res = await axiosInstance.put(`/services/${id}`, {
-        ...serviceData,
-        rooms,
-      });
+      const res = await axios.put(
+        `http://api.johnmikoresort.store/services/${id}`,
+        {
+          ...serviceData,
+          rooms,
+        }
+      );
       return res.data;
     } catch (error) {}
     navigate("/services", { replace: true });

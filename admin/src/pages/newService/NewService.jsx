@@ -9,10 +9,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const NewService = () => {
-  const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_URL,
-  });
-
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
@@ -49,7 +45,7 @@ const NewService = () => {
         photo: list,
       };
 
-      await axiosInstance.post("/services", newservice);
+      await axios.post("http://api.johnmikoresort.store/services", newservice);
       navigate("/services");
     } catch (err) {}
   };

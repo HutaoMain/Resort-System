@@ -7,10 +7,6 @@ import { useEffect } from "react";
 import axios from "axios";
 
 const Datatable = ({ columns }) => {
-  const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_URL,
-  });
-
   const location = useLocation();
   const path = location.pathname.split("/")[1];
 
@@ -24,7 +20,7 @@ const Datatable = ({ columns }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axiosInstance.delete(`/${path}/${id}`);
+      await axios.delete(`http://api.johnmikoresort.store/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
@@ -32,7 +28,10 @@ const Datatable = ({ columns }) => {
   //axios update reservation
   const handleUpdateReservation = async (id) => {
     try {
-      await axiosInstance.put(`/reservations/${id}`, reservation.status);
+      await axios.put(
+        `http://api.johnmikoresort.store/reservations/${id}`,
+        reservation.status
+      );
     } catch (err) {}
   };
 
