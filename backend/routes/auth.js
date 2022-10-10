@@ -4,7 +4,7 @@ const authController = require("../controllers/authController.js");
 
 const CLIENT_URL = "http://johnmikoresort.store/";
 
-router.get("/login/success", (req, res) => {
+router.get("http://api.johnmikoresort.store/login/success", (req, res) => {
   if (req.user) {
     res.status(200).json({
       success: true,
@@ -15,14 +15,14 @@ router.get("/login/success", (req, res) => {
   }
 });
 
-router.get("/login/failed", (req, res) => {
+router.get("http://api.johnmikoresort.store/login/failed", (req, res) => {
   res.status(401).json({
     success: false,
     message: "failure",
   });
 });
 
-router.get("/logout", (req, res) => {
+router.get("http://api.johnmikoresort.store/logout", (req, res) => {
   req.logout();
   res.redirect(CLIENT_URL);
 });
@@ -33,7 +33,7 @@ router.get(
 );
 
 router.get(
-  "/google/callback",
+  "http://api.johnmikoresort.store/google/callback",
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
@@ -41,19 +41,22 @@ router.get(
 );
 
 router.get(
-  "/facebook",
+  "http://api.johnmikoresort.store/facebook",
   passport.authenticate("facebook", { scope: ["profile"] })
 );
 
 router.get(
-  "/facebook/callback",
+  "http://api.johnmikoresort.store/facebook/callback",
   passport.authenticate("facebook", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
+    failureRedirect: "http://api.johnmikoresort.store/login/failed",
   })
 );
 
-router.post("/register", authController.register);
-router.post("/login", authController.login);
+router.post(
+  "http://api.johnmikoresort.store/register",
+  authController.register
+);
+router.post("http://api.johnmikoresort.store/login", authController.login);
 
 module.exports = router;
