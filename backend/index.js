@@ -46,7 +46,10 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: ["https://johnmikoresort.store/", "http://admin.johnmikoresort.store/"],
+    origin: [
+      "https://johnmikoresort.store/",
+      "http://admin.johnmikoresort.store/",
+    ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })

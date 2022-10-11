@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.66ace7b7.css",
-    "main.js": "/static/js/main.82b43bed.js",
+    "main.js": "/static/js/main.a320746f.js",
     "static/media/nipaHut.jpg": "/static/media/nipaHut.e54080083b128f148df1.jpg",
     "static/media/functionHall.jpg": "/static/media/functionHall.ebbd029041e64d0c5f74.jpg",
     "static/media/picnicTable.jpg": "/static/media/picnicTable.f8629ba814402dbc6ea0.jpg",
@@ -9,10 +9,10 @@
     "static/media/room.jpg": "/static/media/room.2244b942b22c5ea70b79.jpg",
     "index.html": "/index.html",
     "main.66ace7b7.css.map": "/static/css/main.66ace7b7.css.map",
-    "main.82b43bed.js.map": "/static/js/main.82b43bed.js.map"
+    "main.a320746f.js.map": "/static/js/main.a320746f.js.map"
   },
   "entrypoints": [
     "static/css/main.66ace7b7.css",
-    "static/js/main.82b43bed.js"
+    "static/js/main.a320746f.js"
   ]
 }
