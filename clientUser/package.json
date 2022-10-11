@@ -1,7 +1,7 @@
 {
   "name": "booking",
   "version": "0.1.0",
-  "private": true,
+  "homepage": ".",
   "dependencies": {
     "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.9.3",
@@ -53,6 +53,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }
