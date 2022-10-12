@@ -3,8 +3,8 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 
 const passport = require("passport");
 const GOOGLE_CLIENT_ID =
-  "442836680666-5ojvaini79uu44rdneffm1l8crl4nse5.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
+  "442836680666-tttakgur3rsijireb65mm2n47fmtk720.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
 
 const FACEBOOK_CLIENT_ID = "477706624375622";
 const FACEBOOK_CLIENT_SECRET = "c0194060e0f43cf3daa62668069b93e9";
