@@ -1,7 +1,7 @@
 const cookieSession = require("cookie-session");
 const express = require("express");
 const cors = require("cors");
-const passportSetup = require("./passport");
+
 const passport = require("passport");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -41,6 +41,7 @@ app.use(
   })
 );
 
+require("./passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
