@@ -3,8 +3,8 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 
 const passport = require("passport");
 const GOOGLE_CLIENT_ID =
-  "442836680666-tttakgur3rsijireb65mm2n47fmtk720.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
+  "442836680666-5ojvaini79uu44rdneffm1l8crl4nse5.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
 
 const FACEBOOK_CLIENT_ID = "477706624375622";
 const FACEBOOK_CLIENT_SECRET = "c0194060e0f43cf3daa62668069b93e9";
@@ -16,10 +16,11 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://johnmikoresort.store/auth/google/callback",
+      callbackURL: "https://api.johnmikoresort.store/auth/google/callback",
     },
 
     function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
       User.findOne({ googleId: profile.id }).then((currentUser) => {
         if (currentUser) {
           console.log("user is: ", currentUser);
@@ -45,7 +46,7 @@ passport.use(
     {
       clientID: FACEBOOK_CLIENT_ID,
       clientSecret: FACEBOOK_CLIENT_SECRET,
-      callbackURL: "https://johnmikoresort.store/auth/facebook/callback",
+      callbackURL: "https://api.johnmikoresort.store/auth/facebook/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
