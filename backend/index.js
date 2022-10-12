@@ -5,7 +5,7 @@ const cors = require("cors");
 const passport = require("passport");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-
+const expressSession = require("express-session");
 const authRoute = require("./routes/auth");
 const usersRoute = require("./routes/users");
 const servicesRoute = require("./routes/services");
@@ -42,6 +42,8 @@ app.use(
 );
 
 require("./passport");
+
+app.use(expressSession());
 app.use(passport.initialize());
 app.use(passport.session());
 
