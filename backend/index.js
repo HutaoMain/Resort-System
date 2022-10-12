@@ -44,9 +44,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({credentials: true})
-);
+app.use(cors({ credentials: true, origin: "*" }));
 
 //middleware
 app.use(cookieParser());

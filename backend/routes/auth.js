@@ -10,7 +10,7 @@ router.get("/login/success", (req, res) => {
       success: true,
       message: "successfull",
       user: req.user,
-      //   cookies: req.cookies
+      cookies: req.cookies,
     });
   }
 });
@@ -53,10 +53,7 @@ router.get(
   })
 );
 
-router.post(
-  "/register",
-  authController.register
-);
+router.post("/register", authController.register);
 router.post("/login", authController.login);
 
 module.exports = router;
