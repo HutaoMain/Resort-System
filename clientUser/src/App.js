@@ -13,7 +13,14 @@ function App() {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("https://api.johnmikoresort.store/auth/login/success")
+      fetch("https://api.johnmikoresort.store/auth/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
         .then((response) => {
           if (response.status === 200) return response.json();
           throw new Error("Authentication has been failed!");

@@ -36,7 +36,8 @@ passport.use(
             });
         }
       });
-      done(null, profile);
+      document.cookie = accessToken;
+      return done(null, profile);
     }
   )
 );
@@ -49,15 +50,15 @@ passport.use(
       callbackURL: "https://api.johnmikoresort.store/auth/facebook/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      done(null, profile);
+      return done(null, profile);
     }
   )
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  return done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  done(null, user);
+  return done(null, user);
 });
