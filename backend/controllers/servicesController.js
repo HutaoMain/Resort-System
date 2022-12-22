@@ -3,7 +3,6 @@ const Room = require("../models/Room.js");
 
 const createService = async (req, res, next) => {
   const newService = new Services(req.body);
-
   try {
     const savedService = await newService.save();
     res.status(200).json(savedService);

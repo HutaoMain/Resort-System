@@ -1,20 +1,25 @@
 import "./datatable.scss";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
 import { Link, useLocation } from "react-router-dom";
 import useFetch from "../../hooks/useFetch.js";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { UrlPath } from "../../UrlPath";
 
 const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
 
   const [list, setList] = useState([]);
-  const [reservation, setReservation] = useState("");
-  const { data, loading, error } = useFetch(
-    `https://api.johnmikoresort.store/${path}`
-  );
+
+  const { data, loading } = useFetch(`${UrlPath}/${path}`);
+
+  // const isAdmin = data.filter((item) => item.isAdmin !== true);
 
   useEffect(() => {
     setList(data);
@@ -22,38 +27,31 @@ const Datatable = ({ columns }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://api.johnmikoresort.store/${path}/${id}`);
+      await axios.delete(`${UrlPath}/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
 
-  //axios update reservation
-  const handleUpdateReservation = async (id) => {
-    try {
-      await axios.put(
-        `https://api.johnmikoresort.store/reservations/${id}`,
-        reservation.status
-      );
-    } catch (err) {}
-  };
+  console.log(data);
 
   const actionColumn = [
     {
       field: "action",
       headerName: "Action",
       headerAlign: "center",
-      width: 200,
+      align: "left",
+      width: 230,
       renderCell: (params) => {
         return (
           <>
-            {params.row.username !== "markanthony123" ? (
+            {params.row.isAdmin !== true ? (
               <div className="cellAction">
-                {location.pathname === "/services" && (
+                {location.pathname === "/rooms" && (
                   <Link
                     to={`/${path}/view/${params.row._id}`}
                     style={{ textDecoration: "none" }}
                   >
-                    <div className="viewButton">View</div>
+                    <div className="btns">View</div>
                   </Link>
                 )}
                 {location.pathname !== "/users" && (
@@ -61,10 +59,10 @@ const Datatable = ({ columns }) => {
                     to={`/${path}/update/${params.row._id}`}
                     style={{ textDecoration: "none" }}
                   >
-                    <div className="viewButton">Edit</div>
+                    <div className="btns">Edit</div>
                   </Link>
                 )}
-                {location.pathname !== "/reservations" ? (
+                {location.pathname !== "/users" ? (
                   <div
                     className="deleteButton"
                     onClick={() => handleDelete(params.row._id)}
@@ -72,12 +70,7 @@ const Datatable = ({ columns }) => {
                     Delete
                   </div>
                 ) : (
-                  <div
-                    className="viewButton"
-                    onClick={() => handleUpdateReservation(params.row._id)}
-                  >
-                    Update
-                  </div>
+                  <></>
                 )}
               </div>
             ) : (
@@ -88,10 +81,21 @@ const Datatable = ({ columns }) => {
       },
     },
   ];
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarExport />
+      </GridToolbarContainer>
+    );
+  }
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        <h1 className="pathTitle">{path}</h1>
+        <h1 className="pathTitle">
+          {location.pathname === "/rooms" ? "Facilities" : path}
+        </h1>
         <h4 className="datatableHover">
           Please hover to header below to filter and sort data
         </h4>
@@ -103,15 +107,19 @@ const Datatable = ({ columns }) => {
           )}
       </div>
       {loading ? (
-        "loading"
+        <div class="dataTableLoading"></div>
       ) : (
         <DataGrid
           getRowId={(row) => row._id}
           className="datagrid"
           rows={list}
           columns={columns.concat(actionColumn)}
-          pageSize={9}
+          pageSize={20}
           rowsPerPageOptions={[9]}
+          getRowClassName={(params) => `rowBackground${params.row.status}`}
+          components={{
+            Toolbar: CustomToolbar,
+          }}
         />
       )}
     </div>

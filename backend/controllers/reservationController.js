@@ -14,7 +14,7 @@ const updateReserve = async (req, res, next) => {
   try {
     const updateReservation = await Reserve.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      { $set: req.body.status },
       { new: true }
     );
     res.status(200).json(updateReservation);

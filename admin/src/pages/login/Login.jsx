@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { UrlPath } from "../../UrlPath";
 import "./login.scss";
 
 const Login = () => {
@@ -22,10 +23,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post(
-        "https://api.johnmikoresort.store/auth/login",
-        credentials
-      );
+      const res = await axios.post(`${UrlPath}/auth/login`, credentials);
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
         navigate("/", { replace: true });

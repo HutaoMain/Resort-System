@@ -5,14 +5,7 @@ import moment from "moment";
 import useFetch from "../../../hooks/useFetch";
 
 const DataTableUser = () => {
-  //   const [reservation, setReservation] = useState([]);
-
-  //   const location = useLocation();
-  //   const id = location.pathname.split("/")[3];
-
-  const { data, loading } = useFetch(
-    `https://api.johnmikoresort.store/reservations`
-  );
+  const { data, loading } = useFetch(`${UrlPath}/reservations`);
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",

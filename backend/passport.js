@@ -36,7 +36,6 @@ passport.use(
             });
         }
       });
-      document.cookie = accessToken;
       return done(null, profile);
     }
   )

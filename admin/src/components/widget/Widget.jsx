@@ -4,15 +4,17 @@ import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices
 import AddHomeWorkIcon from "@mui/icons-material/AddHomeWork";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { UrlPath } from "../../UrlPath";
 
-const Widget = ({ type }) => {
+const Widget = () => {
   const [userData, setUserData] = useState("");
-  const [serviceData, setServiceData] = useState("");
+  const [reservation, setReservation] = useState([]);
   const [roomData, setRoomData] = useState([]);
 
+  //change into useFetch data then 1 useeffect with 3 usestate
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("https://api.johnmikoresort.store/users");
+      const res = await axios.get(`${UrlPath}/users`);
       setUserData(res.data);
     };
     fetchData();
@@ -20,15 +22,17 @@ const Widget = ({ type }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("https://api.johnmikoresort.store/services");
-      setServiceData(res.data);
+      const res = await axios.get(`${UrlPath}/reservations`);
+      setReservation(res.data);
     };
     fetchData();
   }, []);
 
+  const approved = reservation?.filter((item) => item.status === "Approved");
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("https://api.johnmikoresort.store/rooms");
+      const res = await axios.get(`${UrlPath}/rooms`);
       setRoomData(res.data);
     };
     fetchData();
@@ -39,7 +43,7 @@ const Widget = ({ type }) => {
       {/* User */}
       <div className="widgetItem">
         <div className="left">
-          <span className="title">User</span>
+          <span className="title">Users</span>
           <span className="counter">{userData.length}</span>
           <span className="link"></span>
         </div>
@@ -50,11 +54,11 @@ const Widget = ({ type }) => {
         </div>
       </div>
 
-      {/* Service */}
+      {/* Reservations */}
       <div className="widgetItem">
         <div className="left">
-          <span className="title">Services</span>
-          <span className="counter">{serviceData.length}</span>
+          <span className="title">Approved Reservations</span>
+          <span className="counter">{approved?.length}</span>
           <span className="link"></span>
         </div>
         <div className="right">
@@ -67,7 +71,7 @@ const Widget = ({ type }) => {
       {/* Rooms */}
       <div className="widgetItem">
         <div className="left">
-          <span className="title">Room</span>
+          <span className="title">Rooms</span>
           <span className="counter">{roomData.length}</span>
           <span className="link"></span>
         </div>

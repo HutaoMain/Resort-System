@@ -1,103 +1,106 @@
 import "./EntranceRates.css";
-import Table from "react-bootstrap/Table";
-import Cards from "../cards/Cards";
 
 const EntranceRate = () => {
   return (
-    <div className="entranceRate">
-      {/* <div className="entranceRateTable">
-        <span className="adultH1">Adult</span>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Entrance</th>
-              <th>Time</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Day Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-            <tr>
-              <td>Night Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-            <tr>
-              <td>Overnight Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-          </tbody>
-        </Table>
-      </div> */}
-      <Cards />
-      <Cards />
-      <Cards />
+    <>
+      <span style={{ color: "red" }}>
+        <b>
+          This price is excluded in the reservation --- payment will be charge
+          once you arrived at resort.
+        </b>
+      </span>
+      <div className="entranceRate">
+        <div className="entranceRateTable">
+          <span className="adultH1">Adult</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Entrance</th>
+                <th>Time</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Day Swimming</td>
+                <td>7:00AM to 5:00PM</td>
+                <td>P150</td>
+              </tr>
+              <tr>
+                <td>Night Swimming</td>
+                <td>5:00PM to 12:00AM</td>
+                <td>P180</td>
+              </tr>
+              <tr>
+                <td>Overnight Swimming</td>
+                <td>5:00PM to 7:00AM</td>
+                <td>P180</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      {/* <div className="entranceRateTable">
-        <span className="childH1">Child</span>
-        <table>
-          <thead>
-            <tr>
-              <th>Entrance</th>
-              <th>Time</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Day Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-            <tr>
-              <td>Night Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-            <tr>
-              <td>Overnight Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="entranceRateTable">
+          <span className="childH1">Child</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Entrance</th>
+                <th>Time</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Day Swimming</td>
+                <td>7:00AM to 5:00PM</td>
+                <td>P100</td>
+              </tr>
+              <tr>
+                <td>Night Swimming</td>
+                <td>5:00PM to 12:00AM</td>
+                <td>P100</td>
+              </tr>
+              <tr>
+                <td>Overnight Swimming</td>
+                <td>5:00PM to 7:00AM</td>
+                <td>P100</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="entranceRateTable">
+          <span className="seniorH1">Senior Citizen</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Entrance</th>
+                <th>Time</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Day Swimming</td>
+                <td>7:00AM to 5:00PM</td>
+                <td>P100</td>
+              </tr>
+              <tr>
+                <td>Night Swimming</td>
+                <td>5:00PM to 12:00AM</td>
+                <td>P100</td>
+              </tr>
+              <tr>
+                <td>Overnight Swimming</td>
+                <td>5:00PM to 7:00AM</td>
+                <td>P100</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-
-      <div className="entranceRateTable">
-        <span className="seniorH1">Senior Citizen</span>
-        <table>
-          <thead>
-            <tr>
-              <th>Entrance</th>
-              <th>Time</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Day Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-            <tr>
-              <td>Night Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-            <tr>
-              <td>Overnight Swimming</td>
-              <td>P10</td>
-              <td>P10</td>
-            </tr>
-          </tbody>
-        </table>
-      </div> */}
-    </div>
+    </>
   );
 };
 

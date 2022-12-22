@@ -3,20 +3,16 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { Link, useNavigate } from "react-router-dom";
-import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 
 const Sidebar = () => {
-  const { dispatch } = useContext(DarkModeContext);
-  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
 
   const logout = () => {
-    // localStorage.clear();
-    // sessionStorage.clear();
-    navigate("https://api.johnmikoresort.store/login", { replace: true });
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
@@ -29,36 +25,30 @@ const Sidebar = () => {
       <hr />
       <div className="center">
         <ul>
-          <p className="title">MAIN</p>
+          <p className="title">Analytics</p>
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
             </li>
           </Link>
-          <p className="title">LISTS</p>
+          <p className="title">Maintenance</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/services" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Services</span>
-            </li>
-          </Link>
           <Link to="/rooms" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
-              <span>Rooms</span>
+              <span>Maintenance</span>
             </li>
           </Link>
           <Link to="/reservations" style={{ textDecoration: "none" }}>
             <li>
               <LocalShippingIcon className="icon" />
-              <span>Transactions</span>
+              <span>Reservation</span>
             </li>
           </Link>
           <p className="title">USER</p>
@@ -67,16 +57,6 @@ const Sidebar = () => {
             <span>Logout</span>
           </li>
         </ul>
-      </div>
-      <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
       </div>
     </div>
   );

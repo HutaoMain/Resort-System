@@ -1,32 +1,38 @@
 import "./Header.css";
-import { CalendarMonth, Person, AccessTime } from "@mui/icons-material";
+import { CalendarMonth, Foundation } from "@mui/icons-material";
 import { DateRange } from "react-date-range";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)",
+    width: "30%",
+    height: "30%",
+    borderRadius: "20px",
+  },
+};
+
+Modal.setAppElement("#root");
 
 const Header = ({ type }) => {
-  const [user, setUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    const getUser = () => {
-      fetch("https://api.johnmikoresort.store/auth/login/success")
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("Authentication has been failed!");
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
+  const location = useLocation();
+
+  const { dispatch } = useContext(SearchContext);
+  const navigate = useNavigate();
 
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -37,46 +43,33 @@ const Header = ({ type }) => {
     },
   ]);
 
-  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-  function dayDifference(date1, date2) {
-    const timeDiff = Math.abs(date2?.getTime() - date1?.getTime());
-    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-    return diffDays;
-  }
-
-  let days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
-  days = days + 1;
-
-  const [openOptions, setOpenOptions] = useState(false);
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
-
-  const handleOption = (name, operation) => {
-    setOptions((prev) => {
-      return {
-        ...prev,
-        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
-      };
-    });
-  };
-
-  const { dispatch } = useContext(SearchContext);
-  const navigate = useNavigate();
   const handleSearch = () => {
     dispatch({
       type: "NEW_SEARCH",
-      payload: { dates, options },
+      payload: { dates },
+      // options
     });
-    navigate("/services", {
-      state: { dates, options },
+    navigate("/rooms", {
+      state: { dates },
+      // options
     });
   };
 
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  var dateToday = new Date();
+  var numberOfdaysToAdd = 2;
+  var minimumDate = dateToday.setDate(dateToday.getDate() + numberOfdaysToAdd);
+
   return (
-    <div className="header">
+    <div
+      className="header"
+      style={
+        location.pathname === "/" ? { height: "270px" } : { height: "auto" }
+      }
+    >
       <div
         className={
           type === "list" ? "headerContainer listMode" : "headerContainer"
@@ -84,28 +77,28 @@ const Header = ({ type }) => {
       >
         {type !== "list" && (
           <>
-            <h1 className="headerTitle">What is Lorem Ipsum?</h1>
+            <h1 className="headerTitle">John Mikos Place Resort...</h1>
             <p className="headerDesc">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+              was established in the year 2018, and owned by Mr. Joseph
+              Gonzales. It is located in Barangay Pulong Yantok Sentinela Road
+              Angat, Bulacan. They have 4 pools, 10 cottages, 2 function hall
+              that has a capacity of 200 people, 1 Nipa Hut, and 6 rooms for the
+              guest and they also offer an events place for all occasions or any
+              kinds of gathering such as weddings, birthdays, seminars,
+              baptismal and for catering chairs and tables, mobile bar, lights
+              and sound all in the package.
+              <button className="missionBtn" onClick={toggleModal}>
+                <Foundation />
+                Mission/Vision
+              </button>
             </p>
-            <button className="headerBtn">Discover More</button>
 
-            <p className="headerNotice">Please reserve here below.</p>
             <p
               className={
                 user ? "headerNoticeloginHide" : "headerNoticeloginShow"
               }
             >
-              Please Login at the top to use reservation.
+              <b> Please Login at the top to use reservation.</b>
             </p>
 
             <div className={user ? "headerSearch" : "headerSearchDisabled"}>
@@ -125,11 +118,11 @@ const Header = ({ type }) => {
                     moveRangeOnFirstSelection={false}
                     ranges={dates}
                     className="date"
-                    minDate={new Date()}
+                    minDate={new Date(minimumDate)}
                   />
                 )}
               </div>
-              <div className="headerSearchItem">
+              {/* <div className="headerSearchItem">
                 <Person className="headerIcon" />
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
@@ -207,7 +200,7 @@ const Header = ({ type }) => {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="headerSearchItem">
                 <button className="headerBtn" onClick={handleSearch}>
@@ -218,6 +211,47 @@ const Header = ({ type }) => {
           </>
         )}
       </div>
+
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleModal}
+        contentLabel="My dialog"
+        style={customStyles}
+      >
+        <p>
+          <b style={{ fontSize: "20px" }}>Mission</b> <br /> <hr /> The mission
+          of the John Mikos Place Resort is to put hospitality services on the
+          highest level in order to satisfy the demands and expectations of
+          guests. Our aim is to make the John Mikos Place Resort a place for
+          encounters, business success and pleasant meetings. <br /> <br />{" "}
+          <b style={{ fontSize: "20px" }}>Vision</b> <br /> <hr /> The ideology
+          of our vision is to continue to apply and set the highest standards of
+          service quality and in that way justify and uphold the reputation that
+          we have among the guests, partners, competitors and the wider
+          community.
+          <br />
+          <button
+            style={{
+              fontSize: "15px",
+              padding: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "none",
+              borderRadius: "10px",
+              backgroundColor: "#0071c2",
+              color: "white",
+              position: "absolute",
+              right: "10px",
+              bottom: "10px",
+              cursor: "pointer",
+            }}
+            onClick={toggleModal}
+          >
+            Close
+          </button>
+        </p>
+      </Modal>
     </div>
   );
 };

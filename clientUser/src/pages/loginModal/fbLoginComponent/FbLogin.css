@@ -1,0 +1,22 @@
+.fbloginStyle {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+  width: 210px;
+  background-color: #3b5998;
+  color: white;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+}
+
+.disbaleFbLoginStyle {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+  width: 210px;
+  background-color: #3b5998;
+  color: white;
+  border: none;
+  height: 40px;
+}

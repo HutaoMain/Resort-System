@@ -1,5 +1,3 @@
-import functionHall from "../../images/functionHall.jpg";
-
 export const SliderData = [
   {
     image:

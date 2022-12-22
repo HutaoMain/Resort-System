@@ -4,29 +4,28 @@ import MailList from "../../components/mailList/MailList.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import {
   LocationOn,
-  ArrowCircleLeft,
-  ArrowCircleRight,
-  TransitEnterexit,
+  // ArrowCircleLeft,
+  // ArrowCircleRight,
+  // TransitEnterexit,
 } from "@mui/icons-material";
 import { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import Reserve from "../../components/reserve/Reserve";
+import { UrlPath } from "../../UrlPath";
 
-const SingleHotel = ({ user }) => {
+const SinglePage = ({ user }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const [slideNumber, setSlideNumber] = useState(0);
-  const [open, setOpen] = useState(false);
+  // const [slideNumber, setSlideNumber] = useState(0);
+  // const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, loading } = useFetch(
-    `https://api.johnmikoresort.store/services/find/${id}`
-  );
+  const { data, loading } = useFetch(`${UrlPath}/rooms/${id}`);
 
-  const { dates, options } = useContext(SearchContext);
+  const { dates } = useContext(SearchContext);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -38,34 +37,28 @@ const SingleHotel = ({ user }) => {
   let days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
   days = days + 1;
 
-  const handleOpen = (i) => {
-    setSlideNumber(i);
-    setOpen(true);
-  };
+  // const handleOpen = (i) => {
+  //   setSlideNumber(i);
+  //   setOpen(true);
+  // };
 
-  const handleMove = (direction) => {
-    let newSlideNumber;
-    if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
-    } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
-    }
-    setSlideNumber(newSlideNumber);
-  };
+  // const handleMove = (direction) => {
+  //   let newSlideNumber;
+  //   if (direction === "l") {
+  //     newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+  //   } else {
+  //     newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+  //   }
+  //   setSlideNumber(newSlideNumber);
+  // };
 
   const handleClick = () => {
     if (user) {
       setOpenModal(true);
-    } else {
-      alert("You must login first");
     }
   };
 
-  const totalPrice =
-    days *
-    data.cheapestPrice *
-    options.room *
-    (options.adult + options.children);
+  const totalPrice = days * data.price;
 
   return (
     <div>
@@ -75,7 +68,7 @@ const SingleHotel = ({ user }) => {
         <>
           <Header type="list" />
           <div className="hotelContainer">
-            {open && (
+            {/* {open && (
               <div className="slider">
                 <TransitEnterexit
                   className="sliderCloseBtn"
@@ -97,24 +90,23 @@ const SingleHotel = ({ user }) => {
                   onClick={() => handleMove("r")}
                 />
               </div>
-            )}
+            )} */}
             <div className="hotelWrapper">
-              <h1 className="hotelTitle">{data.name}</h1>
+              <h1 className="hotelTitle">{data.title}</h1>
               <div className="hotelAddress">
                 <LocationOn />
-                <span>{data.address}</span>
+                <span>Angat Bulacan</span>
               </div>
               <span className="hotelPriceHighlight">
-                Book a stay over PHP {data.cheapestPrice} at this {data.type}
+                Book a stay over PHP {data.price}
               </span>
               <div className="hotelImages">
-                {data.photo?.map((photo, i) => (
-                  <div className="hotelImgWrapper">
+                {data.picture?.map((photo, i) => (
+                  <div className="hotelImgWrapper" key={i}>
                     <img
-                      onClick={() => handleOpen(i)}
+                      // onClick={() => handleOpen(i)}
                       src={photo}
                       alt=""
-                      key={id}
                       className="hotelImg"
                     />
                   </div>
@@ -122,18 +114,11 @@ const SingleHotel = ({ user }) => {
               </div>
               <div className="hotelDetails">
                 <div className="hotelDetailsTexts">
-                  <h1 className="hotelTitle">{data.title}</h1>
                   <p className="hotelDesc">{data.desc}</p>
                 </div>
                 <div className="hotelDetailsPrice">
                   <h1>Perfect for a {days}-night stay!</h1>
-                  <span>
-                    The standard chunk of Lorem Ipsum used since the 1500s is
-                    reproduced below for those interested. Sections 1.10.32 and
-                    1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are
-                    also reproduced in their exact original form, accompanied by
-                    English versions from the 1914 translation by H. Rackham.
-                  </span>
+
                   <h2>
                     <b>PHP {totalPrice}</b> - {days} night(s)
                   </h2>
@@ -145,11 +130,7 @@ const SingleHotel = ({ user }) => {
             <Footer />
           </div>
           {openModal && (
-            <Reserve
-              setOpen={setOpenModal}
-              serviceid={id}
-              totalprice={totalPrice}
-            />
+            <Reserve setOpen={setOpenModal} totalprice={totalPrice} />
           )}
         </>
       )}
@@ -157,4 +138,4 @@ const SingleHotel = ({ user }) => {
   );
 };
 
-export default SingleHotel;
+export default SinglePage;

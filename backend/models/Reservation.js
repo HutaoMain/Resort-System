@@ -8,7 +8,10 @@ const ReservationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    service: {
+    email: {
+      type: String,
+    },
+    rooms: {
       type: String,
       required: true,
     },
@@ -18,6 +21,12 @@ const ReservationSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Pending",
+    },
+    roomNumberName: {
+      type: String,
+    },
+    roomNumberId: {
+      type: String,
     },
     dateRange: {
       type: Array,

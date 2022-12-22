@@ -19,6 +19,7 @@
 
 import React from "react";
 import "./MailList.css";
+import { Facebook } from "@mui/icons-material";
 
 const emailState = {
   email: "",
@@ -36,8 +37,7 @@ class MailList extends React.Component {
     });
   }
   emailValidation() {
-    const regex =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    const regex = /stamaria.sti.edu.ph$/i;
     if (!this.state.email || regex.test(this.state.email) === false) {
       this.setState({
         error: "Email is not valid",
@@ -55,8 +55,10 @@ class MailList extends React.Component {
   render() {
     return (
       <div className="mail">
-        <h1 className="mailTitle">Save time, save money!</h1>
-        <span className="mailDesc">
+        <h1 className="mailTitle">
+          For Inquiries and Reservation Please contact us!
+        </h1>
+        {/*<span className="mailDesc">
           Sign up and we'll send the best deals to you!
         </span>
         <div className="mailInputContainer">
@@ -70,7 +72,21 @@ class MailList extends React.Component {
           <div>
             <span className="text-danger">{this.state.error}</span>
           </div>
-        </div>
+        </div> */}
+        📞 (0915) 941 8257 <br />
+        <a
+          href="https://www.facebook.com/johnmikoplaceresort"
+          style={{
+            color: "white",
+            marginLeft: "5px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Facebook />
+          https://www.facebook.com/johnmikoplaceresort
+        </a>
       </div>
     );
   }

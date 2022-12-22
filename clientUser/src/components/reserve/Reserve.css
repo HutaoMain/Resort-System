@@ -1,78 +1,112 @@
-.reserve{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.418);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.reserve {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.418);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.rContainer{
-    background-color: white;
-    padding: 20px;
-    position: relative;
+.rContainer {
+  background-color: white;
+  padding: 75px;
+  position: relative;
+  border-radius: 20px;
 }
 
-.rClose{
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
+.rClose {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  font-size: 20px;
 }
 
-.rItem{
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    padding: 20px;
+.rItem {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 20px;
 }
 
-.rInfo{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.rInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.rTitle{
-    font-weight: 500;
+.rTitle {
+  font-weight: 500;
 }
 
-.rDesc{
-    font-weight: 300;
+.rDesc {
+  font-weight: 300;
 }
 
-.rMax{
-    font-size: 12px;
+.rMax {
+  font-size: 12px;
 }
 
-.rPrice{
-    font-weight: 500;
+.rPrice {
+  font-weight: 500;
 }
 
-.rSelectRooms{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    font-size: 8px;
-    color: gray;
+.rSelectRooms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 8px;
+  color: gray;
+  margin-top: 10px;
 }
 
-.room{
-    display: flex;
-    flex-direction: column;
+.room {
+  display: flex;
+  gap: 10px;
 }
 
-.rButton{
-    border: none;
-    padding: 10px 20px;
-    background-color: #0071c2;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
-    margin-top: 20px;
+.room label {
+  font-size: 18px;
 }
+
+.room input {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.siCheckButton:disabled,
+.siCheckButton[disabled] {
+  background-color: gray;
+}
+
+.rBtn {
+  border: none;
+  height: 40px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* .rBtnDisable {
+  border: none;
+  height: 40px;
+  background-color: #aaaaaa;
+  color: #828282;
+  font-weight: bold;
+  cursor: not-allowed;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 20px;
+} */

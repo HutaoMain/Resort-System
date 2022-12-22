@@ -4,7 +4,7 @@ import { SliderData } from "./SliderData";
 import logo from "../../images/logo.png";
 
 const ImageSlider = ({ slides }) => {
-  const delay = 2500;
+  const delay = 15000;
 
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
@@ -28,7 +28,7 @@ const ImageSlider = ({ slides }) => {
     return () => {
       resetTimeout();
     };
-  }, [index]);
+  }, [index, slides.length]);
 
   return (
     <div className="slideshow">
@@ -40,7 +40,7 @@ const ImageSlider = ({ slides }) => {
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
         {SliderData.map((slide, index) => (
-          <img src={slide.image} className="slide" key={index} />
+          <img src={slide.image} className="slide" alt="" key={index} />
         ))}
       </div>
 

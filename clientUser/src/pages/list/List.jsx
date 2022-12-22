@@ -1,124 +1,129 @@
 import "./List.css";
-import Header from "../../components/header/Header.jsx";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import { format } from "date-fns";
-import { DateRange } from "react-date-range";
+// import Header from "../../components/header/Header.jsx";
+// import { useLocation } from "react-router-dom";
+// import { useState } from "react";
+// import { format } from "date-fns";
+// import { DateRange } from "react-date-range";
 import SearchedItem from "../../components/searchedItem/SearchedItem";
 import useFetch from "../../hooks/useFetch";
+import { UrlPath } from "../../UrlPath";
 
 const List = () => {
-  const location = useLocation();
+  // const location = useLocation();
 
-  const [dates, setDates] = useState(location.state.dates);
+  // const [dates, setDates] = useState(location.state.dates);
 
-  const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
-  const [min, setMin] = useState(undefined);
-  const [max, setMax] = useState(undefined);
+  // const [openDate, setOpenDate] = useState(false);
+  // // const [options] = useState(location.state.options);
+  // const [min, setMin] = useState(undefined);
+  // const [max, setMax] = useState(undefined);
 
-  const { data, loading, reFetch } = useFetch(
-    `https://api.johnmikoresort.store/services?min=${min || 0}&max=${
-      max || 999
-    }`
+  const { data } = useFetch(
+    // loading, reFetch
+    `${UrlPath}/rooms`
   );
 
-  const handleClick = () => {
-    reFetch();
-  };
+  // ?min=${min || 0}&max=${max || 999}`
+
+  // const handleClick = () => {
+  //   reFetch();
+  // };
 
   return (
-    <>
-      {loading ? (
-        "loading"
-      ) : (
-        <>
-          <Header type="list" />
-          <div className="listContainer">
-            <div className="listWrapper">
-              <div className="listSearch">
-                <h1 className="listTitle">Search</h1>
-                <div className="listItem">
-                  <label>Check-in Date</label>
-                  <span onClick={() => setOpenDate(!openDate)}>
-                    {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
-                      dates[0].endDate,
-                      "MM/dd/yyyy"
-                    )}`}
-                  </span>
-                  {openDate && (
-                    <DateRange
-                      onChange={(item) => setDates([item.selection])}
-                      minDate={new Date()}
-                      ranges={dates}
-                    />
-                  )}
-                </div>
+    // <>
+    //   {loading ? (
+    //     "loading"
+    //   ) : (
+    //     <>
+    //       <Header type="list" />
+    //       <div className="listContainer">
+    //         <div className="listWrapper">
+    //           <div className="listSearch">
+    //             <h1 className="listTitle">Search</h1>
+    //             <div className="listItem">
+    //               <label>Check-in Date</label>
+    //               <span onClick={() => setOpenDate(!openDate)}>
+    //                 {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+    //                   dates[0].endDate,
+    //                   "MM/dd/yyyy"
+    //                 )}`}
+    //               </span>
+    //               {openDate && (
+    //                 <DateRange
+    //                   onChange={(item) => setDates([item.selection])}
+    //                   minDate={new Date()}
+    //                   ranges={dates}
+    //                 />
+    //               )}
+    //             </div>
 
-                <div className="listItem">
-                  <label>Options</label>
-                  <div className="listOptions">
-                    <div className="listOptionItem">
-                      <span className="listOptionText">
-                        Min price <small>per night</small>
-                      </span>
-                      <input
-                        type="number"
-                        onChange={(e) => setMin(e.target.value)}
-                        className="listOptionInput"
-                      />
-                    </div>
-                    <div className="listOptionItem">
-                      <span className="listOptionText">
-                        Max price <small>per night</small>
-                      </span>
-                      <input
-                        type="number"
-                        onChange={(e) => setMax(e.target.value)}
-                        className="listOptionInput"
-                      />
-                    </div>
-                    <div className="listOptionItem">
-                      <span className="listOptionText">Adult</span>
-                      <input
-                        type="number"
-                        min={1}
-                        className="listOptionInput"
-                        placeholder={options.adult}
-                      />
-                    </div>
-                    <div className="listOptionItem">
-                      <span className="listOptionText">Children</span>
-                      <input
-                        type="number"
-                        min={0}
-                        className="listOptionInput"
-                        placeholder={options.children}
-                      />
-                    </div>
-                    <div className="listOptionItem">
-                      <span className="listOptionText">Room</span>
-                      <input
-                        type="number"
-                        min={1}
-                        className="listOptionInput"
-                        placeholder={options.room}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <button onClick={handleClick}>Search</button>
-              </div>
-              <div className="listResult">
-                {data.map((item) => (
-                  <SearchedItem item={item} key={item._id} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-    </>
+    //             <div className="listItem">
+    //               <label>Options</label>
+    //               <div className="listOptions">
+    //                 <div className="listOptionItem">
+    //                   <span className="listOptionText">
+    //                     Min price <small>per night</small>
+    //                   </span>
+    //                   <input
+    //                     type="number"
+    //                     onChange={(e) => setMin(e.target.value)}
+    //                     className="listOptionInput"
+    //                   />
+    //                 </div>
+    //                 <div className="listOptionItem">
+    //                   <span className="listOptionText">
+    //                     Max price <small>per night</small>
+    //                   </span>
+    //                   <input
+    //                     type="number"
+    //                     onChange={(e) => setMax(e.target.value)}
+    //                     className="listOptionInput"
+    //                   />
+    //                 </div>
+    //{/* <div className="listOptionItem">
+    // <span className="listOptionText">Adult</span>
+    //   <input
+    //      type="number"
+    //      min={1}
+    //        className="listOptionInput"
+    //       placeholder={options.adult}
+    //     />
+    //    </div>
+    //  <div className="listOptionItem">
+    //     <span className="listOptionText">Children</span>
+    //     <input
+    //       type="number"
+    //        min={0}
+    //       className="listOptionInput"
+    //  placeholder={options.children}
+    //     />
+    //  </div> */}
+    //* <div className="listOptionItem">
+    // <span className="listOptionText">Room</span>
+    //  <input
+    //    type="number"
+    //      min={1}
+    //    className="listOptionInput"
+    //    placeholder={options.room}
+    //  />
+    //  </div> */}
+    //  {/* </div>
+    // </div>
+    //  <button onClick={handleClick}>Search</button>
+    // </div> */}
+    <div className="listWrapper">
+      <div className="listResult">
+        {data.map((item) => (
+          <SearchedItem item={item} key={item._id} />
+        ))}
+      </div>
+    </div>
+
+    //       </div>
+    //     </div>
+    //   </>
+    // )}
+    // </>
   );
 };
 

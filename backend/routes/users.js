@@ -1,15 +1,12 @@
 const userRUD = require("../controllers/userController");
-const verify = require("../utils/verifyToken");
-
 const router = require("express").Router();
+// const { createGoogle } = require("../controllers/authController");
+// const auth = require("./auth");
 
-// router.get("/checkauthentication", verify.verifyToken, (req, res, next) => {
-//     res.send("Hello user, you are logged in!");
-// })
+// router.post("/create", auth, createGoogle);
 
-// router.get("/checkuser/:id", verify.verifyUser, (req, res, next) => {
-//     res.send("Hello user, you are logged in!");
-// })
+// UPDATE
+router.post("/create", userRUD.createUser);
 
 // UPDATE
 router.put("/:id", userRUD.updateUser);

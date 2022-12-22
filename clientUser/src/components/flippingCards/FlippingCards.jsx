@@ -2,17 +2,14 @@ import "./FlippingCards.css";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
-  WarningAmber,
   PushPin,
   NotificationsActive,
-  LocationOn,
   DocumentScanner,
 } from "@mui/icons-material";
 
 const FlippingCards = () => {
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
-  const [isOpen3, setIsOpen3] = useState(false);
   const [isOpen4, setIsOpen4] = useState(false);
 
   return (
@@ -30,20 +27,11 @@ const FlippingCards = () => {
         {isOpen1 && (
           <motion.div>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the{" "}
+              <br />
+              Guest coming from Manila[South] are advised to take NLEX
+              Philippine Arena Exit, this is to avoid heavy traffic at Bocaue
+              exit. Guest are advised to use big car to avoid break down in
+              rough road.
             </p>
           </motion.div>
         )}
@@ -62,20 +50,16 @@ const FlippingCards = () => {
         {isOpen2 && (
           <motion.div>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the{" "}
+              <br />
+              - Guest may bring in their food, but please use plastic containers
+              or disposable ones. (beverages are available inside the resort).
+              <br />
+              - Observe proper waste disposal - Please take care of your
+              belongings, most specially your slippers and bags.
+              <br />
+              - FIRST COME FIRST SERVE policy is applied on all open cottages
+              <br />- For online reservations, at least 50% of the desired
+              rooms, or cottage should be paid.
             </p>
           </motion.div>
         )}
@@ -94,20 +78,22 @@ const FlippingCards = () => {
         {isOpen4 && (
           <motion.div>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the{" "}
+              <br />
+              Please wear proper swimming attire when using the pool, colored
+              shirts are strictly phrohibited.
+              <br />
+              Swimming Attire
+              <br />
+              Male: Garterized / Cycling shorts, Trunks, White shirt
+              <br />
+              Female: Bathing suits, Cycling shorts, White shirt
+              <br />
+              - Diving is not allowed at the pool area. No back diving off the
+              edge of the pool or any unsafe activities
+              <br />
+              - Persons with colds, skin diseases or contagious diseases will
+              not be allowed in the pool.
+              <br />- Children must be closely supervised by adults.
             </p>
           </motion.div>
         )}

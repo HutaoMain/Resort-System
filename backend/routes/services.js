@@ -1,5 +1,4 @@
 const serviceCRUD = require("../controllers/servicesController");
-const verify = require("../utils/verifyToken");
 
 const router = require("express").Router();
 

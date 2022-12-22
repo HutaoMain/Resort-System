@@ -17,8 +17,15 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-scroll";
 import Cards from "../../components/cards/Cards.jsx";
+import EntranceRate from "../../components/entranceRate/EntranceRates.jsx";
+// import { useContext } from "react";
 
 const Home = () => {
+  // const { user } = useContext(AuthContext);
+
+  // const alertPopup = () => {
+  //   window.alert("please login");
+  // };
   return (
     <div>
       <div className="homeList">
@@ -47,7 +54,8 @@ const Home = () => {
           to="reservation"
           smooth={true}
           duration={70}
-          offset={-220}
+          offset={-350}
+          // onClick={user ? alertPopup : null}
         >
           <EventAvailable />
           <span>Reservation</span>
@@ -105,6 +113,7 @@ const Home = () => {
         <span className="homeEntranceRateTitle">Packages / Rates</span>
         <div id="entranceRate"></div>
         <Cards />
+        <EntranceRate />
         <br />
         <WarningAmber className="warningAmberIcon" />
         <div id="pleaseRead"></div>
@@ -114,6 +123,7 @@ const Home = () => {
         <h1 className="homeTitle">You can find us here</h1>
         <iframe
           className="googleMap"
+          title="angatBulacan"
           width="600"
           height="500"
           src="https://maps.google.com/maps?q=Barangay%20Pulong%20Yantok%20Sentinela%20Road%20Angat,%20Bulacan&t=&z=13&ie=UTF8&iwloc=&output=embed"

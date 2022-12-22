@@ -1,59 +1,43 @@
 import "./Reserve.css";
 import useFetch from "../../hooks/useFetch.js";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { UrlPath } from "../../UrlPath";
 
-const Reserve = ({ setOpen, serviceid, totalprice }) => {
+const Reserve = ({ setOpen, totalprice }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const [serviceData, setServiceData] = useState("");
+  const [selectedFacilityNumber, setSelectedFacilityNumber] = useState([]);
+  // const [singleRoom, setSingleRoom] = useState({});
 
-  //services
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get(
-        `https://api.johnmikoresort.store/services/find/${id}`
-      );
-      setServiceData(res.data);
-    };
-    fetchData();
-  }, []);
+  // console.log(singleRoom);
 
-  const [user, setUser] = useState(null);
-
+  const { user } = useContext(AuthContext);
   const { dates } = useContext(SearchContext);
 
-  useEffect(() => {
-    const getUser = () => {
-      fetch("https://api.johnmikoresort.store/auth/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("Authentication has been failed!");
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  // start of google save user
+  const testAuthorization = async () => {
+    const credentials = {
+      name: user.name,
+      email: user.email,
+      img: user.picture === "" && user.picture.data.url,
     };
-    getUser();
-  }, []);
+    try {
+      await axios.post(`${UrlPath}/users/create`, credentials);
+      // console.log(credentials);
+    } catch (error) {}
+  };
 
-  const { data } = useFetch(
-    `https://api.johnmikoresort.store/services/rooms/${serviceid}`
-  );
+  // end of google save user
+
+  // put here if facebook or put Or in credentials
+
+  const { data } = useFetch(`${UrlPath}/rooms/${id}`);
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -70,55 +54,97 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
     return dates;
   };
 
-  const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+  let alldates = getDatesInRange(dates[0]?.startDate, dates[0]?.endDate);
 
   const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date) =>
       alldates.includes(new Date(date).getTime())
     );
+
     return !isFound;
   };
 
+  // const isAvailableEvery = (roomNumber) => {
+  //   const isFound = roomNumber?.unavailableDates?.every((date) =>
+  //     alldates.includes(new Date(date).getTime())
+  //   );
+  //   return !isFound;
+  // };
+
+  // useEffect(() => {
+  //   data.roomNumbers?.map((item) => setSingleRoom(item));
+  // }, [data.roomNumbers]);
+
+  console.log(selectedFacilityNumber);
+
   const sample = async () => {
     const postReserve = {
-      customerName: user.displayName,
-      service: serviceData.name,
+      customerName: user.name,
+      email: user.email,
+      rooms: data.title,
       amount: totalprice,
       dateRange: dates,
+      roomNumberId: selectedRooms.toString(),
+      roomNumberName: selectedFacilityNumber.toString(),
     };
 
-    await axios.post(
-      "https://api.johnmikoresort.store/reservations",
-      postReserve
-    );
+    await axios.post(`${UrlPath}/reservations`, postReserve);
   };
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
     const value = e.target.value;
+    const name = e.target.name;
     setSelectedRooms(
       checked
         ? [...selectedRooms, value]
         : selectedRooms.filter((item) => item !== value)
     );
+    setSelectedFacilityNumber(
+      checked
+        ? [...selectedFacilityNumber, name]
+        : selectedFacilityNumber.filter((number) => number !== name)
+    );
   };
+
+  // console.log(selectedRooms);
+
+  // const handleOnFocus = (e) => {
+  //   const checked = e.target.checked;
+  //   setSelectedFacilityNumber(
+  //     checked && [...selectedFacilityNumber]
+  //     // : selectedRooms.filter((item) => item !== value)
+  //   );
+  // };
+
+  // console.log(selectedRooms);
 
   const navigate = useNavigate();
 
+  const handleSendEmail = async () => {
+    try {
+      await axios.post(`${UrlPath}/email/send`, {
+        email: user.email,
+        name: user.name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleClick = async () => {
     try {
+      handleSendEmail();
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(
-            `https://api.johnmikoresort.store/rooms/availability/${roomId}`,
-            {
-              dates: alldates,
-            }
-          );
+          const res = axios.put(`${UrlPath}/rooms/availability/${roomId}`, {
+            dates: alldates,
+          });
           return res.data;
         })
       );
       sample();
+      testAuthorization();
       setOpen(false);
       navigate("/");
     } catch (err) {}
@@ -130,38 +156,38 @@ const Reserve = ({ setOpen, serviceid, totalprice }) => {
         <button onClick={() => setOpen(false)} className="rClose">
           x
         </button>
-        <span>Select your rooms:</span>
-        {data.map(
-          (item, key) =>
-            item && (
-              <div className="rItem" key={key}>
-                <div className="rItemInfo">
-                  <div className="rTitle">{item.title}</div>
-                  <div className="rDesc">{item.desc}</div>
-                  <div className="rMaxPeeps">
-                    Max people: <b>{item.maxPeople}</b>
-                  </div>
-                  <div className="rPrice">{totalprice}</div>
-                </div>
-                <div className="rSelectRooms">
-                  {item.roomNumbers.map((roomNumber) => (
-                    <div className="room">
-                      <label>{roomNumber.number}</label>
-                      <input
-                        type="checkbox"
-                        value={roomNumber._id}
-                        onChange={handleSelect}
-                        disabled={!isAvailable(roomNumber)}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )
-        )}
-        <button onClick={handleClick} className="rButton">
+        <span>Select your available Facility number:</span>
+
+        <div className="rSelectRooms">
+          {data.roomNumbers?.map((roomNumber) => (
+            <div className="room">
+              <label>Facility #: {roomNumber.number}</label>
+
+              <input
+                type="checkbox"
+                id="checkboxReserve"
+                value={roomNumber._id}
+                onChange={handleSelect}
+                name={roomNumber.number}
+                defaultChecked={!isAvailable(roomNumber)}
+                disabled={!isAvailable(roomNumber)}
+                title={!isAvailable(roomNumber) ? "Already Reserved" : ""}
+              />
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={handleClick}
+          name="rBtn"
+          className="rBtn"
+          // disabled={!isAvailableEvery(singleRoom)}
+        >
           Reserve Now!
         </button>
+        <p style={{ color: "red", marginTop: "10px", marginBottom: "-5px" }}>
+          <b>Disclaimer:</b> Once you Reserve check your email, you must pay
+          before 2 hours- or else your reservation will be cancelled.
+        </p>
       </div>
     </div>
   );

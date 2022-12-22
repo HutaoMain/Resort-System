@@ -2,167 +2,69 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import ViewUser from "./pages/viewUser/ViewUser";
-import NewService from "./pages/newService/NewService";
-import NewRoom from "./pages/newRoom/NewRoom";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-// import { productInputs, userInputs } from "./formSource";
+// import NewService from "./pages/newService/NewService";
+import NewRoom from "./pages/rooms/newRoom/NewRoom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "./style/dark.scss";
+import "react-datepicker/dist/react-datepicker.css";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import {
   userColumns,
-  serviceColumns,
   roomColumns,
   reservationsColumn,
 } from "./datatablesource";
-import UpdateService from "./pages/updateService/UpdateService";
-import UpdateRoom from "./pages/updateRoom/UpdateRoom";
+import UpdateRoom from "./pages/rooms/updateRooms/UpdateRoom";
+import UpdateReservation from "./pages/reservation/UpdateReservation";
+import ViewRoom from "./pages/rooms/viewRoom/ViewRoom";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { user } = useContext(AuthContext);
 
-  const navigate = useNavigate();
-
-  const ProtectedRoute = ({ children }) => {
-    if (!user) {
-      navigate("/login", { replace: true });
-    }
-    return children;
-  };
-
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <Routes>
         <Route path="/">
-          <Route path="login" element={<Login />} />
           <Route
-            index
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
+            path="login"
+            element={user ? <Navigate to="/" /> : <Login />}
           />
+          <Route index element={user ? <Home /> : <Login />} />
           <Route path="users">
             <Route
               index
-              element={
-                <ProtectedRoute>
-                  <List columns={userColumns} />
-                </ProtectedRoute>
-              }
+              element={user ? <List columns={userColumns} /> : <Login />}
             />
             <Route
               path="view/:userId"
-              element={
-                <ProtectedRoute>
-                  <ViewUser />
-                </ProtectedRoute>
-              }
-            />
-          </Route>
-          <Route path="services">
-            <Route
-              index
-              element={
-                <ProtectedRoute>
-                  <List columns={serviceColumns} />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
-              path=":serviceId"
-              element={
-                <ProtectedRoute>
-                  <ViewUser />
-                </ProtectedRoute>
-              }
-            /> */}
-            <Route
-              path="new"
-              element={
-                <ProtectedRoute>
-                  <NewService />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="update/:serviceId"
-              element={
-                <ProtectedRoute>
-                  <UpdateService />
-                </ProtectedRoute>
-              }
+              element={user ? <ViewUser /> : <Login />}
             />
           </Route>
           <Route path="rooms">
             <Route
               index
-              element={
-                <ProtectedRoute>
-                  <List columns={roomColumns} />
-                </ProtectedRoute>
-              }
+              element={user ? <List columns={roomColumns} /> : <Login />}
             />
-            {/* <Route
-              path=":productId"
-              element={
-                <ProtectedRoute>
-                  <ViewUser />
-                </ProtectedRoute>
-              }
-            /> */}
             <Route
-              path="new"
-              element={
-                <ProtectedRoute>
-                  <NewRoom />
-                </ProtectedRoute>
-              }
+              path="view/:roomId"
+              element={user ? <ViewRoom /> : <Login />}
             />
+            <Route path="new" element={user ? <NewRoom /> : <Login />} />
             <Route
               path="update/:roomId"
-              element={
-                <ProtectedRoute>
-                  <UpdateRoom />
-                </ProtectedRoute>
-              }
+              element={user ? <UpdateRoom /> : <Login />}
             />
           </Route>
           <Route path="reservations">
             <Route
               index
-              element={
-                <ProtectedRoute>
-                  <List columns={reservationsColumn} />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
-              path=":productId"
-              element={
-                <ProtectedRoute>
-                  <ViewUser />
-                </ProtectedRoute>
-              }
-            /> */}
-            <Route
-              path="new"
-              element={
-                <ProtectedRoute>
-                  <NewRoom />
-                </ProtectedRoute>
-              }
+              element={user ? <List columns={reservationsColumn} /> : <Login />}
             />
             <Route
-              path="update/:roomId"
-              element={
-                <ProtectedRoute>
-                  <UpdateRoom />
-                </ProtectedRoute>
-              }
+              path="update/:reservationId"
+              element={user ? <UpdateReservation /> : <Login />}
             />
           </Route>
         </Route>

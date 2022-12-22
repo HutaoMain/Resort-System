@@ -2,39 +2,98 @@ import "./Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginModal from "../../pages/loginModal/LoginModal.jsx";
 import { useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
+import { ExitToApp } from "@mui/icons-material";
+import { KeyboardBackspace, Home } from "@mui/icons-material";
 
 const Navbar = ({ user }) => {
+  const { dispatch } = useContext(AuthContext);
+
   const location = useLocation();
 
   const navigate = useNavigate();
 
   const [isToggled, setToggle] = useState(false);
   const logout = () => {
-    window.open("https://api.johnmikoresort.store/auth/logout", "_self");
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
-    <div className={location.pathname !== "/" ? "navbars" : "navbarHome"}>
-      <div
-        className={
-          location.pathname !== "/" ? "navbarContainer" : "navbarHomeContainer"
-        }
-      >
+    <div className={location.pathname === "/" ? "navbarHome" : "navbars"}>
+      <div className="navbarHomeContainer">
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-          <span className="logo">JOHN MIKO’S PLACE RESORT</span>
+          <span className="logo">
+            <Home />
+            JOHN MIKO’S PLACE RESORT
+          </span>
         </Link>
+        <div
+          className={
+            location.pathname === "/" ? "homeExtraBtnHide" : "homeExtraBtnShow"
+          }
+        >
+          <button
+            onClick={() => navigate(-1)}
+            style={{
+              border: "none",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              color: "white",
+            }}
+          >
+            <KeyboardBackspace />
+            <span>Back</span>
+          </button>
+        </div>
         <div className="navitems">
           {user ? (
-            <div className="dropdown">
-              <img src={user.photos[0].value} alt="" className="topAvatar" />
-              <div className="dropdown-content">
-                <span className="dropUsername"> {user.displayName} </span>
-                <button className="btnLogout" onClick={logout}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <img
+                src={
+                  user.picture?.data?.url || user?.picture
+                  // || "https://i.ibb.co/MBtjqXQ/no=avatar.gif"
+                }
+                alt="profilePic"
+                className="topAvatar"
+              />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <span>{user.name}</span>
+                <button
+                  style={{
+                    border: "none",
+                    borderRadius: "5px",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                  onClick={logout}
+                >
                   Logout
+                  <ExitToApp />
                 </button>
               </div>
             </div>
           ) : (
+            // <div className="dropdown">
+            //   <img
+            //     src={user.picture?.data?.url || user?.picture}
+            //     alt=""
+            //     className="topAvatar"
+            //   />
+            //   <div className="dropdown-content">
+            //     <span className="dropUsername"> {user.name} </span>
+            //     <button className="btnLogout" onClick={logout}>
+            //       Logout
+            //     </button>
+            //   </div>
+            // </div>
             <>
               <button className="navButton" onClick={() => setToggle(true)}>
                 Login

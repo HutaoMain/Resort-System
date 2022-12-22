@@ -8,11 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useFetch from "../../hooks/useFetch";
 import moment from "moment";
+import { UrlPath } from "../../UrlPath";
 
 const List = () => {
-  const { data, loading, error } = useFetch(
-    "https://api.johnmikoresort.store/reservations"
-  );
+  const { data, loading } = useFetch(`${UrlPath}/reservations`);
 
   return (
     <TableContainer component={Paper} className="table">
@@ -20,9 +19,9 @@ const List = () => {
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">Tracking ID</TableCell>
-            <TableCell className="tableCell">Product</TableCell>
+            <TableCell className="tableCell">Room</TableCell>
             <TableCell className="tableCell">Customer</TableCell>
-            <TableCell className="tableCell">Date</TableCell>
+            <TableCell className="tableCell">Dates</TableCell>
             <TableCell className="tableCell">Amount</TableCell>
             <TableCell className="tableCell">Status</TableCell>
           </TableRow>
@@ -33,7 +32,7 @@ const List = () => {
             : data.map((item) => (
                 <TableRow key={item._id}>
                   <TableCell className="tableCell">{item._id}</TableCell>
-                  <TableCell className="tableCell">{item.service}</TableCell>
+                  <TableCell className="tableCell">{item.rooms}</TableCell>
                   <TableCell className="tableCell">
                     {item.customerName}
                   </TableCell>
