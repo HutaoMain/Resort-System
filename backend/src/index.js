@@ -3,15 +3,25 @@ const cors = require("cors");
 
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+
 const usersRoute = require("./routes/users");
 const servicesRoute = require("./routes/services");
 const roomsRoute = require("./routes/rooms");
 const reservationRoute = require("./routes/reservation");
 const authRoute = require("./routes/auth");
 const emailRoute = require("./routes/email");
-const cookieParser = require("cookie-parser");
 
 const app = express();
+
+app.use(
+  session({
+    secret: "resort-system-10202025-secret-key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 dotenv.config();
 
@@ -43,25 +53,6 @@ app.use("/services", servicesRoute);
 app.use("/rooms", roomsRoute);
 app.use("/reservations", reservationRoute);
 app.use("/email", emailRoute);
-
-// app.post("/send", function (req, res) {
-// const transporter = nodemailer.createTransport({
-//   host: 'smtp.example.com', // your SMTP host
-//   port: 587, // SMTP port
-//   secure: false, // use SSL
-//   auth: {
-//     user: 'username', // your SMTP username
-//     pass: 'password' // your SMTP password
-//   }
-// });
-
-// send a message
-// transporter.sendMail({
-//   from: 'sender@example.com',
-//   to: 'receiver@example.com',
-//   subject: 'Nodemailer is easy to use',
-//   text: 'This is a test message sent with Nodemailer'
-// });
 
 const port = 5000;
 

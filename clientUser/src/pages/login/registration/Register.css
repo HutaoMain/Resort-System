@@ -1,0 +1,99 @@
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.register-input-name-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.register-input-name {
+  width: 45%;
+  height: 45px;
+  margin-top: 10px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.register-input {
+  width: 95%;
+  height: 45px;
+  margin-top: 10px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.register-input-number {
+  width: 95%;
+  height: 45px;
+  margin-top: 10px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.register-input-number::-webkit-outer-spin-button,
+.register-input-number::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.register-birthday-label {
+  margin-top: 10px;
+}
+
+.register-birthday-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-birthday-input-container {
+  display: flex;
+  gap: 10px;
+}
+
+.register-birthday-input {
+  font-size: 18px;
+  height: 45px;
+  border: 1px solid #ccc;
+  width: 120px;
+}
+
+.register-terms {
+  margin-top: 10px;
+  width: 95%;
+  text-align: center;
+  font-size: 15px;
+}
+
+.register-btn {
+  width: 50%;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: #333; /* dark grey */
+  color: #fff; /* white */
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  border: 2px solid #ccc; /* medium grey */
+}
+
+.register-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

@@ -1,14 +1,14 @@
 const User = require("../models/User");
 
-const createUser = async (req, res, next) => {
-  const newUser = new User(req.body);
-  try {
-    await newUser.save();
-    res.status(200).send("User has been created");
-  } catch (err) {
-    next(err);
-  }
-};
+// const createUser = async (req, res, next) => {
+//   const newUser = new User(req.body);
+//   try {
+//     await newUser.save();
+//     res.status(200).send("User has been created");
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
 const updateUser = async (req, res, next) => {
   try {
@@ -47,4 +47,4 @@ const getUsers = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser, updateUser, deleteUser, getUser, getUsers };
+module.exports = { updateUser, deleteUser, getUser, getUsers };

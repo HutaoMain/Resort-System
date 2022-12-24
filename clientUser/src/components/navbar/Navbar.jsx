@@ -1,23 +1,22 @@
 import "./Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import LoginModal from "../../pages/loginModal/LoginModal.jsx";
-import { useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
+// import { useState } from "react";
+// import { AuthContext } from "../../context/AuthContext";
+// import { useContext } from "react";
 import { ExitToApp } from "@mui/icons-material";
 import { KeyboardBackspace, Home } from "@mui/icons-material";
 
 const Navbar = ({ user }) => {
-  const { dispatch } = useContext(AuthContext);
+  // const { dispatch } = useContext(AuthContext);
 
   const location = useLocation();
 
   const navigate = useNavigate();
 
-  const [isToggled, setToggle] = useState(false);
-  const logout = () => {
-    dispatch({ type: "LOGOUT" });
-  };
+  // const [isToggled, setToggle] = useState(false);
+  // const logout = () => {
+  //   dispatch({ type: "LOGOUT" });
+  // };
 
   return (
     <div className={location.pathname === "/" ? "navbarHome" : "navbars"}>
@@ -73,7 +72,7 @@ const Navbar = ({ user }) => {
                     alignItems: "center",
                     cursor: "pointer",
                   }}
-                  onClick={logout}
+                  // onClick={logout}
                 >
                   Logout
                   <ExitToApp />
@@ -94,18 +93,9 @@ const Navbar = ({ user }) => {
             //     </button>
             //   </div>
             // </div>
-            <>
-              <button className="navButton" onClick={() => setToggle(true)}>
-                Login
-              </button>
-              <LoginModal
-                isToggled={isToggled}
-                onClose={() => {
-                  setToggle(false);
-                  navigate(0);
-                }}
-              ></LoginModal>
-            </>
+            <Link to="/login">
+              <button className="navButton">Login</button>
+            </Link>
           )}
         </div>
       </div>

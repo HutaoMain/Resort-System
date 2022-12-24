@@ -5,8 +5,7 @@ const router = require("express").Router();
 
 // router.post("/create", auth, createGoogle);
 
-// UPDATE
-router.post("/create", userRUD.createUser);
+// router.post("/create", userRUD.createUser);
 
 // UPDATE
 router.put("/:id", userRUD.updateUser);

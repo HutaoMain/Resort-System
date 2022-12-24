@@ -1,20 +1,21 @@
 import "./FlippingCards.css";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import {
-  PushPin,
-  NotificationsActive,
-  DocumentScanner,
-} from "@mui/icons-material";
+// import { motion } from "framer-motion";
+// import { useState } from "react";
+// import {
+//   PushPin,
+//   NotificationsActive,
+//   DocumentScanner,
+// } from "@mui/icons-material";
 
 const FlippingCards = () => {
-  const [isOpen1, setIsOpen1] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [isOpen4, setIsOpen4] = useState(false);
+  // const [isOpen1, setIsOpen1] = useState(false);
+  // const [isOpen2, setIsOpen2] = useState(false);
+  // const [isOpen4, setIsOpen4] = useState(false);
 
   return (
     <div className="flippingCardContainer">
-      <motion.div
+      FlippingCards
+      {/* <motion.div
         transition={{ layout: { duration: 1, type: "spring" } }}
         layout
         onClick={() => setIsOpen1(!isOpen1)}
@@ -97,7 +98,7 @@ const FlippingCards = () => {
             </p>
           </motion.div>
         )}
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 };

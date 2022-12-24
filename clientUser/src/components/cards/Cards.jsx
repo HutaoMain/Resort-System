@@ -1,6 +1,6 @@
 import "./Cards.css";
 import useFetch from "../../hooks/useFetch.js";
-import Carousel from "react-elastic-carousel";
+// import Carousel from "react-elastic-carousel";
 import { UrlPath } from "../../UrlPath";
 
 const Cards = () => {
@@ -14,7 +14,7 @@ const Cards = () => {
             <div key={key} className="cardComponent">
               <div className="cardComponentImageContainer">
                 <div className="cardImageContainer">
-                  <Carousel>
+                  {/* <Carousel>
                     {item.picture?.map((image, keyId) => (
                       <img
                         key={keyId}
@@ -23,7 +23,7 @@ const Cards = () => {
                         className="cardComponentImg"
                       />
                     ))}
-                  </Carousel>
+                  </Carousel> */}
                 </div>
               </div>
               <div className="cardComponentDescription">

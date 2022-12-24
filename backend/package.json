@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,14 +19,12 @@
     "express-session": "^1.17.3",
     "gcp-metadata": "^5.0.1",
     "google-auth-library": "^8.6.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.4.2",
-    "netlify-lambda": "^2.0.15",
     "nodemailer": "^6.8.0",
     "nodemon": "^2.0.18",
-    "passport": "^0.5.3",
+    "passport": "^0.6.0",
     "passport-facebook": "^3.0.0",
-    "passport-google-oauth20": "^2.0.0",
-    "serverless-http": "^3.1.0"
+    "uuid": "^9.0.0"
   }
 }

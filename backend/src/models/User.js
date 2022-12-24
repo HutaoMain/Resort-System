@@ -7,13 +7,20 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    // username: {
-    //   type: String,
-    //   unique: true,
-    //   required: true,
-    // },
-    name: {
+    phoneNumber: {
+      type: Number,
+    },
+    firstName: {
       type: String,
+    },
+    lastName: {
+      type: String,
+    },
+    fullName: {
+      type: String,
+    },
+    birthday: {
+      type: Date,
     },
     googleOrFbId: {
       type: String,
