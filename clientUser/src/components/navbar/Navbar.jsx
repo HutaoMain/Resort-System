@@ -63,7 +63,7 @@ const Navbar = ({ user }) => {
                   flexDirection: "column",
                 }}
               >
-                <span>{user.name}</span>
+                <span>{user.firstName}</span>
                 <button
                   style={{
                     border: "none",

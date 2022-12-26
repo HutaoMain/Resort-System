@@ -1,6 +1,6 @@
 import App from "./App";
 import { SearchContextProvider } from "./context/SearchContext";
-import { AuthContextProvider } from "./context/AuthContext";
+// import { AuthContextProvider } from "./context/AuthContext";
 import { UserProvider } from "./context/UserContext";
 
 import React from "react";
@@ -13,9 +13,9 @@ root.render(
     <BrowserRouter>
       <SearchContextProvider>
         <UserProvider>
-          <AuthContextProvider>
-            <App />
-          </AuthContextProvider>
+          {/* <AuthContextProvider> */}
+          <App />
+          {/* </AuthContextProvider> */}
         </UserProvider>
       </SearchContextProvider>
     </BrowserRouter>

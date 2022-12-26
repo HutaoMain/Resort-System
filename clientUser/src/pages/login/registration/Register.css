@@ -30,6 +30,10 @@
   border-radius: 10px;
 }
 
+.register-error-icon {
+  color: red;
+}
+
 .register-input-number {
   width: 95%;
   height: 45px;
@@ -63,6 +67,13 @@
   font-size: 18px;
   height: 45px;
   border: 1px solid #ccc;
+  width: 120px;
+}
+
+.register-birthday-input-error {
+  font-size: 18px;
+  height: 45px;
+  border: 1px solid red;
   width: 120px;
 }
 

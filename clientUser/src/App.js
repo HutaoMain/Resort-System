@@ -10,7 +10,7 @@ import List from "./pages/list/List";
 import { useUser } from "./context/UserContext";
 
 function App() {
-  const { user, logout } = useUser();
+  const { user } = useUser();
 
   const location = useLocation();
 

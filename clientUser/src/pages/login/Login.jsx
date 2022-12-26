@@ -17,6 +17,10 @@ import GoogleLogin from "./googleLoginComponent/GoogleLogin";
 import Modal from "react-modal";
 import Register from "./registration/Register";
 import { useState } from "react";
+import { UrlPath } from "../../UrlPath";
+import axios from "axios";
+import { useUser } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -26,7 +30,7 @@ const customStyles = {
     bottom: "auto",
     transform: "translate(-50%, -50%)",
     width: "400px",
-    height: "64%",
+    height: "60%",
     borderRadius: "20px",
     boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
     overflow: "hidden",
@@ -71,10 +75,39 @@ const Login = () => {
   //   }
   // };
 
+  const [credentials, setCredentials] = useState({
+    email: undefined,
+    password: undefined,
+  });
+
+  const { login } = useUser();
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${UrlPath}/auth/login`, credentials);
+      if (res.status === 200) {
+        const user = { ...credentials };
+        login(user);
+        navigate("/");
+      } else {
+        console.log("not logged in");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleChangeLogin = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   return (
@@ -95,12 +128,16 @@ const Login = () => {
           <input
             className="login-input"
             type="email"
+            id="email"
             placeholder="&nbsp;&nbsp;Email Address"
+            onChange={handleChangeLogin}
           />
           <input
             className="login-input"
             type="password"
+            id="password"
             placeholder="&nbsp;&nbsp;Password"
+            onChange={handleChangeLogin}
           />
           <div className="login-remember-container">
             <input
@@ -116,7 +153,9 @@ const Login = () => {
               Recover Password
             </a>
           </div>
-          <button className="login-btn">Login</button>
+          <button className="login-btn" onClick={handleLogin}>
+            Login
+          </button>
 
           <GoogleLogin />
           <FbLoginComponent />

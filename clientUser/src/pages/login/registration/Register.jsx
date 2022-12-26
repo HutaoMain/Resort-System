@@ -5,8 +5,9 @@ import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-import { Tooltip } from "antd";
+import { Error } from "@mui/icons-material";
+import { Input, Tooltip } from "antd";
+import { useUser } from "../../../context/UserContext";
 
 const Register = ({ close }) => {
   //setup birthdate
@@ -80,6 +81,11 @@ const Register = ({ close }) => {
 
     if (credentials.phoneNumber === "") {
       newErrors.phoneNumber = "Phone number is required";
+    } else if (
+      credentials.phoneNumber.length < 10 ||
+      credentials.phoneNumber.length > 10
+    ) {
+      newErrors.phoneNumber = "Phone number must be 10 digit";
     }
 
     if (credentials.email === "") {
@@ -102,6 +108,18 @@ const Register = ({ close }) => {
       newErrors.confirmPassword = "Passwords do not match";
     }
 
+    if (day === "") {
+      newErrors.day = "Please select a day";
+    }
+
+    if (month === "") {
+      newErrors.month = "Please select a month";
+    }
+
+    if (year === "") {
+      newErrors.year = "Please select a year";
+    }
+
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
@@ -109,6 +127,8 @@ const Register = ({ close }) => {
   // end validation
 
   const navigate = useNavigate();
+
+  const { login } = useUser();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -123,6 +143,8 @@ const Register = ({ close }) => {
             localStorage.setItem("access_token", response.data.access_token);
           });
 
+        const user = { ...credentials };
+        login(user);
         toast.success(" You have successfully signed up!", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
@@ -146,8 +168,13 @@ const Register = ({ close }) => {
       <hr style={{ marginTop: "10px" }} />
       <div className="register-container">
         <div className="register-input-name-container">
-          <Tooltip title={errors.firstName} open={errors.firstName} color="red">
-            <input
+          <Tooltip
+            title={errors.firstName}
+            open={errors.firstName}
+            color="red"
+            placement="left"
+          >
+            <Input
               type="text"
               placeholder="&nbsp;&nbsp;First name"
               id="firstName"
@@ -161,10 +188,23 @@ const Register = ({ close }) => {
               //   }));
               // }}
               onChange={handleChange}
+              status={errors.firstName ? "error" : ""}
+              suffix={
+                errors.firstName ? (
+                  <Error className="register-error-icon" />
+                ) : (
+                  ""
+                )
+              }
             />
           </Tooltip>
-          <Tooltip title={errors.lastName} open={errors.lastName} color="red">
-            <input
+          <Tooltip
+            title={errors.lastName}
+            open={errors.lastName}
+            color="red"
+            placement="right"
+          >
+            <Input
               type="text"
               placeholder="&nbsp;&nbsp;Last name"
               id="lastName"
@@ -172,11 +212,24 @@ const Register = ({ close }) => {
               value={credentials.lastName}
               className="register-input-name"
               onChange={handleChange}
+              status={errors.firstName ? "error" : ""}
+              suffix={
+                errors.firstName ? (
+                  <Error className="register-error-icon" />
+                ) : (
+                  ""
+                )
+              }
             />
           </Tooltip>
         </div>
-        <Tooltip title={errors.email} open={errors.email} color="red">
-          <input
+        <Tooltip
+          title={errors.email}
+          open={errors.email}
+          color="red"
+          placement="left"
+        >
+          <Input
             type="email"
             placeholder="&nbsp;&nbsp;Email Address"
             id="email"
@@ -190,11 +243,19 @@ const Register = ({ close }) => {
             //   }));
             // }}
             onChange={handleChange}
+            status={errors.firstName ? "error" : ""}
+            suffix={
+              errors.firstName ? <Error className="register-error-icon" /> : ""
+            }
           />
         </Tooltip>
-        <Tooltip title={errors.password} open={errors.password} color="red">
-          <input
-            type="password"
+        <Tooltip
+          title={errors.password}
+          open={errors.password}
+          color="red"
+          placement="left"
+        >
+          <Input.Password
             placeholder="&nbsp;&nbsp;Password"
             id="password"
             name="password"
@@ -207,15 +268,19 @@ const Register = ({ close }) => {
             //   }));
             // }}
             onChange={handleChange}
+            status={errors.firstName ? "error" : ""}
+            suffix={
+              errors.firstName ? <Error className="register-error-icon" /> : ""
+            }
           />
         </Tooltip>
         <Tooltip
           title={errors.confirmPassword}
           open={errors.confirmPassword}
           color="red"
+          placement="left"
         >
-          <input
-            type="password"
+          <Input.Password
             placeholder="&nbsp;&nbsp;Confirm Password"
             id="confirmPassword"
             name="confirmPassword"
@@ -228,14 +293,19 @@ const Register = ({ close }) => {
             //   }));
             // }}
             onChange={handleChange}
+            status={errors.firstName ? "error" : ""}
+            suffix={
+              errors.firstName ? <Error className="register-error-icon" /> : ""
+            }
           />
         </Tooltip>
         <Tooltip
           title={errors.phoneNumber}
           open={errors.phoneNumber}
           color="red"
+          placement="left"
         >
-          <input
+          <Input
             type="number"
             placeholder="&nbsp;&nbsp;Phone Number"
             id="phoneNumber"
@@ -249,6 +319,15 @@ const Register = ({ close }) => {
             //   }));
             // }}
             onChange={handleChange}
+            prefix="+63"
+            status={errors.phoneNumber ? "error" : ""}
+            suffix={
+              errors.phoneNumber ? (
+                <Error className="register-error-icon" />
+              ) : (
+                ""
+              )
+            }
           />
         </Tooltip>
         {/* birthday */}
@@ -256,42 +335,75 @@ const Register = ({ close }) => {
         <div className="register-birthday-container">
           <span className="register-birthday-label">Birthday:</span>
           <div className="register-birthday-input-container">
-            <select
-              className="register-birthday-input"
-              value={day}
-              onChange={(e) => setDay(e.target.value)}
+            <Tooltip
+              title={errors.day}
+              open={errors.day}
+              color="red"
+              placement="left"
             >
-              <option value="">--</option>
-              {days.map((day) => (
-                <option key={day} value={day}>
-                  {day}
-                </option>
-              ))}
-            </select>
-            <select
-              className="register-birthday-input"
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
+              <select
+                className={
+                  errors.day
+                    ? "register-birthday-input-error"
+                    : "register-birthday-input"
+                }
+                value={day}
+                onChange={(e) => setDay(e.target.value)}
+              >
+                <option value="">--</option>
+                {days.map((day) => (
+                  <option key={day} value={day}>
+                    {day}
+                  </option>
+                ))}
+              </select>
+            </Tooltip>
+            <Tooltip
+              title={errors.month}
+              open={errors.month}
+              color="red"
+              placement="bottom"
             >
-              <option value="">--</option>
-              {months.map((month) => (
-                <option key={month} value={month}>
-                  {month}
-                </option>
-              ))}
-            </select>
-            <select
-              className="register-birthday-input"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
+              <select
+                className={
+                  errors.month
+                    ? "register-birthday-input-error"
+                    : "register-birthday-input"
+                }
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+              >
+                <option value="">--</option>
+                {months.map((month) => (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                ))}
+              </select>
+            </Tooltip>
+            <Tooltip
+              title={errors.year}
+              open={errors.year}
+              color="red"
+              placement="right"
             >
-              <option value="">--</option>
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
+              <select
+                className={
+                  errors.year
+                    ? "register-birthday-input-error"
+                    : "register-birthday-input"
+                }
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+              >
+                <option value="">--</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </Tooltip>
           </div>
         </div>
         {/* birthday */}
