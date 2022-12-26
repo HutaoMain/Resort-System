@@ -118,4 +118,9 @@ const login = async (req, res) => {
   });
 };
 
-module.exports = { register, login };
+const getCurrentUser = (req, res) => {
+  const user = req.session.user;
+  res.json({ user });
+};
+
+module.exports = { register, login, getCurrentUser };

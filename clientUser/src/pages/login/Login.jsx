@@ -2,6 +2,8 @@ import "./Login.css";
 // import loginImg from "../../images/login.png";
 // import { AuthContext } from "../../context/AuthContext";
 import FbLoginComponent from "./fbLoginComponent/FbLogin";
+import resortLogo from "../../images/resortLogo.png";
+import loginAbstract from "../../images/loginAbstract.jpg";
 
 // import { Link } from "react-router-dom";
 
@@ -79,12 +81,9 @@ const Login = () => {
     <div className="login">
       <div className="login-container">
         <div className="login-left">
-          <span className="login-logo-text">Ali Trip Resort</span>
-          <img
-            className="login-image"
-            src="https://images.alphacoders.com/269/269623.jpg"
-            alt=""
-          />
+          {/* <span className="login-logo-text">Ali Trip Resort</span> */}
+          <img className="login-logo-text" src={resortLogo} alt="Resort Logo" />
+          <img className="login-image" src={loginAbstract} alt="" />
         </div>
         <div className="login-right">
           <h1

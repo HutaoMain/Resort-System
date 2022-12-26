@@ -6,6 +6,8 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+import { Tooltip } from "antd";
+
 const Register = ({ close }) => {
   //setup birthdate
   const [day, setDay] = useState("");
@@ -30,24 +32,24 @@ const Register = ({ close }) => {
   ];
   const years = [...Array(100).keys()].map((i) => currentYear - i - 18);
 
-  const [completeDate, setCompleteDate] = useState({
-    year: year,
-    day: day,
-    month: month,
-  });
+  // const [completeDate, setCompleteDate] = useState({
+  //   year: year,
+  //   day: day,
+  //   month: month,
+  // });
 
-  function handleChangeDate(e) {
-    setCompleteDate({
-      ...completeDate,
-      [e.target.name]: e.target.value,
-    });
-  }
+  // function handleChangeDate(e) {
+  //   setCompleteDate({
+  //     ...completeDate,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // }
 
   const date = new Date(month + " " + day + ", " + year);
   const formattedDate = date.toLocaleDateString();
-
   //end birthdate
 
+  // validation
   const [credentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
@@ -65,32 +67,77 @@ const Register = ({ close }) => {
     });
   }
 
+  function validateForm() {
+    const newErrors = {};
+
+    if (credentials.firstName === "") {
+      newErrors.firstName = "First name is required";
+    }
+
+    if (credentials.lastName === "") {
+      newErrors.lastName = "Last name is required";
+    }
+
+    if (credentials.phoneNumber === "") {
+      newErrors.phoneNumber = "Phone number is required";
+    }
+
+    if (credentials.email === "") {
+      newErrors.email = "Email is required";
+    } else if (!/^[^@]+@[^@.]+\.[^@]+$/.test(credentials.email)) {
+      newErrors.email = "Invalid email address";
+    }
+
+    if (credentials.password === "") {
+      newErrors.password = "Password is required";
+    } else if (credentials.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+
+    if (credentials.confirmPassword === "") {
+      newErrors.confirmPassword = "Please confirm your password";
+    }
+
+    if (credentials.password !== credentials.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  }
+  // end validation
+
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios
-        .post(`${UrlPath}/auth/register`, {
-          ...credentials,
-          birthday: formattedDate,
-        })
-        .then((response) => {
-          localStorage.setItem("access_token", response.data.access_token);
-        });
+      if (validateForm()) {
+        await axios
+          .post(`${UrlPath}/auth/register`, {
+            ...credentials,
+            birthday: formattedDate,
+          })
+          .then((response) => {
+            localStorage.setItem("access_token", response.data.access_token);
+          });
 
-      toast.success(" You have successfully signed up!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 5000,
-        closeOnClick: true,
-      });
-      setTimeout(() => {
-        navigate("/");
-      }, 5000);
+        toast.success(" You have successfully signed up!", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log(credentials);
 
   return (
     <div>
@@ -99,85 +146,111 @@ const Register = ({ close }) => {
       <hr style={{ marginTop: "10px" }} />
       <div className="register-container">
         <div className="register-input-name-container">
-          <input
-            type="text"
-            placeholder="&nbsp;&nbsp;First name"
-            id="firstName"
-            name="firstName"
-            value={credentials.firstName}
-            className="register-input-name"
-            // onChange={(e) => {
-            //   setCredentials((data) => ({
-            //     ...data,
-            //     firstName: e.target.value,
-            //   }));
-            // }}
-          />
-          <input
-            type="text"
-            placeholder="&nbsp;&nbsp;Last name"
-            id="lastName"
-            name="lastname"
-            value={credentials.lastName}
-            className="register-input-name"
-            // onChange={(e) => {
-            //   setCredentials((data) => ({
-            //     ...data,
-            //     lastName: e.target.value,
-            //   }));
-            // }}
-          />
+          <Tooltip title={errors.firstName} open={errors.firstName} color="red">
+            <input
+              type="text"
+              placeholder="&nbsp;&nbsp;First name"
+              id="firstName"
+              name="firstName"
+              value={credentials.firstName}
+              className="register-input-name"
+              // onChange={(e) => {
+              //   setCredentials((data) => ({
+              //     ...data,
+              //     firstName: e.target.value,
+              //   }));
+              // }}
+              onChange={handleChange}
+            />
+          </Tooltip>
+          <Tooltip title={errors.lastName} open={errors.lastName} color="red">
+            <input
+              type="text"
+              placeholder="&nbsp;&nbsp;Last name"
+              id="lastName"
+              name="lastName"
+              value={credentials.lastName}
+              className="register-input-name"
+              onChange={handleChange}
+            />
+          </Tooltip>
         </div>
-        <input
-          type="email"
-          placeholder="&nbsp;&nbsp;Email Address"
-          id="email"
-          name="email"
-          value={credentials.email}
-          className="register-input"
-          // onChange={(e) => {
-          //   setCredentials((data) => ({
-          //     ...data,
-          //     email: e.target.value,
-          //   }));
-          // }}
-        />
-        <input
-          type="password"
-          placeholder="&nbsp;&nbsp;Password"
-          id="password"
-          name="password"
-          value={credentials.password}
-          className="register-input"
-          // onChange={(e) => {
-          //   setCredentials((data) => ({
-          //     ...data,
-          //     password: e.target.value,
-          //   }));
-          // }}
-        />
-        <input
-          type="password"
-          placeholder="&nbsp;&nbsp;Confirm Password"
-          className="register-input"
-          // onChange={(e) => {
-          //   setCredentials((data) => ({
-          //     ...data,
-          //     password: e.target.value,
-          //   }));
-          // }}
-        />
-        <input
-          type="number"
-          placeholder="&nbsp;&nbsp;Phone Number"
-          className="register-input-number"
-          // onChange={(e) => {
-          //   setCredentials((data) => ({
-          //     ...data,
-          //     phoneNumber: e.target.value,
-          //   }));
-          // }}
-        />
+        <Tooltip title={errors.email} open={errors.email} color="red">
+          <input
+            type="email"
+            placeholder="&nbsp;&nbsp;Email Address"
+            id="email"
+            name="email"
+            value={credentials.email}
+            className="register-input"
+            // onChange={(e) => {
+            //   setCredentials((data) => ({
+            //     ...data,
+            //     email: e.target.value,
+            //   }));
+            // }}
+            onChange={handleChange}
+          />
+        </Tooltip>
+        <Tooltip title={errors.password} open={errors.password} color="red">
+          <input
+            type="password"
+            placeholder="&nbsp;&nbsp;Password"
+            id="password"
+            name="password"
+            value={credentials.password}
+            className="register-input"
+            // onChange={(e) => {
+            //   setCredentials((data) => ({
+            //     ...data,
+            //     password: e.target.value,
+            //   }));
+            // }}
+            onChange={handleChange}
+          />
+        </Tooltip>
+        <Tooltip
+          title={errors.confirmPassword}
+          open={errors.confirmPassword}
+          color="red"
+        >
+          <input
+            type="password"
+            placeholder="&nbsp;&nbsp;Confirm Password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={credentials.confirmPassword}
+            className="register-input"
+            // onChange={(e) => {
+            //   setCredentials((data) => ({
+            //     ...data,
+            //     password: e.target.value,
+            //   }));
+            // }}
+            onChange={handleChange}
+          />
+        </Tooltip>
+        <Tooltip
+          title={errors.phoneNumber}
+          open={errors.phoneNumber}
+          color="red"
+        >
+          <input
+            type="number"
+            placeholder="&nbsp;&nbsp;Phone Number"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={credentials.phoneNumber}
+            className="register-input-number"
+            // onChange={(e) => {
+            //   setCredentials((data) => ({
+            //     ...data,
+            //     phoneNumber: e.target.value,
+            //   }));
+            // }}
+            onChange={handleChange}
+          />
+        </Tooltip>
         {/* birthday */}
 
         <div className="register-birthday-container">
@@ -186,7 +259,7 @@ const Register = ({ close }) => {
             <select
               className="register-birthday-input"
               value={day}
-              // onChange={(e) => setDay(e.target.value)}
+              onChange={(e) => setDay(e.target.value)}
             >
               <option value="">--</option>
               {days.map((day) => (
@@ -198,7 +271,7 @@ const Register = ({ close }) => {
             <select
               className="register-birthday-input"
               value={month}
-              // onChange={(e) => setMonth(e.target.value)}
+              onChange={(e) => setMonth(e.target.value)}
             >
               <option value="">--</option>
               {months.map((month) => (
@@ -210,7 +283,7 @@ const Register = ({ close }) => {
             <select
               className="register-birthday-input"
               value={year}
-              // onChange={(e) => setYear(e.target.value)}
+              onChange={(e) => setYear(e.target.value)}
             >
               <option value="">--</option>
               {years.map((year) => (
