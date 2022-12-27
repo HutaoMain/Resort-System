@@ -14,9 +14,11 @@ const Navbar = ({ user }) => {
   const navigate = useNavigate();
 
   // const [isToggled, setToggle] = useState(false);
-  // const logout = () => {
-  //   dispatch({ type: "LOGOUT" });
-  // };
+
+  const logout = () => {
+    localStorage.removeItem("jwt_token");
+    window.location.reload();
+  };
 
   return (
     <div className={location.pathname === "/" ? "navbarHome" : "navbars"}>
@@ -72,7 +74,7 @@ const Navbar = ({ user }) => {
                     alignItems: "center",
                     cursor: "pointer",
                   }}
-                  // onClick={logout}
+                  onClick={logout}
                 >
                   Logout
                   <ExitToApp />

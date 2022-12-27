@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+mongoose.set("strictQuery", false);
+
 const UserSchema = new mongoose.Schema(
   {
     email: {
@@ -16,11 +18,8 @@ const UserSchema = new mongoose.Schema(
     lastName: {
       type: String,
     },
-    fullName: {
-      type: String,
-    },
     birthday: {
-      type: Date,
+      type: String,
     },
     googleOrFbId: {
       type: String,

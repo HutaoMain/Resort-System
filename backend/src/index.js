@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
+// const session = require("express-session");
 
 const usersRoute = require("./routes/users");
 const servicesRoute = require("./routes/services");
@@ -15,13 +15,16 @@ const emailRoute = require("./routes/email");
 
 const app = express();
 
-app.use(
-  session({
-    secret: "resort-system-10202025-secret-key",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+// app.use(
+//   session({
+//     secret: "resort-system-10202025-secret-key",
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       maxAge: 30 * 24 * 60 * 60 * 1000, // Expire the session ID cookie after 30 days
+//     },
+//   })
+// );
 
 dotenv.config();
 

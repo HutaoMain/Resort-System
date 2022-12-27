@@ -19,7 +19,7 @@ import Register from "./registration/Register";
 import { useState } from "react";
 import { UrlPath } from "../../UrlPath";
 import axios from "axios";
-import { useUser } from "../../context/UserContext";
+// import { useUser } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const customStyles = {
@@ -75,12 +75,10 @@ const Login = () => {
   //   }
   // };
 
-  const [credentials, setCredentials] = useState({
-    email: undefined,
-    password: undefined,
-  });
-
-  const { login } = useUser();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState();
+  // const { login } = useUser();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -89,25 +87,20 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${UrlPath}/auth/login`, credentials);
-      if (res.status === 200) {
-        const user = { ...credentials };
-        login(user);
-        navigate("/");
-      } else {
-        console.log("not logged in");
-      }
-    } catch (err) {
-      console.log(err);
+      await axios
+        .post(`${UrlPath}/auth/login`, { email, password })
+        .then((response) => {
+          localStorage.setItem("jwt_token", response.data.token);
+        });
+      navigate("/");
+      window.location.reload();
+    } catch (error) {
+      setError("Incorrect Email or Password");
     }
   };
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleChangeLogin = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   return (
@@ -130,15 +123,20 @@ const Login = () => {
             type="email"
             id="email"
             placeholder="&nbsp;&nbsp;Email Address"
-            onChange={handleChangeLogin}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             className="login-input"
             type="password"
             id="password"
             placeholder="&nbsp;&nbsp;Password"
-            onChange={handleChangeLogin}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
+
+          {error && <p style={{ color: "red" }}>{error}</p>}
+
           <div className="login-remember-container">
             <input
               type="checkbox"

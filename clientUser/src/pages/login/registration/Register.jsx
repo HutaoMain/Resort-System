@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Error } from "@mui/icons-material";
 import { Input, Tooltip } from "antd";
-import { useUser } from "../../../context/UserContext";
+// import { useUser } from "../../../context/UserContext";
 
 const Register = ({ close }) => {
   //setup birthdate
@@ -60,6 +60,7 @@ const Register = ({ close }) => {
     phoneNumber: "",
   });
   const [errors, setErrors] = useState({});
+  // const [error, setError] = useState({});
 
   function handleChange(e) {
     setCredentials({
@@ -128,8 +129,6 @@ const Register = ({ close }) => {
 
   const navigate = useNavigate();
 
-  const { login } = useUser();
-
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
@@ -140,11 +139,9 @@ const Register = ({ close }) => {
             birthday: formattedDate,
           })
           .then((response) => {
-            localStorage.setItem("access_token", response.data.access_token);
+            localStorage.setItem("jwt_token", response.data.token);
           });
 
-        const user = { ...credentials };
-        login(user);
         toast.success(" You have successfully signed up!", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
@@ -152,14 +149,15 @@ const Register = ({ close }) => {
         });
         setTimeout(() => {
           navigate("/");
+          window.location.reload();
         }, 5000);
       }
     } catch (error) {
-      console.log(error);
+      if (error.response.data.message.code === 11000) {
+        setErrors({ email: "Duplicate Email" });
+      }
     }
   };
-
-  console.log(credentials);
 
   return (
     <div>
@@ -415,6 +413,7 @@ const Register = ({ close }) => {
         <button className="register-btn" onClick={handleRegister}>
           Sign Up
         </button>
+
         <button className="register-close-btn" onClick={close}>
           x
         </button>

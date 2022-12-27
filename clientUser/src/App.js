@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Link } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/navbar/Navbar";
@@ -7,12 +7,35 @@ import Messenger from "./components/messenger/Messenger";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
+import { useEffect } from "react";
+import axios from "axios";
+import { UrlPath } from "./UrlPath";
 import { useUser } from "./context/UserContext";
 
 function App() {
-  const { user } = useUser();
+  const { user, login } = useUser();
 
   const location = useLocation();
+
+  useEffect(() => {
+    function retrieveUserData() {
+      const token = localStorage.getItem("jwt_token");
+      return axios.get(`${UrlPath}/auth/user`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    }
+    retrieveUserData()
+      .then((response) => {
+        const userData = response.data.user;
+        login(userData);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -20,7 +43,11 @@ function App() {
       {location.pathname !== "/login" ? <Navbar user={user} /> : null}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login />}
+          render={() => (user ? <Link to="/" /> : <Login />)}
+        />
         <Route path="/rooms" element={<List />} />
         <Route path="/rooms/:id" element={<SinglePage user={user} />} />
       </Routes>
