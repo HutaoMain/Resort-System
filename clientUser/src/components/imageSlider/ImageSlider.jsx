@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./ImageSlider.css";
 import { SliderData } from "./SliderData";
-import logo from "../../images/logo.png";
+// import logo from "../../images/resortLogo.png";
 
 const ImageSlider = ({ slides }) => {
   const delay = 15000;
@@ -33,7 +33,7 @@ const ImageSlider = ({ slides }) => {
   return (
     <div className="slideshow">
       <h1 className="sliderTextCentered">
-        <img src={logo} alt="John Miko Resort Logo" />
+        {/* <img src={logo} alt="John Miko Resort Logo" /> */}
       </h1>
       <div
         className="slideshowSlider"

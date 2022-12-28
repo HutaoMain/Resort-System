@@ -1,3 +1,41 @@
+.home-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.home-image {
+  width: 85%;
+  height: 700px;
+  border-radius: 20px;
+
+  background-image: linear-gradient(to left, transparent 30%, #ccc 95%),
+    url("../../images/home-image.jpg");
+  background-size: cover;
+  object-fit: cover;
+}
+
+.home-image-text-container {
+  width: 50%;
+  height: 700px;
+  margin-left: 30px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-image-text-header {
+  font-size: 100px;
+  font-weight: 700;
+}
+
+.home-image-text-description {
+  font-weight: 700;
+}
+
+/*  */
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 210px;
@@ -10,14 +48,14 @@ html {
   gap: 30px;
 }
 
-#about {
+/* #about {
   background-color: #003580;
   color: white;
   display: flex;
   justify-content: center;
   position: relative;
   width: 100%;
-}
+} */
 
 .homeEntranceRateTitle {
   color: rgb(40, 194, 194);

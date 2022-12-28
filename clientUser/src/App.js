@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation, Link } from "react-router-dom";
 
+import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/navbar/Navbar";
 import SinglePage from "./pages/singlePage/SinglePage.jsx";

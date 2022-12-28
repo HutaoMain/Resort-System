@@ -2,113 +2,34 @@ import Header from "../../components/header/Header.jsx";
 import "./Home.css";
 import MailList from "../../components/mailList/MailList.jsx";
 import Footer from "../../components/footer/Footer.jsx";
-import ImageSlider from "../../components/imageSlider/ImageSlider.jsx";
-import { SliderData } from "../../components/imageSlider/SliderData.jsx";
 import { WarningAmber } from "@mui/icons-material";
 import FlippingCards from "../../components/flippingCards/FlippingCards.jsx";
-import {
-  MapsHomeWork,
-  Info,
-  EventAvailable,
-  MarkChatRead,
-  AddLocationAlt,
-  AddIcCall,
-  RequestQuote,
-} from "@mui/icons-material";
-import { Link } from "react-scroll";
 import Cards from "../../components/cards/Cards.jsx";
 import EntranceRate from "../../components/entranceRate/EntranceRates.jsx";
-// import { useContext } from "react";
 
 const Home = () => {
-  // const { user } = useContext(AuthContext);
-
-  // const alertPopup = () => {
-  //   window.alert("please login");
-  // };
   return (
     <div>
-      <div className="homeList">
-        <Link
-          className="homeListItem"
-          to="hometo"
-          smooth={true}
-          duration={70}
-          offset={-10}
-        >
-          <MapsHomeWork />
-          <span>Home</span>
-        </Link>
-        <Link
-          className="homeListItem"
-          to="about"
-          smooth={true}
-          duration={70}
-          offset={-175}
-        >
-          <Info />
-          <span>About</span>
-        </Link>
-        <Link
-          className="homeListItem"
-          to="reservation"
-          smooth={true}
-          duration={70}
-          offset={-350}
-          // onClick={user ? alertPopup : null}
-        >
-          <EventAvailable />
-          <span>Reservation</span>
-        </Link>
-        <Link
-          className="homeListItem"
-          to="entranceRate"
-          smooth={true}
-          duration={70}
-          offset={-200}
-        >
-          <RequestQuote />
-          <span>Rates</span>
-        </Link>
-        <Link
-          className="homeListItem"
-          to="pleaseRead"
-          smooth={true}
-          duration={70}
-          offset={-250}
-        >
-          <MarkChatRead />
-          <span>Please Read</span>
-        </Link>
-        <Link
-          className="homeListItem"
-          to="map"
-          smooth={true}
-          duration={70}
-          offset={-100}
-        >
-          <AddLocationAlt />
-          <span>Map</span>
-        </Link>
-        <Link
-          className="homeListItem"
-          to="contacts"
-          smooth={true}
-          duration={70}
-          offset={-10}
-        >
-          <AddIcCall />
-          <span>Contacts</span>
-        </Link>
-      </div>
-
-      <div id="hometo">
-        <ImageSlider className="imageSlider" slides={SliderData} />
-      </div>
-      <div className="homeContainer">
-        <div id="about">
-          <Header />
+      <div className="home-image-container">
+        <div className="home-image">
+          <div className="home-image-text-container">
+            <p className="home-image-text-header">Enjoy Your Dream Vacation</p>
+            <br />
+            <p className="home-image-text-description">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
+            </p>
+          </div>
         </div>
+      </div>
+      <Header />
+      <div className="homeContainer">
+        {/* <div id="about">
+      
+        </div> */}
+
         <div id="reservation"></div>
         <span className="homeEntranceRateTitle">Packages / Rates</span>
         <div id="entranceRate"></div>

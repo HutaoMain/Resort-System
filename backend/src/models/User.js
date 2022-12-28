@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
     googleOrFbId: {
       type: String,
     },
-    img: {
+    picture: {
       type: String,
     },
     isAdmin: {

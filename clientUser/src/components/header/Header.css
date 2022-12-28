@@ -1,19 +1,62 @@
-/* .header {
-  background-color: #003580;
-  color: white;
+.header-container {
   display: flex;
+  align-items: center;
   justify-content: center;
-  position: relative;
   width: 100%;
-} */
-
-.headerContainer {
-  width: 100%;
-  max-width: 1024px;
-  margin: 20px 0px 100px 0px;
+  position: absolute;
+  bottom: 140px;
 }
 
-.headerContainer.listMode {
+.header-search-btn-whole {
+  height: 40px;
+  width: 1024px;
+  background-color: #ccc;
+  border: 3px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0px;
+  border-radius: 5px;
+}
+
+.header-search-inside-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-search-icon {
+  color: black;
+  font-weight: 500;
+  margin-left: 100px;
+}
+
+.header-search-text {
+  color: black;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.header-search-date {
+  position: absolute;
+  top: 50px;
+  z-index: 2;
+}
+
+.header-search-btn {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-weight: 500;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 20px;
+  width: 100px;
+}
+
+/*  */
+/* .headerContainer.listMode {
   margin: 20px 0px 0px 0px;
 }
 
@@ -38,7 +81,7 @@
 .headerDesc {
   margin-bottom: 20px;
   font-size: 20px;
-}
+} */
 
 /* .headerNotice {
   font-size: 11px;
@@ -46,34 +89,7 @@
   top: 75%;
 } */
 
-.headerBtn {
-  background-color: white;
-  color: #0071c2;
-  font-weight: 500;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-right: 20px;
-  width: 100px;
-}
-
-.headerSearch {
-  height: 30px;
-  background-color: #0071c2;
-  border: 3px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0px;
-  border-radius: 5px;
-  position: absolute;
-  bottom: -85px;
-  width: 60%;
-  max-width: 1024px;
-}
-
-.headerSearchDisabled {
+/* .headerSearchDisabled {
   height: 30px;
   background-color: #0071c2;
   border: 3px solid black;
@@ -90,31 +106,9 @@
   opacity: 0.6;
 }
 
-.headerIcon {
-  color: lightgray;
-  margin-left: 100px;
-}
-
-.headerSearchItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .headerSearchInput {
   border: none;
   outline: none;
-}
-
-.headerSearchText {
-  color: lightgray;
-  cursor: pointer;
-}
-
-.date {
-  position: absolute;
-  top: 50px;
-  z-index: 2;
 }
 
 .options {
@@ -179,4 +173,4 @@
   background-color: #318aca;
   color: white;
   cursor: pointer;
-}
+} */

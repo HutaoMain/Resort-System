@@ -1,36 +1,15 @@
 import "./Header.css";
-import { CalendarMonth, Foundation } from "@mui/icons-material";
-import { DateRange } from "react-date-range";
-import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format } from "date-fns";
-import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
-import { AuthContext } from "../../context/AuthContext";
-import Modal from "react-modal";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    transform: "translate(-50%, -50%)",
-    width: "30%",
-    height: "30%",
-    borderRadius: "20px",
-  },
-};
+import { CalendarMonth } from "@mui/icons-material";
+import { DateRange } from "react-date-range";
+import { useContext, useState } from "react";
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
-Modal.setAppElement("#root");
-
-const Header = ({ type }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { user } = useContext(AuthContext);
-
-  const location = useLocation();
-
+const Header = () => {
   const { dispatch } = useContext(SearchContext);
   const navigate = useNavigate();
 
@@ -55,74 +34,44 @@ const Header = ({ type }) => {
     });
   };
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
-
-  var dateToday = new Date();
-  var numberOfdaysToAdd = 2;
-  var minimumDate = dateToday.setDate(dateToday.getDate() + numberOfdaysToAdd);
-
   return (
-    <div
-      className="header"
-      style={
-        location.pathname === "/" ? { height: "270px" } : { height: "auto" }
-      }
-    >
-      <div
-        className={
-          type === "list" ? "headerContainer listMode" : "headerContainer"
-        }
-      >
-        {type !== "list" && (
-          <>
-            <h1 className="headerTitle">John Mikos Place Resort...</h1>
-            <p className="headerDesc">
-              was established in the year 2018, and owned by Mr. Joseph
-              Gonzales. It is located in Barangay Pulong Yantok Sentinela Road
-              Angat, Bulacan. They have 4 pools, 10 cottages, 2 function hall
-              that has a capacity of 200 people, 1 Nipa Hut, and 6 rooms for the
-              guest and they also offer an events place for all occasions or any
-              kinds of gathering such as weddings, birthdays, seminars,
-              baptismal and for catering chairs and tables, mobile bar, lights
-              and sound all in the package.
-              <button className="missionBtn" onClick={toggleModal}>
-                <Foundation />
-                Mission/Vision
-              </button>
-            </p>
+    <div>
+      <div className="header-container">
+        <div className="header-search-btn-whole">
+          <div className="header-search-inside-item">
+            <CalendarMonth className="header-search-icon" />
+            <span
+              onClick={() => setOpenDate(!openDate)}
+              className="header-search-text"
+            >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+              dates[0].endDate,
+              "MM/dd/yyyy"
+            )}`}</span>
+            {openDate && (
+              <DateRange
+                editableDateInputs={true}
+                onChange={(item) => setDates([item.selection])}
+                moveRangeOnFirstSelection={false}
+                ranges={dates}
+                className="header-search-date"
+                minDate={new Date()}
+              />
+            )}
+          </div>
+          <div className="header-search-inside-item">
+            <button className="header-search-btn" onClick={handleSearch}>
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-            <p
-              className={
-                user ? "headerNoticeloginHide" : "headerNoticeloginShow"
-              }
-            >
-              <b> Please Login at the top to use reservation.</b>
-            </p>
+export default Header;
 
-            <div className={user ? "headerSearch" : "headerSearchDisabled"}>
-              <div className="headerSearchItem">
-                <CalendarMonth className="headerIcon" />
-                <span
-                  onClick={() => setOpenDate(!openDate)}
-                  className="headerSearchText"
-                >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
-                  dates[0].endDate,
-                  "MM/dd/yyyy"
-                )}`}</span>
-                {openDate && (
-                  <DateRange
-                    editableDateInputs={true}
-                    onChange={(item) => setDates([item.selection])}
-                    moveRangeOnFirstSelection={false}
-                    ranges={dates}
-                    className="date"
-                    minDate={new Date(minimumDate)}
-                  />
-                )}
-              </div>
-              {/* <div className="headerSearchItem">
+/* <div className="headerSearchItem">
                 <Person className="headerIcon" />
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
@@ -200,60 +149,4 @@ const Header = ({ type }) => {
                     </div>
                   </div>
                 )}
-              </div> */}
-
-              <div className="headerSearchItem">
-                <button className="headerBtn" onClick={handleSearch}>
-                  Search
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        style={customStyles}
-      >
-        <p>
-          <b style={{ fontSize: "20px" }}>Mission</b> <br /> <hr /> The mission
-          of the John Mikos Place Resort is to put hospitality services on the
-          highest level in order to satisfy the demands and expectations of
-          guests. Our aim is to make the John Mikos Place Resort a place for
-          encounters, business success and pleasant meetings. <br /> <br />{" "}
-          <b style={{ fontSize: "20px" }}>Vision</b> <br /> <hr /> The ideology
-          of our vision is to continue to apply and set the highest standards of
-          service quality and in that way justify and uphold the reputation that
-          we have among the guests, partners, competitors and the wider
-          community.
-          <br />
-          <button
-            style={{
-              fontSize: "15px",
-              padding: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "none",
-              borderRadius: "10px",
-              backgroundColor: "#0071c2",
-              color: "white",
-              position: "absolute",
-              right: "10px",
-              bottom: "10px",
-              cursor: "pointer",
-            }}
-            onClick={toggleModal}
-          >
-            Close
-          </button>
-        </p>
-      </Modal>
-    </div>
-  );
-};
-
-export default Header;
+              </div> */
