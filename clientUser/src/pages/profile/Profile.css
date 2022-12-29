@@ -1,0 +1,25 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.profile-left {
+  width: 30%;
+  height: 100vh;
+  border: 1px solid black;
+}
+
+.profile-right {
+  width: 70%;
+  height: 100vh;
+  border: 1px solid black;
+}

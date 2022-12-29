@@ -1,58 +1,57 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import "./ImageSlider.css";
 import { SliderData } from "./SliderData";
-// import logo from "../../images/resortLogo.png";
+import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 
-const ImageSlider = ({ slides }) => {
-  const delay = 15000;
+const ImageSlider = () => {
+  // Set the initial image index to 0
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [index, setIndex] = useState(0);
-  const timeoutRef = useRef(null);
-
-  function resetTimeout() {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+  // Function to go to the next image
+  function nextImage() {
+    setCurrentIndex((currentIndex + 1) % SliderData.length);
   }
 
-  useEffect(() => {
-    resetTimeout();
-    timeoutRef.current = setTimeout(
-      () =>
-        setIndex((prevIndex) =>
-          prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
+  // Function to go to the previous image
+  function previousImage() {
+    setCurrentIndex((currentIndex - 1 + SliderData.length) % SliderData.length);
+  }
 
-    return () => {
-      resetTimeout();
-    };
-  }, [index, slides.length]);
+  // Function to go to a specific image by its index
+  function goToImage(index) {
+    setCurrentIndex(index);
+  }
 
   return (
-    <div className="slideshow">
-      <h1 className="sliderTextCentered">
-        {/* <img src={logo} alt="John Miko Resort Logo" /> */}
-      </h1>
-      <div
-        className="slideshowSlider"
-        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-      >
-        {SliderData.map((slide, index) => (
-          <img src={slide.image} className="slide" alt="" key={index} />
-        ))}
+    <div>
+      <div className="slider">
+        {/* Render the current image */}
+        <div className="slider-inner">
+          <img
+            className="slider-image"
+            src={SliderData[currentIndex]}
+            alt="Slider"
+          />
+        </div>
+        {/* Render the next and previous buttons */}
+        <button onClick={previousImage} className="slider-previous-btn">
+          <NavigateBefore style={{ fontSize: "40px" }} />
+        </button>
+        <button onClick={nextImage} className="slider-next-btn">
+          <NavigateNext style={{ fontSize: "40px" }} />
+        </button>
       </div>
-
-      <div className="slideshowDots">
-        {SliderData.map((_, idx) => (
-          <div
-            key={idx}
-            className={`slideshowDot${index === idx ? " active" : ""}`}
-            onClick={() => {
-              setIndex(idx);
-            }}
-          ></div>
+      <div className="thumbnail-container">
+        {/* Render the thumbnails */}
+        {SliderData.map((image, index) => (
+          <img
+            src={image}
+            alt="Thumbnail"
+            onClick={() => goToImage(index)}
+            className={
+              index === currentIndex ? "thumbnail active" : "thumbnail"
+            }
+          />
         ))}
       </div>
     </div>

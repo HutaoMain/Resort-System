@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { UrlPath } from "./UrlPath";
 import { useUser } from "./context/UserContext";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const { user, login } = useUser();
@@ -50,6 +51,7 @@ function App() {
           render={() => (user ? <Link to="/" /> : <Login />)}
         />
         <Route path="/rooms" element={<List />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/rooms/:id" element={<SinglePage user={user} />} />
       </Routes>
     </>
