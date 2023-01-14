@@ -8,10 +8,13 @@ import { DateRange } from "react-date-range";
 import { useContext, useState } from "react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { Input, Tooltip } from "antd";
 
 const Header = () => {
   const { dispatch } = useContext(SearchContext);
   const navigate = useNavigate();
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -22,41 +25,73 @@ const Header = () => {
     },
   ]);
 
-  const handleSearch = () => {
-    dispatch({
-      type: "NEW_SEARCH",
-      payload: { dates },
-      // options
-    });
-    navigate("/rooms", {
-      state: { dates },
-      // options
-    });
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!openDate) {
+      setErrorMessage("Please click at calendar to select a date ");
+    } else {
+      setErrorMessage("");
+
+      dispatch({
+        type: "NEW_SEARCH",
+        payload: { dates },
+        // options
+      });
+      navigate("/rooms", {
+        state: { dates },
+        // options
+      });
+    }
   };
+
+  const handleDateSelect = (item) => {
+    setOpenDate(true);
+    setDates([item.selection]);
+  };
+
+  console.log(dates);
 
   return (
     <div>
       <div className="header-container">
         <div className="header-search-btn-whole">
           <div className="header-search-inside-item">
-            <CalendarMonth className="header-search-icon" />
-            <span
+            <div className="header-calendar" onClick={() => setOpenDate(true)}>
+              <CalendarMonth className="header-search-icon" />
+              {/* <span
               onClick={() => setOpenDate(!openDate)}
               className="header-search-text"
-            >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
-              dates[0].endDate,
-              "MM/dd/yyyy"
-            )}`}</span>
+            >
+              {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+                dates[0].endDate,
+                "MM/dd/yyyy"
+              )}`}
+            </span> */}
+              {!openDate ? (
+                <span>-- -- --</span>
+              ) : (
+                <span>
+                  {`${format(dates[0]?.startDate, "MM/dd/yyyy")} to ${format(
+                    dates[0]?.endDate,
+                    "MM/dd/yyyy"
+                  )}`}
+                </span>
+              )}
+            </div>
             {openDate && (
               <DateRange
                 editableDateInputs={true}
-                onChange={(item) => setDates([item.selection])}
+                // onChange={(item) => setDates([item.selection])}
+                onChange={handleDateSelect}
                 moveRangeOnFirstSelection={false}
                 ranges={dates}
                 className="header-search-date"
                 minDate={new Date()}
               />
             )}
+          </div>
+          <div className="header-search-inside-item">
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </div>
           <div className="header-search-inside-item">
             <button className="header-search-btn" onClick={handleSearch}>

@@ -1,8 +1,9 @@
 .slider {
-  width: 800px;
-  height: 600px;
+  width: 600px;
+  height: 400px;
   overflow: hidden;
   position: relative;
+  background-color: transparent;
 }
 
 .slider-inner {
@@ -10,6 +11,14 @@
   height: 100%;
   display: flex;
   transition: transform 0.5s;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 3px solid white;
 }
 
 .slider-previous-btn {
@@ -27,24 +36,38 @@
   cursor: pointer;
 }
 
-.slider-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .thumbnail-container {
   display: flex;
   justify-content: center;
 }
 
+.thumbnail-text {
+  position: absolute;
+  margin-top: 320px;
+}
+
+.thumbnail-background-box {
+  display: flex;
+  justify-content: center;
+  background-color: #ccc;
+  border-radius: 30px;
+  width: 700px;
+  height: 350px;
+  position: absolute;
+  bottom: -1400px;
+}
+
 .thumbnail {
-  width: 80px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background-size: cover;
   cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-top: 240px;
+  border-radius: 50%;
 }
 
 .thumbnail.active {
-  border: 2px solid #333;
+  border: 2px solid white;
 }

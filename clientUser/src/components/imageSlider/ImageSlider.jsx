@@ -42,17 +42,23 @@ const ImageSlider = () => {
         </button>
       </div>
       <div className="thumbnail-container">
-        {/* Render the thumbnails */}
-        {SliderData.map((image, index) => (
-          <img
-            src={image}
-            alt="Thumbnail"
-            onClick={() => goToImage(index)}
-            className={
-              index === currentIndex ? "thumbnail active" : "thumbnail"
-            }
-          />
-        ))}
+        <div className="thumbnail-background-box">
+          {/* Render the thumbnails */}
+
+          <span className="thumbnail-text">Click to show the images</span>
+
+          {SliderData.map((image, index, key) => (
+            <img
+              key={key}
+              src={image}
+              alt="Thumbnail"
+              onClick={() => goToImage(index)}
+              className={
+                index === currentIndex ? "thumbnail active" : "thumbnail"
+              }
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

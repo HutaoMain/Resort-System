@@ -66,7 +66,6 @@ const SinglePage = ({ user }) => {
         "loading"
       ) : (
         <>
-          <Header type="list" />
           <div className="hotelContainer">
             {/* {open && (
               <div className="slider">

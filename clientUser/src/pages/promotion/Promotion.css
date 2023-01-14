@@ -1,0 +1,23 @@
+.promotion {
+  height: 100vh;
+}
+
+.promotion-container {
+  max-width: 1024px;
+}
+
+.promotion-card {
+  border: 3px solid black;
+  height: 300px;
+  width: 250px;
+  position: relative;
+}
+
+.promotion-card-image {
+  clip-path: circle(60% at 50% 60%);
+  height: 100px;
+  width: 200px;
+  position: absolute;
+  left: -50px;
+  top: 50%;
+}

@@ -25,6 +25,13 @@
   gap: 10px;
 }
 
+.header-calendar {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
 .header-search-icon {
   color: black;
   font-weight: 500;

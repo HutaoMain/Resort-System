@@ -6,7 +6,8 @@ import { WarningAmber } from "@mui/icons-material";
 import FlippingCards from "../../components/flippingCards/FlippingCards.jsx";
 import Cards from "../../components/cards/Cards.jsx";
 import EntranceRate from "../../components/entranceRate/EntranceRates.jsx";
-import ImageSlider from "../../components/imageSlider/ImageSlider.jsx";
+import Amenities from "../amenities/Amenities.jsx";
+import Promotion from "../promotion/Promotion.jsx";
 
 const Home = () => {
   return (
@@ -26,11 +27,10 @@ const Home = () => {
         </div>
       </div>
       <Header />
-      <div className="homeContainer">
-        {/* <div id="about">
-      
-        </div> */}
-        <ImageSlider />
+      <div className="home-pages-container">
+        <Promotion />
+        <Amenities />
+
         <div id="reservation"></div>
         <span className="homeEntranceRateTitle">Packages / Rates</span>
         <div id="entranceRate"></div>
