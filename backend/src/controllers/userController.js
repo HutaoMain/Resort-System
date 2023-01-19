@@ -1,3 +1,5 @@
+// import User from "../models/User";
+
 const User = require("../models/User");
 
 // const createUser = async (req, res, next) => {

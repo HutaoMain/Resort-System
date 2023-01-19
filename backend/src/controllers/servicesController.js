@@ -1,5 +1,8 @@
+// import Services from "../models/Services.js";
+// import Room from "../models/Room";
+
 const Services = require("../models/Services.js");
-const Room = require("../models/Room.js");
+const Room = require("../models/Room");
 
 const createService = async (req, res, next) => {
   const newService = new Services(req.body);

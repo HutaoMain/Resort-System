@@ -1,10 +1,12 @@
+// import User from "../models/User";
+// import createError from "../utils/error";
+// import jwt from "jsonwebtoken";
+// import bcrypt from "bcrypt";
+
 const User = require("../models/User");
 const createError = require("../utils/error");
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
-const secret = "resort-system-10202025-secret-key";
 
 const register = async (req, res) => {
   // Hash the password using bcrypt
@@ -35,7 +37,7 @@ const register = async (req, res) => {
         birthday: user.birthday,
         img: user.img,
       };
-      const token = jwt.sign(payload, secret);
+      const token = jwt.sign(payload, process.env.SECRET);
 
       res.send({ token }); // Send the JWT to the client
       console.log(`successfull login JsonToken: ${token}`);
@@ -68,7 +70,7 @@ const login = async (req, res, next) => {
       birthday: user.birthday,
       img: user.img,
     };
-    const token = jwt.sign(payload, secret);
+    const token = jwt.sign(payload, process.env.SECRET);
 
     res.send({ token }); // Send the JWT to the client
 
@@ -81,7 +83,7 @@ const login = async (req, res, next) => {
 const getUser = (req, res) => {
   const token = req.headers.authorization;
   // Verify the JWT
-  jwt.verify(token, secret, (error, decoded) => {
+  jwt.verify(token, process.env.SECRET, (error, decoded) => {
     if (error) {
       res.status(401).send({ error: "Invalid token" });
     } else {
