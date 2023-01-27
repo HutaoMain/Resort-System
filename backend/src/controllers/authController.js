@@ -1,8 +1,3 @@
-// import User from "../models/User";
-// import createError from "../utils/error";
-// import jwt from "jsonwebtoken";
-// import bcrypt from "bcrypt";
-
 const User = require("../models/User");
 const createError = require("../utils/error");
 const jwt = require("jsonwebtoken");

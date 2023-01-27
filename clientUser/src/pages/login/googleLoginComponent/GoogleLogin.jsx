@@ -1,48 +1,24 @@
-import { useNavigate } from "react-router-dom";
-import { Google } from "@mui/icons-material";
+import { FcGoogle } from "react-icons/fc";
 import { Button } from "@mui/material";
-import jwtDecode from "jwt-decode";
+import { UrlPath } from "../../../UrlPath";
 
 const GoogleLogin = () => {
-  const navigate = useNavigate();
-
-  const handleResponse = (response) => {
-    jwtDecode(response.credential);
-    // dispatch({ type: "LOGIN_SUCCESS", payload: userObject });
-    navigate("/", { replace: true });
+  const handleClick = () => {
+    window.open(`${UrlPath}/auth/google`, "_self");
   };
 
-  const handleGoogleLogin = () => {
-    try {
-      window.google.accounts.id.initialize({
-        client_id: process.env.GOOGLE_CLIENTID,
-        callback: handleResponse,
-      });
-      window.google.accounts.id.prompt((notification) => {
-        if (notification.isNotDisplayed()) {
-          throw new Error("Try to clear the cookies or try again later!");
-        }
-        if (
-          notification.isSkippedMoment() ||
-          notification.isDismissedMoment()
-        ) {
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <Button
       variant="outlined"
-      startIcon={<Google />}
-      onClick={handleGoogleLogin}
+      startIcon={<FcGoogle />}
+      onClick={handleClick}
       sx={{
-        width: "50%",
+        color: "black",
+        width: "300px",
         textTransform: "capitalize",
         border: "2px solid black ",
         borderRadius: "10px",
-        "&:hover": { border: "solid 2px #19A0E1; " },
+        "&:hover": { border: "solid 2px #ccc; " },
       }}
     >
       Login with Google
