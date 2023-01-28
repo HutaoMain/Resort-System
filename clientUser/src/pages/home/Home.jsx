@@ -28,7 +28,7 @@ const Home = () => {
       </div>
       <Header />
       <div className="home-pages-container">
-        <Promotion />
+        {/* <Promotion /> */}
         <Amenities />
 
         <div id="reservation"></div>

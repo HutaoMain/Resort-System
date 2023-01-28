@@ -1,4 +1,3 @@
-import "./FbLogin.css";
 import { Facebook } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { UrlPath } from "../../../UrlPath";
@@ -15,11 +14,13 @@ const FbLoginComponent = () => {
       startIcon={<Facebook color="primary" />}
       sx={{
         color: "black",
-        width: "300px",
+        width: "340px",
+        height: "50px",
+        fontSize: "15px",
         textTransform: "capitalize",
         border: "2px solid black ",
         borderRadius: "10px",
-        marginTop: "10px",
+        marginTop: "20px",
         "&:hover": { border: "solid 2px #ccc; " },
       }}
       onClick={handleClick}

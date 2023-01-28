@@ -14,10 +14,13 @@ const GoogleLogin = () => {
       onClick={handleClick}
       sx={{
         color: "black",
-        width: "300px",
+        width: "340px",
+        height: "50px",
+        fontSize: "15px",
         textTransform: "capitalize",
         border: "2px solid black ",
         borderRadius: "10px",
+        marginTop: "30px",
         "&:hover": { border: "solid 2px #ccc; " },
       }}
     >
