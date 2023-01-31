@@ -1,0 +1,44 @@
+.amenities {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 30px;
+  margin-top: -50px;
+}
+
+.amenities-left {
+  width: 50%;
+}
+
+.amenities-left-description {
+  margin-right: 50px;
+  font-size: 22px;
+}
+
+.amenities-left-list {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.amenities-left-list-item {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  align-items: center;
+}
+
+.amenities-icon {
+  font-size: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #d9e9fe;
+  color: #2d48fa;
+}
+
+.amenities-right {
+  width: 50%;
+}

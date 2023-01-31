@@ -1,8 +1,14 @@
-.slider {
-  width: 600px;
-  height: 400px;
-  overflow: hidden;
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+}
+
+.slider {
+  width: 700px;
+  height: 450px;
+  overflow: hidden;
   background-color: transparent;
 }
 
@@ -39,22 +45,30 @@
 .thumbnail-container {
   display: flex;
   justify-content: center;
-}
-
-.thumbnail-text {
   position: absolute;
-  margin-top: 320px;
+  bottom: -130px;
 }
 
 .thumbnail-background-box {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: #ccc;
   border-radius: 30px;
-  width: 700px;
+  width: 800px;
   height: 350px;
-  position: absolute;
-  bottom: -1400px;
+}
+
+.thumbnail-picture-container {
+  width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail-text {
+  margin-bottom: 20px;
 }
 
 .thumbnail {
@@ -62,7 +76,7 @@
   height: 70px;
   background-size: cover;
   cursor: pointer;
-  margin-right: 10px;
+  margin: 0 25px;
   margin-bottom: 20px;
   margin-top: 240px;
   border-radius: 50%;

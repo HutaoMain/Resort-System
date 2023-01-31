@@ -23,9 +23,8 @@ const ImageSlider = () => {
   }
 
   return (
-    <div>
+    <div className="slider-container">
       <div className="slider">
-        {/* Render the current image */}
         <div className="slider-inner">
           <img
             className="slider-image"
@@ -33,7 +32,6 @@ const ImageSlider = () => {
             alt="Slider"
           />
         </div>
-        {/* Render the next and previous buttons */}
         <button onClick={previousImage} className="slider-previous-btn">
           <NavigateBefore style={{ fontSize: "40px" }} />
         </button>
@@ -43,21 +41,20 @@ const ImageSlider = () => {
       </div>
       <div className="thumbnail-container">
         <div className="thumbnail-background-box">
-          {/* Render the thumbnails */}
-
+          <div className="thumbnail-picture-container">
+            {SliderData.map((image, index, key) => (
+              <img
+                key={key}
+                src={image}
+                alt="Thumbnail"
+                onClick={() => goToImage(index)}
+                className={
+                  index === currentIndex ? "thumbnail active" : "thumbnail"
+                }
+              />
+            ))}
+          </div>
           <span className="thumbnail-text">Click to show the images</span>
-
-          {SliderData.map((image, index, key) => (
-            <img
-              key={key}
-              src={image}
-              alt="Thumbnail"
-              onClick={() => goToImage(index)}
-              className={
-                index === currentIndex ? "thumbnail active" : "thumbnail"
-              }
-            />
-          ))}
         </div>
       </div>
     </div>
