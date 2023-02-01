@@ -15,7 +15,8 @@
 
 .home-image {
   width: 85%;
-  height: 700px;
+  /* height: 700px; */
+  height: 85vh;
   border-radius: 20px;
   background-image: linear-gradient(to left, transparent 30%, #ccc 95%),
     url("../../images/home-image.jpg");
@@ -52,6 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 .scroll-field {
@@ -135,9 +137,14 @@
 
 /* header end */
 
-.googleMap {
+.home-google-map-container {
+  margin-top: 50px;
+  width: 85%;
+}
+
+.google-map {
   width: 100%;
-  max-width: 1024px;
+  height: 80vh;
 }
 
 .warningAmberIcon {

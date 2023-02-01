@@ -1,5 +1,5 @@
 import "./SinglePage.css";
-import Header from "../../components/header/Header.jsx";
+// import Header from "../../components/header/Header.jsx";
 import MailList from "../../components/mailList/MailList.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import {

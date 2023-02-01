@@ -6,7 +6,7 @@
 }
 
 .slider {
-  width: 700px;
+  width: 85%;
   height: 450px;
   overflow: hidden;
   background-color: transparent;
@@ -56,7 +56,7 @@
   flex-direction: column;
   background-color: #ccc;
   border-radius: 30px;
-  width: 800px;
+  width: 90%;
   height: 350px;
 }
 

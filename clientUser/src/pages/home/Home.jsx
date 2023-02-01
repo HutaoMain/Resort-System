@@ -51,16 +51,16 @@ const Home = () => {
       <h1>Please Read</h1>
       <FlippingCards />
       <div id="map"></div> */}
-      <h1 className="homeTitle">You can find us here</h1>
-      <iframe
-        className="googleMap"
-        title="angatBulacan"
-        width="600"
-        height="500"
-        src="https://maps.google.com/maps?q=Barangay%20Pulong%20Yantok%20Sentinela%20Road%20Angat,%20Bulacan&t=&z=13&ie=UTF8&iwloc=&output=embed"
-      ></iframe>
+      <div className="home-google-map-container">
+        <h1 className="home-google-map-title">You can find us here</h1>
+        <iframe
+          className="google-map"
+          title="angatBulacan"
+          src="https://maps.google.com/maps?q=Barangay%20Pulong%20Yantok%20Sentinela%20Road%20Angat,%20Bulacan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        ></iframe>
+      </div>
       <MailList />
-      <div id="contacts"></div>
+      {/* <div id="contacts"></div> */}
       <Footer />
     </div>
     // </div>
