@@ -35,16 +35,16 @@ const Footer = () => {
           humour, or randomised words which don’t look even slightly believable.
         </div>
         <div className="footer-social-container">
-          <div className="footer-social-icon" style={{ color: "3B5999" }}>
+          <div className="footer-social-icon" style={{ color: "#3B5999" }}>
             <BsFacebook />
           </div>
-          <div className="footer-social-icon" style={{ color: "E4405F" }}>
+          <div className="footer-social-icon" style={{ color: "#E4405F" }}>
             <BsInstagram />
           </div>
-          <div className="footer-social-icon" style={{ color: "55ACEE" }}>
+          <div className="footer-social-icon" style={{ color: "#55ACEE" }}>
             <BsTwitter />
           </div>
-          <div className="footer-social-icon" style={{ color: "E60023" }}>
+          <div className="footer-social-icon" style={{ color: "#E60023" }}>
             <BsPinterest />
           </div>
         </div>
@@ -53,16 +53,16 @@ const Footer = () => {
         <h3 className="footer-center-title">Useful Links</h3>
         <ul className="footer-center-list">
           <li className="footer-center-list-item">Home</li>
-          <li className="footer-center-list-item">Cart</li>
-          <li className="footer-center-list-item">Accessories</li>
+          <li className="footer-center-list-item">Rooms</li>
+          <li className="footer-center-list-item">Reviews</li>
           <li className="footer-center-list-item">My Account</li>
-          <li className="footer-center-list-item">Order Tracking</li>
-          <li className="footer-center-list-item">Wishlist</li>
+          <li className="footer-center-list-item">Seasonal Deals</li>
+          <li className="footer-center-list-item">About Ali Trip Resort</li>
           <li className="footer-center-list-item">Terms</li>
         </ul>
       </div>
       <div className="footer-right">
-        <h3>Contact</h3>
+        <h3 className="footer-contact-title">Contact</h3>
         <div className="footer-contact-item">
           <BsFillHouseDoorFill style={{ marginRight: "10px" }} /> Sta. Maria
           Bulacan, 3022
@@ -71,9 +71,11 @@ const Footer = () => {
           <BsFillTelephoneFill style={{ marginRight: "10px" }} /> +1 234 567
         </div>
         <div className="footer-contact-item">
-          <BsMailbox style={{ marginRight: "10px" }} /> contact@rimsti.ph
+          <BsMailbox style={{ marginRight: "10px" }} /> contact@alitripresort.ph
         </div>
-        {/* <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" /> */}
+        <div className="footer-contact-item">
+          Copyright ©2022 Ali Trip Resort™. All rights reserved.
+        </div>
       </div>
     </div>
   );

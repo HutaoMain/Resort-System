@@ -44,35 +44,37 @@ const SearchedItem = ({ item }) => {
   // console.log(allDatesInsideRoom);
 
   return (
-    <div className="searchItem">
-      <img src={item?.picture[0]} alt="" className="siImg" />
+    <div className="search-item">
+      <div className="search-item-container">
+        <img src={item?.picture[0]} alt="" className="siImg" />
 
-      <div className="siDesc">
-        <h1 className="siTitle">{item.title}</h1>
-        {/* <span className="siSubtitle">
+        <div className="siDesc">
+          <h1 className="siTitle">{item.title}</h1>
+          {/* <span className="siSubtitle">
           Studio Apartment with Air Conditioning
         </span> */}
-        {/* <span style={{ fontSize: "10px" }}> ID:{item._id}</span> */}
-        <span className="siFeatures">{item.desc}</span>
-        <span className="siCancelOp">Free cancellation</span>
-        <span className="siCancelOpSubtitle">
-          You can cancel later, so lock in this great price today!
-        </span>
-      </div>
-      <div className="siDetails">
-        {/* {item.rating && ( */}
-        <div className="siRating">
-          <span>Excellent</span>
-          {/* <button>{item.rating}</button> */}
+          {/* <span style={{ fontSize: "10px" }}> ID:{item._id}</span> */}
+          <span className="siFeatures">{item.desc}</span>
+          <span className="siCancelOp">Free cancellation</span>
+          <span className="siCancelOpSubtitle">
+            You can cancel later, so lock in this great price today!
+          </span>
         </div>
-        {/* )} */}
-        <div className="siDetailText">
-          <span className="siPrice">PHP {item.price}</span>
-          <span className="siTaxOp">Includes taxes and fees</span>
-          <Link to={`/rooms/${item._id}`}>
-            <button className="siCheckButton">See availability</button>
-            {/* disabled={!isAvailable(allDatesInsideRoom)} */}
-          </Link>
+        <div className="siDetails">
+          {/* {item.rating && ( */}
+          <div className="siRating">
+            <span>Excellent</span>
+            {/* <button>{item.rating}</button> */}
+          </div>
+          {/* )} */}
+          <div className="siDetailText">
+            <span className="siPrice">PHP {item.price}</span>
+            <span className="siTaxOp">Includes taxes and fees</span>
+            <Link to={`/rooms/${item._id}`}>
+              <button className="siCheckButton">See availability</button>
+              {/* disabled={!isAvailable(allDatesInsideRoom)} */}
+            </Link>
+          </div>
         </div>
       </div>
     </div>

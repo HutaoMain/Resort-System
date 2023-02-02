@@ -7,6 +7,10 @@ import "./List.css";
 import SearchedItem from "../../components/searchedItem/SearchedItem";
 import useFetch from "../../hooks/useFetch";
 import { UrlPath } from "../../UrlPath";
+import MailList from "../../components/mailList/MailList";
+import Footer from "../../components/footer/Footer";
+
+import { FcHome, FcInTransit } from "react-icons/fc";
 
 const List = () => {
   // const location = useLocation();
@@ -113,10 +117,49 @@ const List = () => {
     // </div> */}
     <div className="listWrapper">
       <div className="listResult">
+        <div style={{ display: "flex", gap: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <FcHome
+              style={{
+                border: "1px solid black",
+                borderRadius: "50%",
+                padding: "20px",
+                fontSize: "30px",
+              }}
+            />
+            <span>Apartment</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <FcInTransit
+              style={{
+                border: "1px solid black",
+                borderRadius: "50%",
+                padding: "20px",
+                fontSize: "30px",
+              }}
+            />
+            <span>Transit</span>
+          </div>
+        </div>
         {data.map((item) => (
           <SearchedItem item={item} key={item._id} />
         ))}
       </div>
+      <MailList />
+      {/* <div id="contacts"></div> */}
+      <Footer />
     </div>
 
     //       </div>
