@@ -40,6 +40,24 @@
   max-width: 1024px;
 }
 
+.list-filter-container {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  width: 1024px;
+  height: 100px;
+
+  margin-top: 20px;
+}
+
+.list-dropdown {
+  position: absolute;
+  height: 40px;
+  font-size: 18px;
+  right: 0;
+  top: 50%;
+}
+
 /* .listItem {
   display: flex;
   flex-direction: column;

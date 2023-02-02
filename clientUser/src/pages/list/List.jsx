@@ -1,7 +1,7 @@
 import "./List.css";
 // import Header from "../../components/header/Header.jsx";
 // import { useLocation } from "react-router-dom";
-// import { useState } from "react";
+import { useState } from "react";
 // import { format } from "date-fns";
 // import { DateRange } from "react-date-range";
 import SearchedItem from "../../components/searchedItem/SearchedItem";
@@ -13,111 +13,28 @@ import Footer from "../../components/footer/Footer";
 import { FcHome, FcInTransit } from "react-icons/fc";
 
 const List = () => {
-  // const location = useLocation();
+  const [selectedOption, setSelectedOption] = useState("default");
 
-  // const [dates, setDates] = useState(location.state.dates);
+  const { data } = useFetch(`${UrlPath}/rooms`);
 
-  // const [openDate, setOpenDate] = useState(false);
-  // // const [options] = useState(location.state.options);
-  // const [min, setMin] = useState(undefined);
-  // const [max, setMax] = useState(undefined);
-
-  const { data } = useFetch(
-    // loading, reFetch
-    `${UrlPath}/rooms`
-  );
-
-  // ?min=${min || 0}&max=${max || 999}`
-
-  // const handleClick = () => {
-  //   reFetch();
-  // };
+  const sortItems = () => {
+    switch (selectedOption) {
+      case "alphabetically":
+        return data.sort((a, b) => (a.title > b.title ? 1 : -1));
+      case "byPrice":
+        return data.sort((a, b) => (a.price > b.price ? 1 : -1));
+      // case "byDate":
+      //   return data.sort((a, b) => (a.date > b.date ? 1 : -1));
+      default:
+        return data;
+    }
+  };
 
   return (
-    // <>
-    //   {loading ? (
-    //     "loading"
-    //   ) : (
-    //     <>
-    //       <Header type="list" />
-    //       <div className="listContainer">
-    //         <div className="listWrapper">
-    //           <div className="listSearch">
-    //             <h1 className="listTitle">Search</h1>
-    //             <div className="listItem">
-    //               <label>Check-in Date</label>
-    //               <span onClick={() => setOpenDate(!openDate)}>
-    //                 {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
-    //                   dates[0].endDate,
-    //                   "MM/dd/yyyy"
-    //                 )}`}
-    //               </span>
-    //               {openDate && (
-    //                 <DateRange
-    //                   onChange={(item) => setDates([item.selection])}
-    //                   minDate={new Date()}
-    //                   ranges={dates}
-    //                 />
-    //               )}
-    //             </div>
-
-    //             <div className="listItem">
-    //               <label>Options</label>
-    //               <div className="listOptions">
-    //                 <div className="listOptionItem">
-    //                   <span className="listOptionText">
-    //                     Min price <small>per night</small>
-    //                   </span>
-    //                   <input
-    //                     type="number"
-    //                     onChange={(e) => setMin(e.target.value)}
-    //                     className="listOptionInput"
-    //                   />
-    //                 </div>
-    //                 <div className="listOptionItem">
-    //                   <span className="listOptionText">
-    //                     Max price <small>per night</small>
-    //                   </span>
-    //                   <input
-    //                     type="number"
-    //                     onChange={(e) => setMax(e.target.value)}
-    //                     className="listOptionInput"
-    //                   />
-    //                 </div>
-    //{/* <div className="listOptionItem">
-    // <span className="listOptionText">Adult</span>
-    //   <input
-    //      type="number"
-    //      min={1}
-    //        className="listOptionInput"
-    //       placeholder={options.adult}
-    //     />
-    //    </div>
-    //  <div className="listOptionItem">
-    //     <span className="listOptionText">Children</span>
-    //     <input
-    //       type="number"
-    //        min={0}
-    //       className="listOptionInput"
-    //  placeholder={options.children}
-    //     />
-    //  </div> */}
-    //* <div className="listOptionItem">
-    // <span className="listOptionText">Room</span>
-    //  <input
-    //    type="number"
-    //      min={1}
-    //    className="listOptionInput"
-    //    placeholder={options.room}
-    //  />
-    //  </div> */}
-    //  {/* </div>
-    // </div>
-    //  <button onClick={handleClick}>Search</button>
-    // </div> */}
     <div className="listWrapper">
       <div className="listResult">
-        <div style={{ display: "flex", gap: "20px" }}>
+        <span style={{ fontSize: "20px" }}>Categories</span>
+        <div className="list-filter-container">
           <div
             style={{
               display: "flex",
@@ -152,21 +69,24 @@ const List = () => {
             />
             <span>Transit</span>
           </div>
+          <select
+            className="list-dropdown"
+            onChange={(e) => setSelectedOption(e.target.value)}
+          >
+            <option value="default">Sort By</option>
+            <option value="alphabetically">Alphabetically</option>
+            <option value="byPrice">By Price</option>
+            {/* <option value="byDate">By Date</option> */}
+          </select>
         </div>
-        {data.map((item) => (
+        {sortItems().map((item) => (
           <SearchedItem item={item} key={item._id} />
         ))}
       </div>
       <MailList />
-      {/* <div id="contacts"></div> */}
+
       <Footer />
     </div>
-
-    //       </div>
-    //     </div>
-    //   </>
-    // )}
-    // </>
   );
 };
 
