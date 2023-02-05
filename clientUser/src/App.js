@@ -13,6 +13,7 @@ import axios from "axios";
 import { UrlPath } from "./UrlPath";
 import { useUser } from "./context/UserContext";
 import Profile from "./pages/profile/Profile";
+import ProgressBarMain from "./components/progressBar/ProgressBarMain";
 
 function App() {
   const { user, login } = useUser();
@@ -43,6 +44,7 @@ function App() {
     <>
       <Messenger />
       {location.pathname !== "/login" ? <Navbar user={user} /> : null}
+      {location.pathname !== "/" ? <ProgressBarMain /> : null}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

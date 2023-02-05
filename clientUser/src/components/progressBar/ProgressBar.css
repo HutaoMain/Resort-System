@@ -1,0 +1,118 @@
+/* .progress-container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  position: relative;
+}
+
+.barmarker-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+.barmarker {
+  width: 100%;
+  display: grid;
+  place-content: center;
+}
+
+.barmarker:is(:not(:last-child)) {
+  border-right: 1px solid black;
+}
+
+.progress {
+  width: 100%;
+  height: 24px;
+} */
+
+/*  */
+
+.progressbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  margin-left: 340px;
+}
+
+.circle-progress {
+  width: 29px;
+  height: 29px;
+  line-height: 25px;
+  background-color: green;
+  color: white;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: -2px;
+}
+
+.stepBlock {
+  width: 340px;
+}
+
+.stepWrapper {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.stepBlock .circleWrapper {
+  position: relative;
+}
+
+.selected .circle-progress {
+  color: black;
+  background-color: white;
+  border-color: green;
+}
+
+.stepBlock:not(:last-child) > .circleWrapper::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  background-color: green;
+  margin: auto;
+  z-index: -1;
+}
+
+.stepBlock:not(:last-child) > .circleWrapper::after {
+  height: 3px;
+}
+
+.stepBlock:not(:last-child).selected > .circleWrapper::after,
+.stepBlock:not(:last-child).selected
+  ~ .stepBlock:not(:last-child)
+  > .circleWrapper::after {
+  height: 2px;
+  opacity: 0.6;
+}
+
+.primaryButton {
+  padding: 10px 25px;
+  background-color: green;
+  border: none;
+  margin: 10px;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.primaryButton:disabled {
+  opacity: 0.5;
+}
