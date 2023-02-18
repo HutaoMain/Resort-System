@@ -44,7 +44,9 @@ function App() {
     <>
       <Messenger />
       {location.pathname !== "/login" ? <Navbar user={user} /> : null}
-      {location.pathname !== "/" ? <ProgressBarMain /> : null}
+      {/* {location.pathname !== "/" && location.pathname !== "/login" ? (
+        <ProgressBarMain />
+      ) : null} */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

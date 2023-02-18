@@ -40,7 +40,7 @@
   max-width: 1024px;
 }
 
-.list-filter-container {
+/* .list-filter-container {
   display: flex;
   gap: 20px;
   position: relative;
@@ -48,14 +48,21 @@
   height: 100px;
 
   margin-top: 20px;
+} */
+
+.list-dropdown-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .list-dropdown {
-  position: absolute;
+  /* position: absolute; */
   height: 40px;
   font-size: 18px;
-  right: 0;
-  top: 50%;
+  margin-bottom: 10px;
+
+  /* right: 0;
+  top: 50%; */
 }
 
 /* .listItem {

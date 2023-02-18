@@ -1,5 +1,4 @@
 import "./SinglePage.css";
-// import Header from "../../components/header/Header.jsx";
 import MailList from "../../components/mailList/MailList.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import {
@@ -7,6 +6,8 @@ import {
   // ArrowCircleLeft,
   // ArrowCircleRight,
   // TransitEnterexit,
+  NavigateBefore,
+  NavigateNext,
 } from "@mui/icons-material";
 import { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
@@ -19,9 +20,8 @@ const SinglePage = ({ user }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  // const [slideNumber, setSlideNumber] = useState(0);
-  // const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
 
   const { data, loading } = useFetch(`${UrlPath}/rooms/${id}`);
 
@@ -37,21 +37,6 @@ const SinglePage = ({ user }) => {
   let days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
   days = days + 1;
 
-  // const handleOpen = (i) => {
-  //   setSlideNumber(i);
-  //   setOpen(true);
-  // };
-
-  // const handleMove = (direction) => {
-  //   let newSlideNumber;
-  //   if (direction === "l") {
-  //     newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
-  //   } else {
-  //     newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
-  //   }
-  //   setSlideNumber(newSlideNumber);
-  // };
-
   const handleClick = () => {
     if (user) {
       setOpenModal(true);
@@ -60,6 +45,25 @@ const SinglePage = ({ user }) => {
 
   const totalPrice = days * data.price;
 
+  // Function to go to the next image
+  function nextImage() {
+    setCurrentImage((currentImage + 1) % data.picture?.length);
+  }
+
+  // Function to go to the previous image
+  function previousImage() {
+    setCurrentImage(
+      (currentImage - 1 + data.picture?.length) % data.picture?.length
+    );
+  }
+
+  // Function to go to a specific image by its index
+  function goToImage(index) {
+    setCurrentImage(index);
+  }
+
+  console.log(data);
+
   return (
     <div>
       {loading ? (
@@ -67,30 +71,58 @@ const SinglePage = ({ user }) => {
       ) : (
         <>
           <div className="hotelContainer">
-            {/* {open && (
-              <div className="slider">
-                <TransitEnterexit
-                  className="sliderCloseBtn"
-                  onClick={() => setOpen(false)}
-                />
-                <ArrowCircleLeft
-                  className="sliderArrow"
-                  onClick={() => handleMove("l")}
-                />
-                <div className="sliderWrapper">
-                  <img
-                    src={data.photo[slideNumber]}
-                    alt=""
-                    className="sliderImg"
-                  />
-                </div>
-                <ArrowCircleRight
-                  className="sliderArrow"
-                  onClick={() => handleMove("r")}
-                />
-              </div>
-            )} */}
             <div className="hotelWrapper">
+              {/* <div className="hotelImages">
+                {data.picture?.map((photo, i) => (
+                  <div className="hotelImgWrapper" key={i}>
+                    <img src={photo} alt="" className="hotelImg" />
+                  </div>
+                ))}
+              </div> */}
+
+              {/* <div className="singlepage-image-slider-container"> */}
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className="singlepage-image-slider">
+                  <div className="singlepage-image-slider-inner">
+                    <img
+                      className="singlepage-slider-image"
+                      src={data?.picture?.[currentImage]}
+                      alt="Slider"
+                    />
+                  </div>
+                  <button
+                    onClick={previousImage}
+                    className="singlepage-slider-previous-btn"
+                  >
+                    <NavigateBefore style={{ fontSize: "40px" }} />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="singlepage-slider-next-btn"
+                  >
+                    <NavigateNext style={{ fontSize: "50px" }} />
+                  </button>
+                </div>
+
+                <div className="singlepage-thumbnail-slider">
+                  <div className="singlepage-thumbnail-image-container">
+                    {data.picture?.map((image, index, key) => (
+                      <img
+                        key={key}
+                        src={image}
+                        alt="Thumbnail"
+                        onClick={() => goToImage(index)}
+                        className={
+                          index === currentImage
+                            ? "singlepage-thumbnail-active"
+                            : "singlepage-thumbnail"
+                        }
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
               <h1 className="hotelTitle">{data.title}</h1>
               <div className="hotelAddress">
                 <LocationOn />
@@ -99,18 +131,6 @@ const SinglePage = ({ user }) => {
               <span className="hotelPriceHighlight">
                 Book a stay over PHP {data.price}
               </span>
-              <div className="hotelImages">
-                {data.picture?.map((photo, i) => (
-                  <div className="hotelImgWrapper" key={i}>
-                    <img
-                      // onClick={() => handleOpen(i)}
-                      src={photo}
-                      alt=""
-                      className="hotelImg"
-                    />
-                  </div>
-                ))}
-              </div>
               <div className="hotelDetails">
                 <div className="hotelDetailsTexts">
                   <p className="hotelDesc">{data.desc}</p>

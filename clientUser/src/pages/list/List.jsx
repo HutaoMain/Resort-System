@@ -10,7 +10,7 @@ import { UrlPath } from "../../UrlPath";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
 
-import { FcHome, FcInTransit } from "react-icons/fc";
+// import { FcHome, FcInTransit } from "react-icons/fc";
 
 const List = () => {
   const [selectedOption, setSelectedOption] = useState("default");
@@ -33,7 +33,7 @@ const List = () => {
   return (
     <div className="listWrapper">
       <div className="listResult">
-        <span style={{ fontSize: "20px" }}>Categories</span>
+        {/* <span style={{ fontSize: "20px" }}>Categories</span>
         <div className="list-filter-container">
           <div
             style={{
@@ -69,6 +69,9 @@ const List = () => {
             />
             <span>Transit</span>
           </div>
+        
+        </div> */}
+        <div className="list-dropdown-container">
           <select
             className="list-dropdown"
             onChange={(e) => setSelectedOption(e.target.value)}
