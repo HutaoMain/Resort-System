@@ -24,8 +24,8 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
     },
-    function (accessToken, refreshToken, profile, cb) {
-      return cb(err, user);
+    function (accessToken, refreshToken, profile, done) {
+      done(null, profile);
     }
   )
 );

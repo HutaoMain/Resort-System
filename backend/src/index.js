@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -14,11 +16,11 @@ const emailRoute = require("./routes/email");
 
 dotenv.config();
 
-const passportSetup = require("./passport");
-
 const passport = require("passport");
 
 const app = express();
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(
   session({

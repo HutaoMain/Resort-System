@@ -2,12 +2,14 @@ import "./Navbar.css";
 import resortLogo from "../../images/navbarLogo.png";
 
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Navbar = ({ user }) => {
-  // const logout = () => {
-  //   localStorage.removeItem("jwt_token");
-  //   window.location.reload();
-  // };
+const Navbar = ({ user, logout }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="navbar">
@@ -17,7 +19,7 @@ const Navbar = ({ user }) => {
         </Link>
         <div className="nav-items">
           {user ? (
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div className="profile-dropdown">
               <img
                 src={
                   user.picture?.data?.url ||
@@ -26,29 +28,17 @@ const Navbar = ({ user }) => {
                 }
                 alt="profile pic"
                 className="navbar-avatar"
+                onClick={toggleDropdown}
               />
-              {/* <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <span>{user.firstName}</span>
-                <button
-                  style={{
-                    border: "none",
-                    borderRadius: "5px",
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
-                  onClick={logout}
-                >
-                  Logout
-                  <ExitToApp />
-                </button>
-              </div> */}
+              {isOpen && (
+                <div className="dropdown-content">
+                  <Link to="/profile">
+                    <span>Profile</span>
+                  </Link>
+                  <span>Settings</span>
+                  <span onClick={logout}>Logout</span>
+                </div>
+              )}
             </div>
           ) : (
             <Link to="/login">

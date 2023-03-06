@@ -49,14 +49,34 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  //comment to preserve
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios
+  //       .post(`${UrlPath}/auth/login`, { email, password } )
+  //       .then((response) => {
+  //         const token = response.data.token;
+  //         // Set HTTP-only cookie with the token
+  //         document.cookie = `jwt_token=${token}; Secure; HttpOnly`;
+  //       });
+  //     navigate("/");
+  //     window.location.reload();
+  //   } catch (error) {
+  //     setError("Incorrect Email or Password");
+  //   }
+  // };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await axios
-        .post(`${UrlPath}/auth/login`, { email, password })
-        .then((response) => {
-          localStorage.setItem("jwt_token", response.data.token);
-        });
+      const response = await axios.post(`${UrlPath}/auth/login`, {
+        email,
+        password,
+      });
+      const token = response.data.token;
+      // Set HTTP-only cookie with the token
+      document.cookie = `jwt_token=${token}; path=/; HttpOnly;`;
       navigate("/");
       window.location.reload();
     } catch (error) {

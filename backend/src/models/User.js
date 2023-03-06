@@ -6,6 +6,11 @@ mongoose.set("strictQuery", false);
 
 const UserSchema = new mongoose.Schema(
   {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     email: {
       type: String,
       required: true,
@@ -34,6 +39,9 @@ const UserSchema = new mongoose.Schema(
       default: false,
     },
     password: {
+      type: String,
+    },
+    confirmPassword: {
       type: String,
     },
   },

@@ -4,19 +4,55 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
+  console.log(req.body);
+  if (!req.body) {
+    throw new Error("Request body is undefined or empty.");
+  }
+
+  const { email, password, phoneNumber, firstName, lastName, birthday } =
+    req.body;
+
+  if (!email) {
+    throw new Error("email field is missing in request body.");
+  }
+
+  if (!password) {
+    throw new Error("Password field is missing in request body.");
+  }
+
+  if (!phoneNumber) {
+    throw new Error("phoneNumber field is missing in request body.");
+  }
+
+  if (!firstName) {
+    throw new Error("firstName field is missing in request body.");
+  }
+
+  if (!lastName) {
+    throw new Error("lastName field is missing in request body.");
+  }
+
+  if (!birthday) {
+    throw new Error("birthday field is missing in request body.");
+  }
+
   // Hash the password using bcrypt
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
   // Create a new user account with the hashed password
   const user = new User({
+    username: req.body.email,
     email: req.body.email,
     password: hashedPassword,
+    confirmPassword: hashedPassword,
     phoneNumber: req.body.phoneNumber,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     birthday: req.body.birthday,
   });
+
+  console.log(user);
 
   // Save the user to the database
   await user.save(function (err, user) {
@@ -67,7 +103,14 @@ const login = async (req, res, next) => {
     };
     const token = jwt.sign(payload, process.env.SECRET);
 
-    res.send({ token }); // Send the JWT to the client
+    res.cookie("jwt_token", token, {
+      httpOnly: true,
+      path: "/",
+      secure: false, // Set to true when deploying over HTTPS
+    });
+    console.log("jwt_token cookie:", req.cookies.jwt_token);
+    // secure: true } // update when deploying
+    res.send({ token });
 
     console.log(`successfull login JsonToken: ${token}`);
   } catch (err) {
@@ -76,7 +119,7 @@ const login = async (req, res, next) => {
 };
 
 const getUser = (req, res) => {
-  const token = req.headers.authorization;
+  const token = req.cookies.jwt_token;
   // Verify the JWT
   jwt.verify(token, process.env.SECRET, (error, decoded) => {
     if (error) {

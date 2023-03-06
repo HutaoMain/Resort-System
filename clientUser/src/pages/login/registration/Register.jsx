@@ -33,19 +33,6 @@ const Register = ({ close }) => {
   ];
   const years = [...Array(100).keys()].map((i) => currentYear - i - 18);
 
-  // const [completeDate, setCompleteDate] = useState({
-  //   year: year,
-  //   day: day,
-  //   month: month,
-  // });
-
-  // function handleChangeDate(e) {
-  //   setCompleteDate({
-  //     ...completeDate,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // }
-
   const date = new Date(month + " " + day + ", " + year);
   const formattedDate = date.toLocaleDateString();
   //end birthdate
@@ -60,7 +47,6 @@ const Register = ({ close }) => {
     phoneNumber: "",
   });
   const [errors, setErrors] = useState({});
-  // const [error, setError] = useState({});
 
   function handleChange(e) {
     setCredentials({
@@ -127,6 +113,8 @@ const Register = ({ close }) => {
   }
   // end validation
 
+  console.log(credentials);
+
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -139,7 +127,9 @@ const Register = ({ close }) => {
             birthday: formattedDate,
           })
           .then((response) => {
-            localStorage.setItem("jwt_token", response.data.token);
+            const token = response.data.token;
+            // Set HTTP-only cookie with the token
+            document.cookie = `jwt_token=${token}; Secure; HttpOnly`;
           });
 
         toast.success(" You have successfully signed up!", {
@@ -153,8 +143,28 @@ const Register = ({ close }) => {
         }, 5000);
       }
     } catch (error) {
-      if (error.response.data.message.code === 11000) {
-        setErrors({ email: "Duplicate Email" });
+      if (error.response) {
+        const status = error.response.status;
+        if (status === 400) {
+          // Handle validation error
+          const errors = error.response.data.errors;
+          console.log(error);
+          console.log(errors);
+        } else if (status === 401) {
+          // Handle unauthorized request
+          console.log("Unauthorized request");
+        } else if (status === 409) {
+          // Handle duplicate email
+          setErrors({ email: "Duplicate Email" });
+        } else {
+          // Handle other errors
+          console.log(error);
+          console.log("An error occurred");
+        }
+      } else {
+        // Handle network errors
+        console.log(error);
+        console.log("A network error occurred");
       }
     }
   };
