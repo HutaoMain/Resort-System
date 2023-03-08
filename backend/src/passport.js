@@ -3,6 +3,8 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const passport = require("passport");
 
+const reusable = require("./utils/reusable");
+
 passport.use(
   new FacebookStrategy(
     {
@@ -24,7 +26,13 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
     },
-    function (accessToken, refreshToken, profile, done) {
+    async function (accessToken, refreshToken, profile, done) {
+      const user = await models.User.findOne({ googleOrFbId: profile.id });
+
+      reusable.res.send({ token });
+
+      console.log(`successfull login JsonToken: ${token}`);
+      console.log(profile);
       done(null, profile);
     }
   )

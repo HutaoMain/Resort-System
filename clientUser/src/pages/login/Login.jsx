@@ -76,7 +76,8 @@ const Login = () => {
       });
       const token = response.data.token;
       // Set HTTP-only cookie with the token
-      document.cookie = `jwt_token=${token}; path=/; HttpOnly;`;
+      document.cookie = `jwt_token=${token};`;
+      // Secure; HttpOnly;
       navigate("/");
       window.location.reload();
     } catch (error) {

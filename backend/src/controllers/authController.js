@@ -3,6 +3,8 @@ const createError = require("../utils/error");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+const reusable = require("../utils/reusable");
+
 const register = async (req, res) => {
   console.log(req.body);
   if (!req.body) {
@@ -52,26 +54,15 @@ const register = async (req, res) => {
     birthday: req.body.birthday,
   });
 
-  console.log(user);
-
   // Save the user to the database
   await user.save(function (err, user) {
     if (err) {
       // If there is an error, send an error message
       res.status(400).send({ message: err });
     } else {
-      const payload = {
-        id: user._id,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        fullName: user.firstName + user.lastName,
-        birthday: user.birthday,
-        img: user.img,
-      };
-      const token = jwt.sign(payload, process.env.SECRET);
-
+      const token = reusable.generateToken(user);
+      reusable.setJwtTokenCookie(res, req, token);
       res.send({ token }); // Send the JWT to the client
-      console.log(`successfull login JsonToken: ${token}`);
     }
   });
 };
@@ -92,27 +83,9 @@ const login = async (req, res, next) => {
       return next(createError(400, "Wrong password or username!"));
     }
 
-    // Login was successful, create a JWT
-    const payload = {
-      id: user._id,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      fullName: user.firstName + user.lastName,
-      birthday: user.birthday,
-      img: user.img,
-    };
-    const token = jwt.sign(payload, process.env.SECRET);
-
-    res.cookie("jwt_token", token, {
-      httpOnly: true,
-      path: "/",
-      secure: false, // Set to true when deploying over HTTPS
-    });
-    console.log("jwt_token cookie:", req.cookies.jwt_token);
-    // secure: true } // update when deploying
+    const token = reusable.generateToken(user);
+    reusable.setJwtTokenCookie(res, req, token);
     res.send({ token });
-
-    console.log(`successfull login JsonToken: ${token}`);
   } catch (err) {
     next(err);
   }

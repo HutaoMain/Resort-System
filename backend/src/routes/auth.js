@@ -46,7 +46,7 @@ router.get(
   passport.authenticate("facebook", { failureRedirect: "/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect("/");
+    res.redirect(CLIENT_URL);
   }
 );
 

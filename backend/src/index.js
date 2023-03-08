@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const dotenv = require("dotenv");
+dotenv.config();
+
 const mongoose = require("mongoose");
 
 const usersRoute = require("./routes/users");
@@ -13,8 +15,7 @@ const roomsRoute = require("./routes/rooms");
 const reservationRoute = require("./routes/reservation");
 const authRoute = require("./routes/auth");
 const emailRoute = require("./routes/email");
-
-dotenv.config();
+const passportSetup = require("./passport");
 
 const passport = require("passport");
 
@@ -29,6 +30,9 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(
   cors({
@@ -61,9 +65,6 @@ app.use("/services", servicesRoute);
 app.use("/rooms", roomsRoute);
 app.use("/reservations", reservationRoute);
 app.use("/email", emailRoute);
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 const port = 5000;
 

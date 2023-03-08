@@ -58,8 +58,6 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  console.log(user);
-
   return (
     <>
       <Messenger />
