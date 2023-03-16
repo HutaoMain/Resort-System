@@ -26,14 +26,17 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
     },
-    async function (accessToken, refreshToken, profile, done) {
+    async function (res, req, profile, done) {
       const user = await models.User.findOne({ googleOrFbId: profile.id });
 
-      reusable.res.send({ token });
+      const token = reusable.generateToken(user);
+      reusable.setJwtTokenCookie(res, req, token);
+
+      res.send({ token });
 
       console.log(`successfull login JsonToken: ${token}`);
       console.log(profile);
-      done(null, profile);
+      // done(null, profile);
     }
   )
 );
