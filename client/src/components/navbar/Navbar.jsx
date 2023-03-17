@@ -21,11 +21,7 @@ const Navbar = ({ user, logout }) => {
           {user ? (
             <div className="profile-dropdown">
               <img
-                src={
-                  user.picture?.data?.url ||
-                  user?.picture ||
-                  "https://i.ibb.co/MBtjqXQ/no=avatar.gif"
-                }
+                src={user?.picture || "https://i.ibb.co/MBtjqXQ/no=avatar.gif"}
                 alt="profile pic"
                 className="navbar-avatar"
                 onClick={toggleDropdown}

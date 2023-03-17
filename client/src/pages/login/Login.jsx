@@ -8,6 +8,7 @@ import { useState } from "react";
 import { UrlPath } from "../../UrlPath";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -197,6 +198,7 @@ const Login = () => {
         </div>
       </Modal>
       {/* </div> */}
+      <ToastContainer />
     </div>
   );
 };

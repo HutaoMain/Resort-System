@@ -30,3 +30,30 @@ picture: 'https://lh3.googleusercontent.com/a/AGNmyxYo9SEX-mC8NdOVdaBnWXdCC8CwPJ
 locale: 'en'
 }
 }
+
+#facebook
+
+{
+id: '6858018010879926',
+username: undefined,
+displayName: 'Ali Alcantara',
+name: {
+familyName: undefined,
+givenName: undefined,
+middleName: undefined
+},
+gender: undefined,
+profileUrl: undefined,
+photos: [
+{
+value: 'https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=6858018010879926&height=50&width=50&ext=1681550332&hash=AeSnTA9BlTRbK4cSgPE'
+}
+],
+provider: 'facebook',
+\_raw: '{"id":"6858018010879926","name":"Ali Alcantara","picture":{"data":{"height":50,"is_silhouette":false,"url":"https:\\/\\/platform-lookaside.fbsbx.com\\/platform\\/profilepic\\/?asid=6858018010879926&height=50&width=50&ext=1681550332&hash=AeSnTA9BlTRbK4cSgPE","width":50}}}',
+\_json: {
+id: '6858018010879926',
+name: 'Ali Alcantara',
+picture: { data: [Object] }
+}
+}
