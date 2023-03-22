@@ -19,4 +19,7 @@ router.get("/:id", userRUD.getUser);
 // GET ALL
 router.get("/", userRUD.getUsers);
 
+//get by email
+router.get("/email/:email", userRUD.getUserByEmail);
+
 module.exports = router;

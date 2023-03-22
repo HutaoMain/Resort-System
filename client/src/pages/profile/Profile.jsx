@@ -6,6 +6,8 @@ import "./Profile.css";
 const Profile = () => {
   const { userData } = useFetch(`${UrlPath}/auth/user`);
 
+  // const { data } = useFetch(`${UrlPath}/users/email/${userData.email}`);
+
   console.log(userData);
 
   return (
@@ -14,7 +16,7 @@ const Profile = () => {
         <div className="profile-left">
           <div className="profile-innerbox">
             <img src={"https://i.ibb.co/MBtjqXQ/no=avatar.gif"} alt="profile" />
-            <span>Name: {userData?.fullName}</span>
+            <span>Name: {userData?.email}</span>
           </div>
         </div>
         <div className="profile-right">Right</div>

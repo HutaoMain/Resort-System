@@ -40,6 +40,14 @@ const getUser = async (req, res, next) => {
     next(err);
   }
 };
+const getUserByEmail = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
 const getUsers = async (req, res, next) => {
   try {
     const users = await User.find();
@@ -49,4 +57,4 @@ const getUsers = async (req, res, next) => {
   }
 };
 
-module.exports = { updateUser, deleteUser, getUser, getUsers };
+module.exports = { updateUser, deleteUser, getUser, getUsers, getUserByEmail };
