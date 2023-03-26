@@ -102,7 +102,6 @@ passport.use(
           picture: profile.photos[0].value,
         };
         const token = jwt.sign(payload, process.env.SECRET);
-
         // Call the 'done' function to complete authentication process
         done(null, { token });
       } catch (error) {

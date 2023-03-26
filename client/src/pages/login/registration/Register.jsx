@@ -113,8 +113,6 @@ const Register = ({ close }) => {
   }
   // end validation
 
-  console.log(credentials);
-
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {

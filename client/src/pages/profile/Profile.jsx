@@ -1,25 +1,46 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../hooks/useFetch";
 import { UrlPath } from "../../UrlPath";
-
 import "./Profile.css";
 
 const Profile = () => {
-  const { userData } = useFetch(`${UrlPath}/auth/user`);
+  const { user } = useContext(AuthContext);
 
-  // const { data } = useFetch(`${UrlPath}/users/email/${userData.email}`);
+  const { data } = useFetch(`${UrlPath}/users/email/${user}`);
 
-  console.log(userData);
+  console.log(data);
 
   return (
     <div className="profile">
       <div className="profile-container">
-        <div className="profile-left">
-          <div className="profile-innerbox">
-            <img src={"https://i.ibb.co/MBtjqXQ/no=avatar.gif"} alt="profile" />
-            <span>Name: {userData?.email}</span>
+        <section className="profile-left">
+          {/* <div className="profile-innerbox"> */}
+          <img
+            className="profile-image"
+            src={data?.picture || "https://i.ibb.co/MBtjqXQ/no=avatar.gif"}
+            alt="profile"
+          />
+          <div className="profile-section-profile-details">
+            <span className="profile-details-label">Profile Details</span>
+            <div className="profile-horizontal-line"></div>
           </div>
-        </div>
-        <div className="profile-right">Right</div>
+          <span className="profile-detail-list">
+            Name: {data?.lastName}, {data?.firstName}
+          </span>
+          <span className="profile-detail-list">
+            Phone Number: {data?.phoneNumber}
+          </span>
+          <span className="profile-detail-list">
+            Birthday: {data?.birthday}
+          </span>
+          <div className="profile-detail-list">
+            <input type="password" />
+            <input type="password" />
+          </div>
+          {/* </div> */}
+        </section>
+        <section className="profile-right">Right</section>
       </div>
     </div>
   );

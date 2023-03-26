@@ -48,6 +48,13 @@ function App() {
         });
 
         const userData = response.data.user;
+
+        const userEmail = localStorage.getItem("userEmail");
+
+        if (!userEmail) {
+          localStorage.setItem("userEmail", JSON.stringify(userData?.email));
+        }
+
         login(userData);
       } catch (error) {
         console.error(error);
