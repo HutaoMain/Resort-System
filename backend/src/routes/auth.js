@@ -3,7 +3,7 @@ const passport = require("passport");
 
 const authController = require("../controllers/authController");
 
-const CLIENT_URL = "http://localhost:3000";
+const CLIENT_URL = process.env.CLIENT_URL;
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);

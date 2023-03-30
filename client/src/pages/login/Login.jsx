@@ -112,7 +112,7 @@ const Login = () => {
         <div className="login-right">
           {/* <div className="login-right-container"> */}
           <h2
-            className="loginTitle"
+            className="login-title"
             style={{ marginBottom: "5px", marginTop: "10px" }}
           >
             Welcome to Ali Trip Resort

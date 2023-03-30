@@ -71,12 +71,9 @@
   height: 45px;
   margin-top: 40px;
   font-size: 20px;
-
   outline: none;
   border: none;
-
   border-bottom: 2px solid black;
-
   background-color: transparent;
 }
 
@@ -89,22 +86,8 @@
 }
 
 .login-remember-container {
-  /* align-items: center;
-  margin-top: 20px; */
   margin-top: 15px;
 }
-
-/* .login-checkbox-remember {
-  cursor: pointer;
-  margin-right: 5px;
-} */
-
-/* .login-recover-password {
-  margin-left: 40px;
-
-  text-decoration: underline;
-  color: black;
-} */
 
 .login-btn {
   width: 340px;
@@ -138,9 +121,48 @@
   height: 45px;
 }
 
+.google-login-btn {
+  color: black;
+  width: 340px;
+  height: 50px;
+  font-size: 15px;
+  text-transform: capitalize;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-login-btn:hover {
+  border: solid 2px #ccc;
+}
+
+.facebook-login-btn {
+  color: black;
+  width: 340px;
+  height: 50px;
+  font-size: 15px;
+  text-transform: capitalize;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.facebook-login-btn:hover {
+  border: solid 2px #ccc;
+}
+
 /* responsive */
 
-@media screen and (max-width: 1025px) {
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
   .login-tagline {
     margin-left: 30px;
   }
@@ -149,18 +171,50 @@
   }
 }
 
-@media screen and (max-width: 800px) {
-  .login-left-container {
-    margin-right: 20px;
-  }
-}
-
-@media screen and (max-width: 700px) {
+/* mobile */
+@media screen and (max-width: 767px) {
   .login-left {
     display: none;
   }
 
   .login-right {
     width: 100%;
+  }
+  .login-copyright-text {
+    color: black;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .login-or {
+    width: 90%;
+    margin: 40px auto;
+  }
+
+  .login-or::before,
+  .login-or::after {
+    margin: auto 10px;
+  }
+
+  .login-input {
+    width: 90%;
+  }
+
+  .login-btn {
+    width: 90%;
+  }
+
+  .google-login-btn {
+    width: 90%;
+  }
+
+  .facebook-login-btn {
+    width: 90%;
+  }
+
+  .login-title {
+    width: 90%;
+    text-align: center;
   }
 }
