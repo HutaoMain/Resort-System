@@ -162,12 +162,18 @@
 /* responsive */
 
 /* tablet */
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1230px) {
   .login-tagline {
     margin-left: 30px;
+    margin-right: 50px;
   }
+
   .login-logo-text {
     margin-left: 30px;
+  }
+
+  .login-copyright-text {
+    font-size: 1.5vw;
   }
 }
 
@@ -180,18 +186,20 @@
   .login-right {
     width: 100%;
   }
+
   .login-copyright-text {
     color: black;
     text-align: center;
   }
+
+  .login-or {
+    width: 90%;
+    margin-top: 40px;
+    margin-bottom: 0px;
+  }
 }
 
 @media screen and (max-width: 340px) {
-  .login-or {
-    width: 90%;
-    margin: 40px auto;
-  }
-
   .login-or::before,
   .login-or::after {
     margin: auto 10px;
@@ -216,5 +224,11 @@
   .login-title {
     width: 90%;
     text-align: center;
+  }
+}
+
+@media screen and (max-height: 640px) {
+  .login-copyright-text {
+    display: none;
   }
 }

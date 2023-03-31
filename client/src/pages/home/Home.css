@@ -10,42 +10,92 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: 130px;
+  margin-bottom: 8vh;
 }
 
 .home-image {
   width: 85%;
-  /* height: 700px; */
   height: 80vh;
   border-radius: 20px;
   background-image: linear-gradient(to left, transparent 30%, #ccc 95%),
     url("../../images/home-image.jpg");
   background-size: cover;
-  object-fit: cover;
 }
 
 .home-image-text-container {
   width: 50%;
-  height: 700px;
+  max-height: 50vh;
   margin-left: 30px;
-  margin-top: 35px;
   display: flex;
   flex-direction: column;
 }
 
 .home-image-text-header {
-  font-size: 90px;
+  font-size: 5vw;
   font-weight: 700;
+  text-align: center;
+  margin-bottom: 3vh;
 }
 
 .home-image-text-description {
   font-weight: 700;
+  text-align: center;
 }
 
 .home-header-search-bar {
   position: absolute;
-  bottom: -35px;
+  bottom: -9vh;
+  width: 90%;
+  max-width: 1200px;
 }
+
+@media screen and (max-width: 767px) {
+  .home-image-text-container {
+    width: 90%;
+  }
+
+  .home-image {
+    height: 40vh;
+    background-image: linear-gradient(to top, transparent 30%, #ccc 75%),
+      url("../../images/home-image.jpg");
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .home-image-text-container {
+    margin-left: 0;
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  .home-image-text-header {
+    font-size: 16px;
+    margin-top: 5vh;
+    margin-bottom: 0;
+  }
+
+  .home-image-text-description {
+    font-size: 10px;
+  }
+}
+
+/* TODO: need to update this max-height */
+
+/* minimum mobile height */
+@media screen and (max-height: 640px) {
+  .home-image {
+    height: 30vh;
+    max-height: 50vh;
+  }
+
+  .home-image-text-container {
+    width: 80%;
+    margin-left: 10px;
+  }
+}
+
+/* end here updated */
 
 .scroll-container {
   width: 100%;

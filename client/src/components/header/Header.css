@@ -1,4 +1,4 @@
-.header-container {
+/* .header-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,4 +58,128 @@
   border-radius: 5px;
   margin-right: 20px;
   width: 100px;
+} */
+
+/* custom date calendar css */
+
+.rdrWeekDay {
+  border: 1px solid gray;
+}
+
+.rdrDayNumber {
+  border: 1px solid gray;
+}
+
+/* header */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.header-search-btn-whole {
+  height: 40px;
+  width: 85%;
+  max-width: 1024px;
+  background-color: #ccc;
+  border: 3px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0px;
+  border-radius: 5px;
+}
+
+.header-search-inside-item {
+  margin: 0px 30px;
+}
+
+.header-calendar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.header-search-icon {
+  color: black;
+  font-weight: 500;
+}
+
+.header-search-text {
+  color: black;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.header-search-date {
+  /*  */
+  position: absolute;
+  top: 70px;
+  left: 10%;
+  z-index: 2;
+}
+
+.header-search-btn {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-weight: 500;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 20px;
+  width: 100px;
+}
+
+@media only screen and (max-width: 767px) {
+  .header-search-btn-whole {
+    height: 20px;
+  }
+
+  .header-search-inside-item {
+    margin: 0 10px;
+  }
+
+  .header-search-text {
+    font-size: 12px;
+    word-wrap: break-word;
+  }
+
+  .header-search-date {
+    transform: none;
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translate(-50%);
+    z-index: 100;
+    font-size: 14px;
+    overflow: scroll;
+  }
+
+  .header-search-btn {
+    width: 75px;
+    font-size: 14px;
+    margin-right: 10px;
+    height: 30px;
+    padding: 0px 10px;
+  }
+}
+
+@media screen and (max-height: 640px) and (max-width: 320px) {
+  .header-search-btn-whole {
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  .header-search-inside-item {
+    margin: 0;
+  }
+  .header-search-text {
+    font-size: 4vw;
+  }
+  .header-search-icon {
+    font-size: 4vw;
+  }
 }

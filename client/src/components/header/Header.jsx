@@ -14,7 +14,7 @@ const Header = () => {
   const { dispatch } = useContext(SearchContext);
   const navigate = useNavigate();
 
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -27,47 +27,46 @@ const Header = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (!openDate) {
-      setErrorMessage("Please click at calendar to select a date ");
-    } else {
-      setErrorMessage("");
+    // if (!openDate) {
+    //   setErrorMessage("Please click at calendar to select a date ");
+    // } else {
+    //   setErrorMessage("");
 
-      dispatch({
-        type: "NEW_SEARCH",
-        payload: { dates },
-        // options
-      });
-      navigate("/rooms", {
-        state: { dates },
-        // options
-      });
-    }
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: { dates },
+      // options
+    });
+    navigate("/rooms", {
+      state: { dates },
+      // options
+    });
+    // }
   };
 
   const handleDateSelect = (item) => {
-    setOpenDate(true);
     setDates([item.selection]);
   };
 
-  console.log(dates);
+  console.log(openDate);
 
   return (
     <div>
       <div className="header-container">
         <div className="header-search-btn-whole">
           <div className="header-search-inside-item">
-            <div className="header-calendar" onClick={() => setOpenDate(true)}>
-              <CalendarMonth className="header-search-icon" />
-              {/* <span
+            <div
+              className="header-calendar"
               onClick={() => setOpenDate(!openDate)}
-              className="header-search-text"
             >
-              {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
-                dates[0].endDate,
-                "MM/dd/yyyy"
-              )}`}
-            </span> */}
-              {!openDate ? (
+              <CalendarMonth className="header-search-icon" />
+              <span className="header-search-text">
+                {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+                  dates[0].endDate,
+                  "MM/dd/yyyy"
+                )}`}
+              </span>
+              {/* {!openDate ? (
                 <span>-- -- --</span>
               ) : (
                 <span>
@@ -76,7 +75,7 @@ const Header = () => {
                     "MM/dd/yyyy"
                   )}`}
                 </span>
-              )}
+              )} */}
             </div>
             {openDate && (
               <DateRange
@@ -90,10 +89,10 @@ const Header = () => {
               />
             )}
           </div>
-          <div className="header-search-inside-item">
+          {/* <div className="header-search-inside-item">
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-          </div>
-          <div className="header-search-inside-item">
+          </div> */}
+          <div>
             <button className="header-search-btn" onClick={handleSearch}>
               Search
             </button>
