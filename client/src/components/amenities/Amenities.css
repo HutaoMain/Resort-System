@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 30px;
-  margin-top: -50px;
+  width: 85%;
 }
 
 .amenities-left {
@@ -41,4 +41,57 @@
 
 .amenities-right {
   width: 50%;
+}
+
+@media screen and (max-width: 767px) {
+  .amenities {
+    width: 90%;
+    margin-top: 5vh;
+    margin-bottom: 20vh;
+    flex-direction: column;
+  }
+
+  .amenities-left {
+    width: 90%;
+    margin-bottom: 10vh;
+  }
+
+  .amenities-left-title {
+    font-size: 16px;
+  }
+
+  .amenities-left-description {
+    margin-right: 0;
+    font-size: 14px;
+  }
+
+  .amenities-left-list-item {
+    font-size: 14px;
+  }
+
+  .amenities-icon {
+    font-size: 18px;
+    padding: 5px;
+  }
+
+  .amenities-right {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1460px) and (min-width: 767px) {
+  .amenities {
+    flex-direction: column;
+    margin-bottom: 50vh;
+    margin-top: 200px;
+  }
+
+  .amenities-left {
+    width: 90%;
+    margin-bottom: 20vh;
+  }
+
+  .amenities-right {
+    width: 90%;
+  }
 }

@@ -12,7 +12,7 @@ const Amenities = () => {
   return (
     <div className="amenities">
       <div className="amenities-left">
-        <h1>Resort Amenities</h1>
+        <h1 className="amenities-left-title">Resort Amenities</h1>
         <p className="amenities-left-description">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever

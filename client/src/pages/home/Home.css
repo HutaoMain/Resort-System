@@ -24,8 +24,8 @@
 
 .home-image-text-container {
   width: 50%;
-  max-height: 50vh;
   margin-left: 30px;
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
 }
@@ -44,58 +44,10 @@
 
 .home-header-search-bar {
   position: absolute;
-  bottom: -9vh;
+  bottom: -8vh;
   width: 90%;
   max-width: 1200px;
 }
-
-@media screen and (max-width: 767px) {
-  .home-image-text-container {
-    width: 90%;
-  }
-
-  .home-image {
-    height: 40vh;
-    background-image: linear-gradient(to top, transparent 30%, #ccc 75%),
-      url("../../images/home-image.jpg");
-
-    display: flex;
-    justify-content: center;
-  }
-
-  .home-image-text-container {
-    margin-left: 0;
-    text-align: center;
-    word-wrap: break-word;
-  }
-
-  .home-image-text-header {
-    font-size: 16px;
-    margin-top: 5vh;
-    margin-bottom: 0;
-  }
-
-  .home-image-text-description {
-    font-size: 10px;
-  }
-}
-
-/* TODO: need to update this max-height */
-
-/* minimum mobile height */
-@media screen and (max-height: 640px) {
-  .home-image {
-    height: 30vh;
-    max-height: 50vh;
-  }
-
-  .home-image-text-container {
-    width: 80%;
-    margin-left: 10px;
-  }
-}
-
-/* end here updated */
 
 .scroll-container {
   width: 100%;
@@ -103,7 +55,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: -10px;
 }
 
 .scroll-field {
@@ -150,10 +101,63 @@
   }
 }
 
-.home-amenities {
+@media screen and (max-width: 767px) {
+  .home-image-text-container {
+    width: 90%;
+  }
+
+  .home-image {
+    height: 40vh;
+    background-image: linear-gradient(to top, transparent 30%, #ccc 75%),
+      url("../../images/home-image.jpg");
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .home-image-text-container {
+    margin-left: 0;
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  .home-image-text-header {
+    font-size: 16px;
+
+    margin-bottom: 0;
+  }
+
+  .home-image-text-description {
+    font-size: 10px;
+  }
+
+  .scroll-mouse {
+    width: 30px;
+    height: 60px;
+  }
+}
+
+/* TODO: need to update this max-height */
+
+/* minimum mobile height */
+@media screen and (max-height: 640px) {
+  .home-image {
+    height: 30vh;
+    max-height: 50vh;
+  }
+
+  .home-image-text-container {
+    width: 80%;
+    margin-left: 10px;
+  }
+}
+
+/* end here updated */
+
+/* .home-amenities {
   width: 85%;
   margin-bottom: 10px;
-}
+} */
 
 .home-google-map-container {
   margin-top: 45px;

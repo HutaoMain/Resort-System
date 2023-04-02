@@ -36,9 +36,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="home-amenities">
-        <Amenities />
-      </div>
+      {/* <div className="home-amenities"> */}
+      <Amenities />
+      {/* </div> */}
 
       {/* <div id="reservation"></div>
       <span className="homeEntranceRateTitle">Packages / Rates</span>
