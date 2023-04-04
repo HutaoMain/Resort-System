@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const setJwtTokenCookie = (res, req, token) => {
   //TODO add this inside token ,{httpOnly: true, secure: false, // Set to true when deploying over HTTPS}
-  res.cookie(`jwt_token`, token);
+  res.cookie(`jwt_token`, token, { httpOnly: true, secure: false }); // Set to true when deploying over HTTPS ;
   console.log("jwt_token cookie:", req.cookies.jwt_token);
 };
 

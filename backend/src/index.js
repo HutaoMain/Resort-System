@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const session = require("express-session");
+const cookieSession = require("express-session");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
@@ -16,7 +16,6 @@ const reservationRoute = require("./routes/reservation");
 const authRoute = require("./routes/auth");
 const emailRoute = require("./routes/email");
 const passportSetup = require("./passport");
-
 const passport = require("passport");
 
 const app = express();
@@ -24,10 +23,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(
-  session({
+  cookieSession({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 

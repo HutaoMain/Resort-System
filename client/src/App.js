@@ -8,15 +8,18 @@ import Messenger from "./components/messenger/Messenger";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UrlPath } from "./UrlPath";
 import { useUser } from "./context/UserContext";
 import Profile from "./pages/profile/Profile";
+import { AuthContext } from "./context/AuthContext";
 // import ProgressBarMain from "./components/progressBar/ProgressBarMain";
 
 function App() {
-  const { user, login, logout } = useUser();
+  // const { user, login, logout } = useUser();
+
+  const [user, setUser] = useState(null);
 
   const location = useLocation();
 
@@ -43,19 +46,22 @@ function App() {
   useEffect(() => {
     async function retrieveUserData() {
       try {
-        const response = await axios.get(`${UrlPath}/auth/user`, {
+        const response = await axios.get(`${UrlPath}/auth/login/success`, {
           withCredentials: true,
         });
 
-        const userData = response.data.user;
+        console.log(response);
 
-        const userEmail = localStorage.getItem("userEmail");
+        // const userData = response.data.user;
 
-        if (!userEmail) {
-          localStorage.setItem("userEmail", JSON.stringify(userData?.email));
-        }
+        // const userEmail = localStorage.getItem("userEmail");
 
-        login(userData);
+        // if (!userEmail) {
+        //   localStorage.setItem("userEmail", JSON.stringify(userData?.email));
+        // }
+
+        // login(userData);
+        setUser(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -65,12 +71,21 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  // const { dispatch } = useContext(AuthContext);
+
+  // useEffect(() => {
+  //   fetch(`${UrlPath}/auth/login/success`)
+  //     .then((res) => res.json())
+  //     .then((data) => setUser(data))
+  //     .then((data) => dispatch({ type: "LOGIN_SUCCESS", payload: data }))
+  //     .catch((err) => console.log(err));
+  //   // eslint-disable-next-line
+  // }, []);
+
   return (
     <>
       <Messenger />
-      {location.pathname !== "/login" ? (
-        <Navbar user={user} logout={logout} />
-      ) : null}
+      {location.pathname !== "/login" ? <Navbar user={user} /> : null}
       {/* {location.pathname !== "/" && location.pathname !== "/login" ? (
         <ProgressBarMain />
       ) : null} */}
