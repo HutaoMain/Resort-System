@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../hooks/useFetch";
-import { UrlPath } from "../../UrlPath";
 import "./Profile.css";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
 
-  const { data } = useFetch(`${UrlPath}/users/email/${user}`);
+  const { data } = useFetch(
+    `${process.env.REACT_APP_BACKEND_URL}/users/email/${user}`
+  );
 
   console.log(data);
 

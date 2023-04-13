@@ -1,9 +1,8 @@
 import { FcGoogle } from "react-icons/fc";
-import { UrlPath } from "../../../UrlPath";
 
 const GoogleLogin = () => {
   const handleClick = () => {
-    window.open(`${UrlPath}/auth/google`, "_self");
+    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
   };
 
   return (

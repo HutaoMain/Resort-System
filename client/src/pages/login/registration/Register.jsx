@@ -1,5 +1,4 @@
 import "./Register.css";
-import { UrlPath } from "../../../UrlPath";
 
 import axios from "axios";
 import { useState } from "react";
@@ -120,7 +119,7 @@ const Register = ({ close }) => {
     try {
       if (validateForm()) {
         await axios
-          .post(`${UrlPath}/auth/register`, {
+          .post(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
             ...credentials,
             birthday: formattedDate,
           })

@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from "react";
-import { UrlPath } from "../UrlPath";
 import axios from "axios";
 
 const UserContext = createContext();
@@ -13,7 +12,9 @@ function UserProvider(props) {
 
   function logout() {
     axios
-      .get(`${UrlPath}/auth/logout`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`, {
+        withCredentials: true,
+      })
       .then(() => {
         setUser(null);
         document.cookie =

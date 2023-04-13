@@ -31,10 +31,8 @@ Deserializes user object from session
   Deserializes user object from session
   @type {deserializeUser}
   */
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user);
-  });
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 passport.use(
@@ -42,7 +40,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: `/auth/facebook/callback`,
+      callbackURL: `${process.env.SERVER_URL}/auth/facebook/callback`,
       profileFields: ["id", "displayName", "photos", "email"],
     },
     async function (accessToken, refreshToken, profile, done) {
@@ -51,14 +49,11 @@ passport.use(
         // Find the user in the database using if the email is existing
         const user = await User.findOne({ email: profile.emails[0].value });
 
-        // If user does not exist, create a new user in the database
         if (!user) {
-          // Extract the given name and family name from the display name
           let displayNameParts = profile.displayName.split(" ");
           let firstName = displayNameParts[0];
           let lastName = displayNameParts[displayNameParts.length - 1];
 
-          // Create a new user with the extracted information
           const newUser = new User({
             username: profile.emails[0].value,
             email: profile.emails[0].value,
@@ -69,21 +64,23 @@ passport.use(
           });
           await newUser.save();
 
-          done(null, newUser);
-        }
-        // Generate a JWT token using user data
-        // const payload = {
-        //   username: user.username,
-        //   email: user.email,
-        //   firstName: user.firstName,
-        //   lastName: user.lastName,
-        //   googleOrFbId: user.googleOrFbId,
-        //   picture: user.picture,
-        // };
-        // const token = jwt.sign(payload, process.env.SECRET);
+          const token = jwt.sign(newUser, process.env.SECRET);
 
-        // Call the 'done' function to complete authentication process
-        done(null, user);
+          done(null, { token });
+        }
+
+        const payload = {
+          username: user.username,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          googleOrFbId: user.googleOrFbId,
+          picture: user.picture,
+        };
+
+        const token = jwt.sign(payload, process.env.SECRET);
+
+        done(null, { token });
       } catch (error) {
         done(error);
       }
@@ -108,6 +105,7 @@ passport.use(
       profileFields: ["id", "displayName", "photos", "email"],
     },
     async function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
       try {
         // Find the user in the database using if the email is existing
         const user = await User.findOne({ email: profile.emails[0].value });
@@ -134,7 +132,7 @@ passport.use(
           firstName: user.firstName,
           lastName: user.lastName,
           googleOrFbId: user.googleOrFbId,
-          picture: user.picture,
+          picture: profile.photos[0].value,
         };
 
         const token = jwt.sign(payload, process.env.SECRET);

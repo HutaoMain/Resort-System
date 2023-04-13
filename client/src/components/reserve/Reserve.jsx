@@ -5,7 +5,6 @@ import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { UrlPath } from "../../UrlPath";
 
 const Reserve = ({ setOpen, totalprice }) => {
   const location = useLocation();
@@ -28,7 +27,10 @@ const Reserve = ({ setOpen, totalprice }) => {
       img: user.picture === "" && user.picture.data.url,
     };
     try {
-      await axios.post(`${UrlPath}/users/create`, credentials);
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/users/create`,
+        credentials
+      );
       // console.log(credentials);
     } catch (error) {}
   };
@@ -37,7 +39,7 @@ const Reserve = ({ setOpen, totalprice }) => {
 
   // put here if facebook or put Or in credentials
 
-  const { data } = useFetch(`${UrlPath}/rooms/${id}`);
+  const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/rooms/${id}`);
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -88,7 +90,10 @@ const Reserve = ({ setOpen, totalprice }) => {
       roomNumberName: selectedFacilityNumber.toString(),
     };
 
-    await axios.post(`${UrlPath}/reservations`, postReserve);
+    await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/reservations`,
+      postReserve
+    );
   };
 
   const handleSelect = (e) => {
@@ -123,7 +128,7 @@ const Reserve = ({ setOpen, totalprice }) => {
 
   const handleSendEmail = async () => {
     try {
-      await axios.post(`${UrlPath}/email/send`, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/email/send`, {
         email: user.email,
         name: user.name,
       });
@@ -137,9 +142,12 @@ const Reserve = ({ setOpen, totalprice }) => {
       handleSendEmail();
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`${UrlPath}/rooms/availability/${roomId}`, {
-            dates: alldates,
-          });
+          const res = axios.put(
+            `${process.env.REACT_APP_BACKEND_URL}/rooms/availability/${roomId}`,
+            {
+              dates: alldates,
+            }
+          );
           return res.data;
         })
       );

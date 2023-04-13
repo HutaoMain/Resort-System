@@ -5,7 +5,6 @@ import GoogleLogin from "./googleLoginComponent/GoogleLogin";
 import Modal from "react-modal";
 import Register from "./registration/Register";
 import { useState } from "react";
-import { UrlPath } from "../../UrlPath";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -55,7 +54,7 @@ const Login = () => {
   //   e.preventDefault();
   //   try {
   //     await axios
-  //       .post(`${UrlPath}/auth/login`, { email, password } )
+  //       .post(`/auth/login`, { email, password } )
   //       .then((response) => {
   //         const token = response.data.token;
   //         // Set HTTP-only cookie with the token
@@ -71,10 +70,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${UrlPath}/auth/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
       const token = response.data.token;
       // Set HTTP-only cookie with the token
       document.cookie = `jwt_token=${token};`;

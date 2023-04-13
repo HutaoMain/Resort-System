@@ -1,10 +1,9 @@
 import "./Cards.css";
 import useFetch from "../../hooks/useFetch.js";
 // import Carousel from "react-elastic-carousel";
-import { UrlPath } from "../../UrlPath";
 
 const Cards = () => {
-  const { data } = useFetch(`${UrlPath}/rooms`);
+  const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/rooms`);
 
   return (
     <>

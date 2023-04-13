@@ -6,7 +6,6 @@ import { useState } from "react";
 // import { DateRange } from "react-date-range";
 import SearchedItem from "../../components/searchedItem/SearchedItem";
 import useFetch from "../../hooks/useFetch";
-import { UrlPath } from "../../UrlPath";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
 
@@ -15,7 +14,7 @@ import Footer from "../../components/footer/Footer";
 const List = () => {
   const [selectedOption, setSelectedOption] = useState("default");
 
-  const { data } = useFetch(`${UrlPath}/rooms`);
+  const { data } = useFetch(`${process.env.REACT_APP_BACKEND_URL}/rooms`);
 
   const sortItems = () => {
     switch (selectedOption) {

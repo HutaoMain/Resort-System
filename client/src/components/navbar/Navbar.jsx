@@ -3,17 +3,12 @@ import resortLogo from "../../images/navbarLogo.png";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { UrlPath } from "../../UrlPath";
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, logout }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
-
-  const logout = () => {
-    window.open(`${UrlPath}/auth/logout`, "_self");
   };
 
   console.log("profile", user);
@@ -40,7 +35,7 @@ const Navbar = ({ user }) => {
                     <span>Profile</span>
                   </Link>
                   <span>Settings</span>
-                  <span onClick={logout}>Logout</span>
+                  <span onClick={() => logout()}>Logout</span>
                 </div>
               )}
             </div>

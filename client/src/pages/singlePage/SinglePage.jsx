@@ -14,7 +14,6 @@ import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import Reserve from "../../components/reserve/Reserve";
-import { UrlPath } from "../../UrlPath";
 
 const SinglePage = ({ user }) => {
   const location = useLocation();
@@ -23,7 +22,9 @@ const SinglePage = ({ user }) => {
   const [openModal, setOpenModal] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
 
-  const { data, loading } = useFetch(`${UrlPath}/rooms/${id}`);
+  const { data, loading } = useFetch(
+    `${process.env.REACT_APP_BACKEND_URL}/rooms/${id}`
+  );
 
   const { dates } = useContext(SearchContext);
 

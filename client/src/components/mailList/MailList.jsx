@@ -81,9 +81,9 @@ const MailList = () => {
     }
   };
 
-  const onSubmit = () => {
-    handleEmailValidation();
-  };
+  // const onSubmit = () => {
+  //   handleEmailValidation();
+  // };
 
   return (
     <div className="mail">
@@ -97,7 +97,7 @@ const MailList = () => {
         <input
           type="email"
           placeholder="Your Email"
-          onChange={(e) => e.target.value}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <button onClick={handleEmailValidation}>Subscribe</button>
         <div>
